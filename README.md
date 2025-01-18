@@ -2,6 +2,8 @@
 
 This project is a web game about memorising increasingly difficult button sequences to defeat various monsters as you delve deeper and deeper into some nondescript fantasy-world dungeon. The app is built in React using Vite, Typescript and Tailwind css, and deployed as a static webpage on GitHub Pages.
 
+The web app can be accessed [here](https://txdk.github.io/dungeon-memory-game/).
+
 ## Getting Started
 
 To run the app in a local development environment, clone the repo then install the project dependencies:

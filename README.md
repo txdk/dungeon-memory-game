@@ -18,4 +18,4 @@ Then run the development server
 npm run dev
 ```
 
-You will then be able to access the webapp by navigating to `http://localhost:5173` in your web browser.
+You will then be able to access the webapp by navigating to `http://localhost:5173/dungeon-memory-game` in your web browser.

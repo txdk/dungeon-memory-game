@@ -20,7 +20,6 @@ const renderHearts = (health: number) => {
 }
 
 export default function HealthBar() {
-
     const { state } = useContext(GameContext);
     const currentHealth: number = state.currentHealth;
 

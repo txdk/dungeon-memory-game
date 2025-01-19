@@ -6,9 +6,8 @@ function App() {
 
   return (
     <div className="">
-      <h1 className='text-4xl font-customFont text-center text-green-500 py-7'>My vision is augmented</h1>
       <GameProvider>
-        <div className="flex place-content-center pt-10">
+        <div className="flex place-content-center pt-[130px]">
           <Screen />
         </div>
         <Controls />

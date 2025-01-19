@@ -1,26 +1,38 @@
 import { useContext } from "react";
-import Button from "./Button";
 import HealthBar from "./HealthBar";
 import GameContext from "../contexts/GameContext";
+import NewGameButton from "./NewGameButton";
+import ScoreDisplay from "./ScoreDisplay";
+import { GameStatus } from "../reducers/GameReducer";
+import CombatDisplay from "./CombatDisplay";
+import GameOverScreen from "./GameOverScreen";
 
 export default function Screen() {
 
     const { state, startGame } = useContext(GameContext);
+    
+    // Determine what element to render on screen based on game status
+    let screenElement: JSX.Element = <></>;
+
+    if (state.status === GameStatus.NOT_STARTED) {
+        screenElement = <NewGameButton startGame={startGame} />; 
+    }
+    else if (state.status === GameStatus.IN_PROGRESS) {
+        screenElement = (
+            <>
+                <HealthBar />
+                <ScoreDisplay score={state.score} />
+                <CombatDisplay monster={state.currentMonster} />
+            </>
+        );
+    }
+    else if (state.status === GameStatus.GAME_OVER) {
+        screenElement = <GameOverScreen score={state.score} startGame={startGame} />; 
+    }
 
     return ( 
         <div className="mx-10 w-2/3 border rounded-2xl h-[350px] relative bg-black">
-            {
-                state.currentLevel === undefined? 
-                <div className="flex justify-center mt-[130px]">
-                    <Button className="text-yellow-500" handleClick={startGame}>New Game</Button>
-                </div>:
-                <>
-                    <HealthBar />
-                    <p className="font-customFont text-green-500 text-left m-2">Score: {state.score}</p>
-                    <p className="font-customFont text-green-500 text-center m-5">You encountered: a goblin!</p>
-                </>
-            }
-            
+            {screenElement}  
         </div>  
     );
 }

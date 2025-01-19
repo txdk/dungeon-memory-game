@@ -4,7 +4,7 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight, FaLongArrowAltUp } from "react
 import { ICON_SIZE } from "../constants/AppConstants";
 import { useContext } from "react";
 import GameContext from "../contexts/GameContext";
-import { GameInput } from "../reducers/GameReducer";
+import { GameInput } from "../constants/GameConstants"; 
 
 export default function Controls() {
 

@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import { GameInput, initialState } from "../reducers/GameReducer";
+import { GameInput } from "../constants/GameConstants";
+import { initialState } from "../reducers/GameReducer";
 
 const GameContext = createContext({
     state: initialState, 

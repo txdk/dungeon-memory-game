@@ -7,7 +7,8 @@ const GameContext = createContext({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     registerInput: (_: GameInput) => {},
     startGame: () => {},
-    generateNextMonster: () => {}
+    generateNextMonster: () => {},
+    closeInfoPanel: () => {}
 });
 
 export default GameContext;

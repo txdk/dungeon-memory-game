@@ -33,11 +33,20 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         });
     };
 
+    // Close monster info panel
+    const closeInfoPanel = () => {
+        dispatch({
+            type: GameActionType.CLOSE_INFO_PANEL,
+            payload: null
+        })
+    }
+
     const providerValue = useMemo(() => ({
         state: gameState,
         registerInput: registerInput,
         startGame: startGame,
-        generateNextMonster: generateNextMonster
+        generateNextMonster: generateNextMonster,
+        closeInfoPanel: closeInfoPanel
     }), [gameState, registerInput])
 
     return (

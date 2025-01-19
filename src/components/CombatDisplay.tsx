@@ -33,7 +33,7 @@ export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>)
                             You defeated the {monster.name} and gained {monster.score} score!
                         </p>
                         
-                        <Button className="flex p-2 h-2/3 items-center" handleClick={generateNextMonster}>
+                        <Button className="flex p-1.5 h-2/3 items-center" handleClick={generateNextMonster}>
                             <>
                                 <span className="text-sm">Proceed</span>
                                 <RxDoubleArrowRight className="ml-2" />

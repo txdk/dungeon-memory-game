@@ -3,12 +3,12 @@ import { GameInput } from "../constants/GameConstants";
 import { INPUT_ICON_SIZE } from "../constants/AppConstants";
 import { GiBroadsword, GiShield } from "react-icons/gi";
 
-interface PlayerInputIconProps {
+interface InputIconProps {
     className?: string;
     input: GameInput;
 }
 
-export default function PlayerInputIcon({ className, input }: Readonly<PlayerInputIconProps>) {
+export default function InputIcon({ className, input }: Readonly<InputIconProps>) {
     switch (input) {
         case GameInput.INPUT_LEFT:
             return (<FaLongArrowAltLeft className={className} size={INPUT_ICON_SIZE} />);

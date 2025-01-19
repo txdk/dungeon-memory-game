@@ -1,5 +1,6 @@
-import { GameInput, MAX_HEALTH } from "../constants/GameConstants";
+import { GameInput, LEVEL_REQUIREMENTS, MAX_HEALTH } from "../constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
+import { getRandomMonster } from "../core/MonsterGenerator";
 import { firstMonster, Monster } from "../core/Monsters";
 
 export interface PlayerInput {
@@ -21,6 +22,7 @@ export interface GameState {
     currentHealth: number;
     currentLevel: number | undefined;
     score: number;
+    seenMonsters: Array<number>;
 }
 
 export const initialState: GameState = {
@@ -30,12 +32,14 @@ export const initialState: GameState = {
     currentMonster: null,
     currentHealth: MAX_HEALTH,
     currentLevel: undefined,
-    score: 0
+    score: 0,
+    seenMonsters: []
 };
 
 export enum GameActionType {
     PLAYER_INPUT,
     GENERATE_NEXT_MONSTER,
+    CLOSE_INFO_PANEL,
     START_GAME
 }
 
@@ -58,7 +62,12 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
         // Process player input
         case GameActionType.PLAYER_INPUT: {
             // Do nothing if there is no active monster or game not in progress
-            if (state.status !== GameStatus.IN_PROGRESS || state.currentMonster === null || state.currentMonster.isDefeated) {
+            if (
+                state.status !== GameStatus.IN_PROGRESS || 
+                state.currentMonster === null || 
+                !state.seenMonsters.includes(state.currentMonster.id) ||
+                state.currentMonster.isDefeated
+            ) {
                 return state;
             }
 
@@ -87,16 +96,29 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
 
         // Generate next monster
         case GameActionType.GENERATE_NEXT_MONSTER: {
-            const scoreIncrease: number = state.currentMonster? state.currentMonster.score: 0;
+            const scoreIncrease: number = state.currentMonster?.isDefeated? state.currentMonster.score: 0;
+            const newScore: number = state.score + scoreIncrease;
+
+            // Check level-up condition
+            const newLevel: number = state.currentLevel! + Number(newScore >= (LEVEL_REQUIREMENTS.get(state.currentLevel!) ?? Infinity));
+            const nextMonster: Monster = getRandomMonster(newLevel);
 
             return {
                 ...state,
                 playerInputs: [],
                 correctInputs: 0,
-                score: state.score + scoreIncrease,
-                currentMonster: {...firstMonster}
+                score: newScore,
+                currentLevel: newLevel,
+                currentMonster: {...nextMonster}
             };
         }
+
+        // Close monster info panel
+        case GameActionType.CLOSE_INFO_PANEL:
+            return {
+                ...state,
+                seenMonsters: [...(state.seenMonsters), state.currentMonster!.id]
+            };
 
         default:
             return state;

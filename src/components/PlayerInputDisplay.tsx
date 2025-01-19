@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 import GameContext from "../contexts/GameContext";
-import PlayerInputIcon from "./PlayerInputIcon";
+import InputIcon from "./InputIcon";
 import { PlayerInput } from "../reducers/GameReducer";
 
 // Render the player control inputs
@@ -11,7 +11,7 @@ const renderInputs = (playerInputs: Array<PlayerInput>) => {
         const iconColour: string = playerInputs[i].isCorrect? "text-green-500": "text-red-700"; 
 
         playerInputArray.push(
-            <PlayerInputIcon
+            <InputIcon
                 className={iconColour}
                 input={playerInputs[i].input} 
                 key={`input-${i}`}

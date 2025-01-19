@@ -6,6 +6,7 @@ import ScoreDisplay from "./ScoreDisplay";
 import { GameStatus } from "../reducers/GameReducer";
 import CombatDisplay from "./CombatDisplay";
 import GameOverScreen from "./GameOverScreen";
+import MonsterInfoPanel from "./MonsterInfoPanel";
 
 export default function Screen() {
 
@@ -22,7 +23,14 @@ export default function Screen() {
             <>
                 <HealthBar />
                 <ScoreDisplay score={state.score} />
-                <CombatDisplay monster={state.currentMonster} />
+                {
+                    state.currentMonster !== null && (
+                        !state.seenMonsters.includes(state.currentMonster.id)? (
+                            <MonsterInfoPanel monster={state.currentMonster} />
+                        ):
+                        <CombatDisplay monster={state.currentMonster} />
+                    )
+                }       
             </>
         );
     }

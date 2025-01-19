@@ -25,10 +25,19 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         });
     };
 
+    // Generate next monster encounter
+    const generateNextMonster = () => {
+        dispatch({
+           type: GameActionType.GENERATE_NEXT_MONSTER,
+           payload: null 
+        });
+    };
+
     const providerValue = useMemo(() => ({
         state: gameState,
         registerInput: registerInput,
-        startGame: startGame
+        startGame: startGame,
+        generateNextMonster: generateNextMonster
     }), [gameState, registerInput])
 
     return (

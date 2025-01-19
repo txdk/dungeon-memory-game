@@ -1,5 +1,5 @@
 import { GameInput, MAX_HEALTH } from "../constants/GameConstants";
-import { checkPlayerInput, getGameStatus } from "../core/CombatModule";
+import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
 import { firstMonster, Monster } from "../core/Monsters";
 
 export interface PlayerInput {
@@ -35,7 +35,7 @@ export const initialState: GameState = {
 
 export enum GameActionType {
     PLAYER_INPUT,
-    CLEAR_INPUTS,
+    GENERATE_NEXT_MONSTER,
     START_GAME
 }
 
@@ -58,14 +58,16 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
         // Process player input
         case GameActionType.PLAYER_INPUT: {
             // Do nothing if there is no active monster or game not in progress
-            if (state.status !== GameStatus.IN_PROGRESS || state.currentMonster === null) {
+            if (state.status !== GameStatus.IN_PROGRESS || state.currentMonster === null || state.currentMonster.isDefeated) {
                 return state;
             }
 
-            // Check whether inputted control is correct
+            // Check whether player input is correct and resolve consequences
             const playerInput = action.payload as GameInput;
             const isCorrect: boolean = checkPlayerInput(playerInput, state.correctInputs, state.currentMonster);
+            const correctInputs: number = state.correctInputs + Number(isCorrect);
             const playerHealth: number = state.currentHealth - Number(!isCorrect);
+            const isMonsterDefeated: boolean = checkMonsterDefeated(correctInputs, state.currentMonster);
 
             return {
                 ...state,
@@ -74,18 +76,27 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
                     ...state.playerInputs, 
                     {input: playerInput, isCorrect: isCorrect}
                 ],
-                correctInputs: state.correctInputs + Number(isCorrect),
-                currentHealth: playerHealth
+                correctInputs: correctInputs,
+                currentHealth: playerHealth,
+                currentMonster: {
+                    ...state.currentMonster,
+                    isDefeated: isMonsterDefeated
+                }
             }; 
         }
 
-        // Clear player inputs
-        case GameActionType.CLEAR_INPUTS:
+        // Generate next monster
+        case GameActionType.GENERATE_NEXT_MONSTER: {
+            const scoreIncrease: number = state.currentMonster? state.currentMonster.score: 0;
+
             return {
                 ...state,
                 playerInputs: [],
-                correctInputs: 0
-            }
+                correctInputs: 0,
+                score: state.score + scoreIncrease,
+                currentMonster: {...firstMonster}
+            };
+        }
 
         default:
             return state;

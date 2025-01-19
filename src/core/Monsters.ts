@@ -6,6 +6,7 @@ export interface Monster {
     defeatSequence: Array<GameInput>;
     level: number;
     score: number;
+    isDefeated: boolean;
 }
 
 export const firstMonster: Monster = {
@@ -13,5 +14,6 @@ export const firstMonster: Monster = {
     name: "bat",
     defeatSequence: [GameInput.INPUT_ATTACK],
     level: 1,
-    score: 5
+    score: 5,
+    isDefeated: false
 }

@@ -13,7 +13,7 @@ export interface Monster {
 };
 
 // Tier 1 monsters
-const tier1MonsterNames: Array<string> = randomiseArrayOrder(["bat", "goblin", "skeleton", "gingerbread man"]) as Array<string>;
+const tier1MonsterNames: Array<string> = randomiseArrayOrder(["bat", "goblin", "skeleton"]) as Array<string>;
 
 export const firstMonster: Monster = {
     id: 0,
@@ -187,5 +187,6 @@ export const monsterList: Array<Monster> = [
     sixthMonster,
     seventhMonster,
     eighthMonster,
-    ninthMonster
+    ninthMonster,
+    tenthMonster
 ];

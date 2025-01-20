@@ -6,6 +6,7 @@ import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameInput } from "../constants/GameConstants";
 import { v4 as uuidv4} from 'uuid';
+import AnimatedText from "./AnimatedText";
 
 interface MonsterInfoPanelProps {
     monster: Monster;
@@ -17,10 +18,12 @@ export default function MonsterInfoPanel({ monster }: Readonly<MonsterInfoPanelP
 
     return (
         <div className="font-customFont text-green-500 text-center m-5 pt-5">
-            <p>
-                New monster discovered: {monster.name}
-            </p>
-            <p className="mt-5">
+            <AnimatedText 
+                id={monster.instanceId}
+                text={`New monster discovered: ${monster.name}!`}
+                delay={25}
+            />
+            <p className="pt-5">
                 {monster.description}
             </p>
             <span className="flex justify-left mt-5">

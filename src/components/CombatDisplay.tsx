@@ -4,6 +4,7 @@ import Button from "./Button";
 import PlayerInputDisplay from "./PlayerInputDisplay";
 import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
+import AnimatedText from "./AnimatedText";
 
 interface CombatDisplayProps {
     monster: Monster | null;
@@ -21,9 +22,13 @@ export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>)
     return (
         <>
             {/* Monster display text */}
-            <p className="font-customFont text-green-500 text-center m-5 pt-5">
-                You encountered a {monster.name}!
-            </p>
+            <div className="text-center m-5 pt-5">
+                <AnimatedText 
+                    id={monster.instanceId}
+                    text={`You encountered a ${monster.name}!`}
+                    delay={25}
+                />
+            </div>
 
             <PlayerInputDisplay />
             {

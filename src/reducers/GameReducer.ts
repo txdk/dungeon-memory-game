@@ -1,7 +1,7 @@
 import { GameInput, LEVEL_REQUIREMENTS, MAX_HEALTH } from "../constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
-import { getRandomMonster } from "../core/MonsterGenerator";
-import { firstMonster, Monster } from "../core/Monsters";
+import { generateMonsterList, getRandomMonster } from "../core/MonsterGenerator";
+import { Monster } from "../core/Monsters";
 
 export interface PlayerInput {
     input: GameInput,
@@ -22,6 +22,7 @@ export interface GameState {
     currentHealth: number;
     currentLevel: number | undefined;
     score: number;
+    monsterList: Array<Monster>;
     seenMonsters: Array<number>;
 }
 
@@ -33,6 +34,7 @@ export const initialState: GameState = {
     currentHealth: MAX_HEALTH,
     currentLevel: undefined,
     score: 0,
+    monsterList: [],
     seenMonsters: []
 };
 
@@ -51,13 +53,18 @@ export interface GameAction {
 export default function gameReducer(state: GameState, action: GameAction): GameState {
     switch (action.type) {
         // Process game start
-        case GameActionType.START_GAME:
+        case GameActionType.START_GAME: {
+            const monsterList: Array<Monster> = generateMonsterList();
+
             return {
                 ...initialState,
                 status: GameStatus.IN_PROGRESS,
-                currentMonster: {...firstMonster},
-                currentLevel: 1
+                currentMonster: {...monsterList[0]},
+                currentLevel: 1,
+                monsterList: monsterList
             };
+        }
+            
 
         // Process player input
         case GameActionType.PLAYER_INPUT: {
@@ -101,7 +108,7 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
 
             // Check level-up condition
             const newLevel: number = state.currentLevel! + Number(newScore >= (LEVEL_REQUIREMENTS.get(state.currentLevel!) ?? Infinity));
-            const nextMonster: Monster = getRandomMonster(newLevel);
+            const nextMonster: Monster = getRandomMonster(newLevel, state.monsterList);
 
             return {
                 ...state,

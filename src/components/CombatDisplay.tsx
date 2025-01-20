@@ -5,6 +5,7 @@ import PlayerInputDisplay from "./PlayerInputDisplay";
 import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "./AnimatedText";
+import { getMonsterArticle } from "../core/MonsterGenerator";
 
 interface CombatDisplayProps {
     monster: Monster | null;
@@ -25,7 +26,7 @@ export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>)
             <div className="text-center m-5 pt-5">
                 <AnimatedText 
                     id={monster.instanceId}
-                    text={`You encountered a ${monster.name}!`}
+                    text={`You encountered ${getMonsterArticle(monster.name)} ${monster.name}!`}
                     delay={25}
                 />
             </div>

@@ -35,7 +35,7 @@ export default function Screen() {
         );
     }
     else if (state.status === GameStatus.GAME_OVER) {
-        screenElement = <GameOverScreen score={state.score} startGame={startGame} />; 
+        screenElement = <GameOverScreen monsterName={state.currentMonster!.name} score={state.score} startGame={startGame} />; 
     }
 
     return ( 

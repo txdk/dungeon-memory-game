@@ -1,5 +1,5 @@
 import { GameInput } from "../constants/GameConstants"
-import { getRandomCombatInput, getRandomDirection, getRandomInput, getRandomNonCombatInput, randomiseArrayOrder } from "../utils/RandomiserUtils";
+import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, getRandomNonCombatInput, randomiseArrayOrder } from "../utils/RandomiserUtils";
 import { v4 as uuidv4} from 'uuid';
 
 export interface Monster {
@@ -71,11 +71,9 @@ export const generateTier2Monsters = () => {
         name: tier2MonsterNames[1],
         description: "Study this vicious monster's attack habits closely and exploit its somewhat predictable movements!",
         defeatSequence: [
-            fifthMonsterMovements[0], 
-            fifthMonsterMovements[0], 
+            ...(new Array(2).fill(fifthMonsterMovements[0])),
             GameInput.INPUT_ATTACK, 
-            fifthMonsterMovements[1], 
-            fifthMonsterMovements[1]
+            ...(new Array(2).fill(fifthMonsterMovements[1]))
         ],
         score: 20,
         isDefeated: false
@@ -132,17 +130,9 @@ export const generateOgre = () => {
         name: "ogre",
         description: "A towering brute that will take repeated and concentrated effort to defeat.",
         defeatSequence: [
-            ogreInputs[0], 
-            ogreInputs[0], 
-            ogreInputs[0], 
-            ogreInputs[1], 
-            ogreInputs[1], 
-            ogreInputs[1], 
-            ogreInputs[1], 
-            ogreInputs[2], 
-            ogreInputs[2], 
-            ogreInputs[2], 
-            ogreInputs[2]
+            ...(new Array(3).fill(ogreInputs[0])),
+            ...(new Array(4).fill(ogreInputs[1])),
+            ...(new Array(4).fill(ogreInputs[2])),
         ],
         score: 100,
         isDefeated: false
@@ -177,17 +167,20 @@ export const generateMinotaur = () => {
 }
 
 export const generateMiniboss = () => {
+    const minibossNames: Array<string> = ["vampire", "mind flayer", "death knight"];
+    const minibossName: string = getRandomArrayElement(minibossNames);
+
     return {
         id: 9,
         instanceId: uuidv4(),
-        name: "vampire",
+        name: minibossName,
         description: "An ancient deadly foe with no easily exploitable weaknesses. Use all of your cunning to best it in combat!",
         defeatSequence: randomiseArrayOrder([
             getRandomInput(),
-            getRandomInput(),
-            getRandomInput(),
-            getRandomInput(),
-            getRandomInput(),
+            GameInput.INPUT_LEFT,
+            GameInput.INPUT_UP,
+            GameInput.INPUT_RIGHT,
+            GameInput.INPUT_SHIELD, 
             GameInput.INPUT_ATTACK
         ]) as Array<GameInput>,
         score: 400,

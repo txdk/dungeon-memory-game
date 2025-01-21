@@ -6,6 +6,7 @@ import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "./AnimatedText";
 import { getMonsterArticle } from "../core/MonsterGenerator";
+import SlotCounter from "react-slot-counter";
 
 interface CombatDisplayProps {
     monster: Monster | null;
@@ -35,8 +36,10 @@ export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>)
             {
                 monster.isDefeated && (
                     <div className="flex items-center">
-                        <p className="p-5 ml-5 font-customFont text-green-500">
-                            You defeated the {monster.name} and gained {monster.score} score!
+                        <p className="p-5 ml-5 font-customFont text-green-500 text-sm">
+                            You defeated the {monster.name} and gained {" "}
+                            <SlotCounter value={monster.score} duration={0.5} />
+                            {" "}score!
                         </p>
                         
                         <Button className="flex p-1.5 h-2/3 items-center" handleClick={generateNextMonster}>

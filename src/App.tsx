@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="">
       <GameProvider>
-        <div className="flex place-content-center pt-[130px]">
+        <div className="flex place-content-center pt-[30px] md:pt-[130px]">
           <Screen />
         </div>
         <Controls />

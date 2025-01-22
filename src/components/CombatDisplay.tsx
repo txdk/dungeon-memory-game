@@ -35,16 +35,16 @@ export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>)
             <PlayerInputDisplay />
             {
                 monster.isDefeated && (
-                    <div className="flex items-center">
-                        <p className="p-5 ml-5 font-customFont text-green-500 text-sm">
+                    <div className="flex flex-col md:flex-row items-center">
+                        <p className="p-0 md:p-5 ml-5 font-customFont text-green-500 text-sm">
                             You defeated the {monster.name} and gained {" "}
                             <SlotCounter value={monster.score} duration={0.5} />
                             {" "}score!
                         </p>
                         
-                        <Button className="flex p-1.5 h-2/3 items-center" handleClick={generateNextMonster}>
+                        <Button className="flex p-1 md:p-1.5 mt-3 md:mt-0 h-2/3 items-center" handleClick={generateNextMonster}>
                             <>
-                                <span className="text-sm">Proceed</span>
+                                <span className="text-xs md:text-sm">Proceed</span>
                                 <RxDoubleArrowRight className="ml-2" />
                             </>
                         </Button>

@@ -39,7 +39,7 @@ export default function Screen() {
     }
 
     return ( 
-        <div className="mx-10 w-2/3 border rounded-2xl h-[350px] relative bg-black">
+        <div className="mx-2 md:mx-10 w-[95%] md:w-2/3 border rounded-2xl h-[400px] md:h-[350px] relative bg-black">
             {screenElement}  
         </div>  
     );

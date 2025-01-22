@@ -11,11 +11,11 @@ interface GameOverScreenProps {
 export default function GameOverScreen({ monsterName, score, startGame }: Readonly<GameOverScreenProps>) {
     return (
         <>
-            <p className="font-customFont text-4xl text-green-500 text-center mt-[100px]">Game Over!</p>
-            <p className="font-customFont text-green-500 text-center mt-3">
+            <p className="font-customFont text-3xl md:text-4xl text-green-500 text-center mt-[100px]">Game Over!</p>
+            <p className="font-customFont text-green-500 text-center text-sm md:text-base mt-3">
                 Slain by {getMonsterArticle(monsterName)} {monsterName}...
             </p>
-            <p className="font-customFont text-green-500 text-center mt-3">
+            <p className="font-customFont text-green-500 text-center text-sm md:text-base mt-3">
                 FINAL SCORE:{" "}
                 <SlotCounter value={score} />
             </p>

@@ -28,7 +28,7 @@ export default function PlayerInputDisplay() {
     const playerInputArray: Array<JSX.Element> = useMemo(() => renderInputs(playerInputs), [playerInputs]);
 
     return (
-        <div className="flex font-customFont text-green-500 mt-10 p-10">
+        <div className="flex font-customFont text-green-500 mt-10 p-5 md:p-10">
             INPUTS: {playerInputArray}
         </div>
     );

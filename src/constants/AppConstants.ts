@@ -9,3 +9,6 @@ export const MOBILE_INPUT_ICON_SIZE: number = 20;
 
 // Size of icons in input display
 export const INPUT_ICON_SIZE: number = 27;
+
+// Stage transition time in ms
+export const STAGE_TRANSITION_DELAY = 2000;

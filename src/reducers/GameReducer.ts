@@ -1,7 +1,8 @@
-import { GameInput, LEVEL_REQUIREMENTS, MAX_HEALTH } from "../constants/GameConstants";
+import { GameInput, LEVEL_REQUIREMENTS, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
-import { generateMonsterList, getRandomMonster } from "../core/MonsterGenerator";
-import { Monster } from "../core/Monsters";
+import { generateMonsterList, getRandomMonsterFromStage } from "../core/MonsterGenerator";
+import { Encounter, Monster } from "../core/Monsters";
+import { generateFirstStage, Stage } from "../core/Stages";
 
 export interface PlayerInput {
     input: GameInput,
@@ -10,6 +11,7 @@ export interface PlayerInput {
 
 export enum GameStatus {
     NOT_STARTED,
+    START_NEW_STAGE,
     IN_PROGRESS,
     GAME_OVER
 }
@@ -20,10 +22,12 @@ export interface GameState {
     correctInputs: number;
     currentMonster: Monster | null;
     currentHealth: number;
+    currentStage: Stage | null;
     currentLevel: number | undefined;
     score: number;
     monsterList: Array<Monster>;
     seenMonsters: Array<number>;
+    newestEncounter: Encounter | null;
 }
 
 export const initialState: GameState = {
@@ -32,15 +36,18 @@ export const initialState: GameState = {
     correctInputs: 0,
     currentMonster: null,
     currentHealth: MAX_HEALTH,
+    currentStage: null,
     currentLevel: undefined,
     score: 0,
     monsterList: [],
-    seenMonsters: []
+    seenMonsters: [],
+    newestEncounter: null
 };
 
 export enum GameActionType {
     PLAYER_INPUT,
     GENERATE_NEXT_MONSTER,
+    START_NEW_STAGE,
     CLOSE_INFO_PANEL,
     START_GAME
 }
@@ -55,16 +62,21 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
         // Process game start
         case GameActionType.START_GAME: {
             const monsterList: Array<Monster> = generateMonsterList();
+            const firstEncounter: Encounter = {
+                monster: {...monsterList[0]},
+                quantity: 0
+            };
 
             return {
                 ...initialState,
-                status: GameStatus.IN_PROGRESS,
+                status: GameStatus.START_NEW_STAGE,
                 currentMonster: {...monsterList[0]},
+                currentStage: {...(generateFirstStage(monsterList))},
                 currentLevel: 1,
-                monsterList: monsterList
+                monsterList: monsterList,
+                newestEncounter: firstEncounter
             };
-        }
-            
+        };
 
         // Process player input
         case GameActionType.PLAYER_INPUT: {
@@ -84,6 +96,7 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
             const correctInputs: number = state.correctInputs + Number(isCorrect);
             const playerHealth: number = state.currentHealth - Number(!isCorrect);
             const isMonsterDefeated: boolean = checkMonsterDefeated(correctInputs, state.currentMonster);
+            const isNewestMonster: boolean = state.currentMonster.id === state.newestEncounter!.monster.id;
 
             return {
                 ...state,
@@ -97,6 +110,10 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
                 currentMonster: {
                     ...state.currentMonster,
                     isDefeated: isMonsterDefeated
+                },
+                newestEncounter: {
+                    ...state.newestEncounter!,
+                    quantity: state.newestEncounter!.quantity + ((isNewestMonster && isMonsterDefeated)? 1: 0)
                 }
             }; 
         }
@@ -107,8 +124,12 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
             const newScore: number = state.score + scoreIncrease;
 
             // Check level-up condition
-            const newLevel: number = state.currentLevel! + Number(newScore >= (LEVEL_REQUIREMENTS.get(state.currentLevel!) ?? Infinity));
-            const nextMonster: Monster = getRandomMonster(newLevel, state.monsterList);
+            const canLevelUp: boolean = (
+                (newScore >= (LEVEL_REQUIREMENTS.get(state.currentLevel!) ?? Infinity)) &&
+                (state.newestEncounter!.quantity >= MIN_ENCOUNTERS_BEFORE_NEW_MONSTER)
+            );
+            const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
+            const nextMonster: Monster = getRandomMonsterFromStage(newLevel, state.currentStage!);
 
             return {
                 ...state,
@@ -116,11 +137,23 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
                 correctInputs: 0,
                 score: newScore,
                 currentLevel: newLevel,
-                currentMonster: {...nextMonster}
+                currentMonster: {...nextMonster},
+                newestEncounter: {
+                    ...(state.newestEncounter!),
+                    monster: state.monsterList[newLevel - 1],
+                    quantity: canLevelUp? 0: state.newestEncounter!.quantity
+                }
             };
-        }
+        };
 
-        // Close monster info panel
+        // Start new stage
+        case GameActionType.START_NEW_STAGE: 
+            return {
+                ...state,
+                status: GameStatus.IN_PROGRESS
+            };
+
+        // Close monster info panel - new monster encounter
         case GameActionType.CLOSE_INFO_PANEL:
             return {
                 ...state,

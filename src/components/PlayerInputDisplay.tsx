@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 import GameContext from "../contexts/GameContext";
-import InputIcon from "./InputIcon";
+import InputIcon from "./generic/InputIcon";
 import { PlayerInput } from "../reducers/GameReducer";
 
 // Render the player control inputs

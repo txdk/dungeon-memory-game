@@ -12,6 +12,11 @@ export interface Monster {
     isDefeated: boolean;
 };
 
+export interface Encounter {
+    monster: Monster;
+    quantity: number;
+};
+
 // Tier 1 monsters
 export const generateTier1Monsters = () => {
     const tier1MonsterNames: Array<string> = randomiseArrayOrder(["bat", "goblin", "skeleton"]) as Array<string>;
@@ -56,7 +61,7 @@ export const generateTier2Monsters = () => {
         id: 3,
         instanceId: uuidv4(),
         name: tier2MonsterNames[0],
-        description: "A cunning creature with moderate combat prowess, can catch the unwary adventurer off-guard.",
+        description: "A cunning creature with moderate combat prowess. Can catch the unwary adventurer off-guard.",
         defeatSequence: randomiseArrayOrder(
             [GameInput.INPUT_ATTACK, getRandomNonCombatInput(), getRandomNonCombatInput()]
         ) as Array<GameInput>,

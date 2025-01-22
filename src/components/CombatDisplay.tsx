@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Monster } from "../core/Monsters";
-import Button from "./Button";
+import Button from "./generic/Button";
 import PlayerInputDisplay from "./PlayerInputDisplay";
 import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import AnimatedText from "./AnimatedText";
+import AnimatedText from "./generic/AnimatedText";
 import { getMonsterArticle } from "../core/MonsterGenerator";
 import SlotCounter from "react-slot-counter";
 

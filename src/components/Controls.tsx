@@ -1,5 +1,5 @@
 import { GiBroadsword, GiShield } from "react-icons/gi";
-import Button from "./Button";
+import Button from "./generic/Button";
 import { FaLongArrowAltLeft, FaLongArrowAltRight, FaLongArrowAltUp } from "react-icons/fa";
 import { ICON_SIZE, MOBILE_ICON_SIZE } from "../constants/AppConstants";
 import { useContext } from "react";

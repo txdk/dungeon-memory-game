@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Monster } from "../core/Monsters";
-import Button from "./Button";
-import InputIcon from "./InputIcon";
+import Button from "./generic/Button";
+import InputIcon from "./generic/InputIcon";
 import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameInput } from "../constants/GameConstants";
 import { v4 as uuidv4} from 'uuid';
-import AnimatedText from "./AnimatedText";
+import AnimatedText from "./generic/AnimatedText";
 
 interface MonsterInfoPanelProps {
     monster: Monster;

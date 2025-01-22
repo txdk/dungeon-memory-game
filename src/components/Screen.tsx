@@ -7,6 +7,7 @@ import { GameStatus } from "../reducers/GameReducer";
 import CombatDisplay from "./CombatDisplay";
 import GameOverScreen from "./GameOverScreen";
 import MonsterInfoPanel from "./MonsterInfoPanel";
+import StageTransitionDisplay from "./StageTransitionDisplay";
 
 export default function Screen() {
 
@@ -17,6 +18,9 @@ export default function Screen() {
 
     if (state.status === GameStatus.NOT_STARTED) {
         screenElement = <NewGameButton startGame={startGame} />; 
+    }
+    else if (state.status === GameStatus.START_NEW_STAGE) {
+        screenElement = <StageTransitionDisplay stage={state.currentStage!} />;
     }
     else if (state.status === GameStatus.IN_PROGRESS) {
         screenElement = (

@@ -8,7 +8,13 @@ export enum GameInput {
     INPUT_RIGHT,
     INPUT_ATTACK,
     INPUT_SHIELD
-}
+};
+
+// Minimum number of encounters required with the newest monster before the next one can be encountered
+export const MIN_ENCOUNTERS_BEFORE_NEW_MONSTER = 2;
+
+// ID of final monster in Stage 1
+export const FIRST_STAGE_FINAL_MONSTER_ID: number = 5;
 
 // Score requirement to level up
 const LEVEL_REQUIREMENTS: Map<number, number> = new Map();

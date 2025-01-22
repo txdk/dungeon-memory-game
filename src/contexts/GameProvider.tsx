@@ -33,6 +33,14 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         });
     };
 
+    // Start new stage
+    const startNewStage = () => {
+        dispatch({
+            type: GameActionType.START_NEW_STAGE,
+            payload: null
+        })
+    }
+
     // Close monster info panel
     const closeInfoPanel = () => {
         dispatch({
@@ -46,6 +54,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         registerInput: registerInput,
         startGame: startGame,
         generateNextMonster: generateNextMonster,
+        startNewStage: startNewStage,
         closeInfoPanel: closeInfoPanel
     }), [gameState, registerInput])
 

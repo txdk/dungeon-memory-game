@@ -8,6 +8,7 @@ const GameContext = createContext({
     registerInput: (_: GameInput) => {},
     startGame: () => {},
     generateNextMonster: () => {},
+    startNewStage: () => {},
     closeInfoPanel: () => {}
 });
 

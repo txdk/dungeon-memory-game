@@ -15,6 +15,8 @@ export default function AnimatedText({ id, text, delay, className }: Readonly<An
 
     // Play animation
     useEffect(() => {
+
+        // Reset element if id is different
         if (id !== cachedId) {
             setCachedId(id);
             setCurrentText("");

@@ -1,6 +1,6 @@
 import { FaLongArrowAltLeft, FaLongArrowAltRight, FaLongArrowAltUp } from "react-icons/fa";
-import { GameInput } from "../constants/GameConstants";
-import { INPUT_ICON_SIZE, MOBILE_INPUT_ICON_SIZE } from "../constants/AppConstants";
+import { GameInput } from "../../constants/GameConstants";
+import { INPUT_ICON_SIZE, MOBILE_INPUT_ICON_SIZE } from "../../constants/AppConstants";
 import { GiBroadsword, GiShield } from "react-icons/gi";
 import { useMediaQuery } from "react-responsive";
 

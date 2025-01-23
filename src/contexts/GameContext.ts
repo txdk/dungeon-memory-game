@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { GameInput } from "../constants/GameConstants";
-import { initialState } from "../reducers/GameReducer";
+import { GameStatus, initialState } from "../reducers/GameState";
 
 const GameContext = createContext({
     state: initialState, 
@@ -8,7 +8,8 @@ const GameContext = createContext({
     registerInput: (_: GameInput) => {},
     startGame: () => {},
     generateNextMonster: () => {},
-    startNewStage: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setGameStatus: (_: GameStatus) => {},
     closeInfoPanel: () => {}
 });
 

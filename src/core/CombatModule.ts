@@ -1,5 +1,5 @@
 import { GameInput } from "../constants/GameConstants";
-import { GameStatus } from "../reducers/GameReducer";
+import { GameStatus } from "../reducers/GameState";
 import { Monster } from "./Monsters";
 
 // Check whether player input is correct

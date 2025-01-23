@@ -5,16 +5,17 @@ import { useContext, useEffect, useState } from "react";
 import { STAGE_TRANSITION_DELAY } from "../constants/AppConstants";
 import { Stage } from "../core/Stages";
 import GameContext from "../contexts/GameContext";
+import { GameStatus } from "../reducers/GameState";
 
-interface StageTransitionDisplayProps {
+interface StageStartScreenProps {
     stage: Stage;
 }
 
-export default function StageTransitionDisplay({ stage }: Readonly<StageTransitionDisplayProps>) {
+export default function StageStartScreen({ stage }: Readonly<StageStartScreenProps>) {
 
     const [cachedId, setCachedId] = useState<string>("");
     const [buttonVisibility, setButtonVisibility] = useState<boolean>(false);
-    const { startNewStage } = useContext(GameContext);
+    const { setGameStatus } = useContext(GameContext);
 
     useEffect(() => {
 
@@ -43,7 +44,7 @@ export default function StageTransitionDisplay({ stage }: Readonly<StageTransiti
                 buttonVisibility &&
                 <Button 
                     className="flex mt-[50px] md:mt-[50px] relative p-1 md:p-1.5 left-[32%] md:left-[40%] items-center fade-in" 
-                    handleClick={startNewStage}
+                    handleClick={() => setGameStatus(GameStatus.IN_PROGRESS)}
                 >
                     <>
                         <span className="text-xs md:text-sm">Proceed</span>

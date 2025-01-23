@@ -1,50 +1,61 @@
 import { useContext } from "react";
-import HealthBar from "./HealthBar";
 import GameContext from "../contexts/GameContext";
 import NewGameButton from "./NewGameButton";
-import ScoreDisplay from "./ScoreDisplay";
-import { GameStatus } from "../reducers/GameReducer";
+import { GameStatus } from "../reducers/GameState"; 
 import CombatDisplay from "./CombatDisplay";
 import GameOverScreen from "./GameOverScreen";
 import MonsterInfoPanel from "./MonsterInfoPanel";
-import StageTransitionDisplay from "./StageTransitionDisplay";
+import StageStartScreen from "./StageStartScreen";
+import StageClearScreen from "./StageClearScreen";
+import HeadsUpDisplay from "./HeadsUpDisplay";
 
 export default function Screen() {
 
     const { state, startGame } = useContext(GameContext);
     
     // Determine what element to render on screen based on game status
-    let screenElement: JSX.Element = <></>;
+    const renderScreenElement = () => {
+        switch (state.status) {
+            case (GameStatus.NOT_STARTED):
+                return <NewGameButton startGame={startGame} />; 
+            
+            case (GameStatus.START_NEW_STAGE):
+                return <StageStartScreen stage={state.currentStage!} />;
 
-    if (state.status === GameStatus.NOT_STARTED) {
-        screenElement = <NewGameButton startGame={startGame} />; 
-    }
-    else if (state.status === GameStatus.START_NEW_STAGE) {
-        screenElement = <StageTransitionDisplay stage={state.currentStage!} />;
-    }
-    else if (state.status === GameStatus.IN_PROGRESS) {
-        screenElement = (
-            <>
-                <HealthBar />
-                <ScoreDisplay score={state.score} />
-                {
-                    state.currentMonster !== null && (
-                        !state.seenMonsters.includes(state.currentMonster.id)? (
-                            <MonsterInfoPanel monster={state.currentMonster} />
-                        ):
-                        <CombatDisplay monster={state.currentMonster} />
-                    )
-                }       
-            </>
-        );
-    }
-    else if (state.status === GameStatus.GAME_OVER) {
-        screenElement = <GameOverScreen monsterName={state.currentMonster!.name} score={state.score} startGame={startGame} />; 
-    }
+            case (GameStatus.IN_PROGRESS):
+                return (
+                    <>
+                        <HeadsUpDisplay score={state.score} />
+                        {
+                            state.currentMonster !== null && (
+                                !state.seenMonsters.includes(state.currentMonster.id)? (
+                                    <MonsterInfoPanel monster={state.currentMonster} />
+                                ):
+                                <CombatDisplay monster={state.currentMonster} />
+                            )
+                        }       
+                    </>
+                );
+
+            case (GameStatus.STAGE_CLEAR):
+                return (
+                    <>
+                        <HeadsUpDisplay score={state.score} />
+                        <StageClearScreen stage={state.currentStage!} />
+                    </>
+                );
+                
+            case (GameStatus.GAME_OVER):
+                return <GameOverScreen monsterName={state.currentMonster!.name} score={state.score} startGame={startGame} />
+
+            default:
+                return <></>;
+        }
+    };
 
     return ( 
         <div className="mx-2 md:mx-10 w-[95%] md:w-2/3 border rounded-2xl h-[400px] md:h-[350px] relative bg-black">
-            {screenElement}  
+            {renderScreenElement()}  
         </div>  
     );
 }

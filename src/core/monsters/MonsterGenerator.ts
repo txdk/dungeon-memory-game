@@ -1,7 +1,7 @@
-import { getRandomArrayElement } from "../utils/RandomiserUtils";
+import { getRandomArrayElement } from "../../utils/RandomiserUtils";
 import { generateMiniboss, generateMinotaur, generateNecromancer, generateOgre, generateTier1Monsters, generateTier2Monsters, Monster } from "./Monsters";
 import { v4 as uuidv4} from 'uuid';
-import { Stage } from "./Stages";
+import { Stage } from "../Stages";
 
 // Determine whether monster article is "a" or "an"
 export const getMonsterArticle = (name: string) => {

@@ -7,13 +7,14 @@ import { useMediaQuery } from "react-responsive";
 interface InputIconProps {
     className?: string;
     input: GameInput;
+    size?: number;
 }
 
-export default function InputIcon({ className, input }: Readonly<InputIconProps>) {
+export default function InputIcon({ className, input, size }: Readonly<InputIconProps>) {
 
     // Determine which icon size to use
     const isTabletOrMobile = useMediaQuery({ maxWidth: 768 });
-    const iconSize = isTabletOrMobile? MOBILE_INPUT_ICON_SIZE: INPUT_ICON_SIZE;
+    const iconSize = size ?? (isTabletOrMobile? MOBILE_INPUT_ICON_SIZE: INPUT_ICON_SIZE);
 
     switch (input) {
         case GameInput.INPUT_LEFT:

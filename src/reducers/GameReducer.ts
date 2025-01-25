@@ -1,8 +1,8 @@
-import { GameInput, LEVEL_REQUIREMENTS, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../constants/GameConstants";
+import { GameInput, LEVEL_REQUIREMENTS, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
-import { generateMonsterList, getRandomMonsterFromStage } from "../core/MonsterGenerator";
-import { Encounter, Monster } from "../core/Monsters";
-import { generateFirstStage } from "../core/Stages";
+import { generateMonsterList, getRandomMonsterFromStage } from "../core/monsters/MonsterGenerator";
+import { Encounter, Monster } from "../core/monsters/Monsters";
+import { generateFirstStage, generateSecondStage, NewStageParams, Stage } from "../core/Stages";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "./GameState";
 
 // Start a new game
@@ -113,6 +113,32 @@ const generateNextMonster = (state: GameState) => {
     } as GameState;
 };
 
+// Handle starting a new stage
+const handleStageStart = (state: GameState, newStageParams: NewStageParams) => {
+
+    const newHealth: number = state.currentHealth + (newStageParams.rewards.health ?? 0);
+    const newScore: number = state.score + (newStageParams.rewards.score ?? 0);
+    const newStage: Stage = generateSecondStage(newStageParams.monsterList, state.monsterList);
+    const initialLevel: number = newStageParams.monsterList.length;
+
+    const firstMonster: Monster = {...getRandomMonsterFromStage(initialLevel, newStage)};
+    const firstEncounter: Encounter = {
+        monster: {...firstMonster},
+        quantity: 0
+    };
+
+    return {
+        ...state,
+        status: GameStatus.START_NEW_STAGE,
+        currentHealth: Math.min(MAX_HEALTH, newHealth),
+        score: newScore,
+        currentStage: newStage,
+        currentLevel: initialLevel,
+        currentMonster: {...firstMonster},
+        newestEncounter: firstEncounter
+    } as GameState;
+};
+
 // Handle the closing of the new monster encounter info panel and registering the new monster as seen
 const handleCloseMonsterInfoPanel = (state: GameState) => {
     return {
@@ -139,6 +165,10 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
         // Set game status
         case GameActionType.SET_GAME_STATUS: 
             return setGameStatus(state, action.payload as GameStatus);
+
+        // Start new stage
+        case GameActionType.START_NEW_STAGE:
+            return handleStageStart(state, action.payload as NewStageParams);
 
         // Close monster info panel - new monster encounter
         case GameActionType.CLOSE_INFO_PANEL:

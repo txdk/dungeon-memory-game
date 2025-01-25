@@ -1,5 +1,5 @@
 import { GameInput, MAX_HEALTH } from "../constants/GameConstants";
-import { Encounter, Monster } from "../core/Monsters";
+import { Encounter, Monster } from "../core/monsters/Monsters";
 import { Stage } from "../core/Stages";
 
 export interface PlayerInput {
@@ -11,6 +11,7 @@ export enum GameStatus {
     NOT_STARTED,
     START_NEW_STAGE,
     STAGE_CLEAR,
+    STAGE_SELECT,
     IN_PROGRESS,
     GAME_OVER
 };
@@ -45,6 +46,7 @@ export const initialState: GameState = {
 
 export enum GameActionType {
     PLAYER_INPUT,
+    START_NEW_STAGE,
     GENERATE_NEXT_MONSTER,
     SET_GAME_STATUS,
     CLOSE_INFO_PANEL,

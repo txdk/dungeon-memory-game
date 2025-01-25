@@ -1,6 +1,6 @@
 import { GameInput } from "../constants/GameConstants";
 import { GameStatus } from "../reducers/GameState";
-import { Monster } from "./Monsters";
+import { Monster } from "./monsters/Monsters";
 
 // Check whether player input is correct
 export const checkPlayerInput = (input: GameInput, correctInputs: number, monster: Monster) => {

@@ -1,11 +1,11 @@
 import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "./generic/AnimatedText";
 import Button from "./generic/Button";
-import { useContext, useEffect, useState } from "react";
-import { STAGE_TRANSITION_DELAY } from "../constants/AppConstants";
+import { useContext } from "react";
 import { Stage } from "../core/Stages";
 import GameContext from "../contexts/GameContext";
 import { GameStatus } from "../reducers/GameState";
+import { useDelay } from "../hooks/useDelay";
 
 interface StageStartScreenProps {
     stage: Stage;
@@ -13,25 +13,8 @@ interface StageStartScreenProps {
 
 export default function StageStartScreen({ stage }: Readonly<StageStartScreenProps>) {
 
-    const [cachedId, setCachedId] = useState<string>("");
-    const [buttonVisibility, setButtonVisibility] = useState<boolean>(false);
+    const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
-
-    useEffect(() => {
-
-        // Reset element if stage is new
-        if (stage.id !== cachedId) {
-            setButtonVisibility(false);
-            setCachedId(stage.id);
-        }
-
-        // Delay display of button
-        const timeout = setTimeout(() => {
-            setButtonVisibility(true);
-        }, STAGE_TRANSITION_DELAY);
-
-        return () => clearTimeout(timeout);
-    }, [stage.id, cachedId]);
 
     return (
         <div className="font-customFont text-green-500 text-center text-xl md:text-2xl mt-[100px]">

@@ -16,7 +16,7 @@ export const MIN_ENCOUNTERS_BEFORE_NEW_MONSTER = 2;
 // ID of final monster in Stage 1
 export const FIRST_STAGE_FINAL_MONSTER_ID: number = 4;
 
-// Score requirement to level up
+// Score requirement to level up TODO: set to change for different stages?
 const LEVEL_REQUIREMENTS: Map<number, number> = new Map();
 LEVEL_REQUIREMENTS.set(1, 10);
 LEVEL_REQUIREMENTS.set(2, 50);

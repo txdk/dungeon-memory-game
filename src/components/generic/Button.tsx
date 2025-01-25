@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ReactNode } from "react";
 
 interface ButtonProps {
-    children: ReactNode;
+    children?: ReactNode;
     className?: string;
     handleClick(event: React.MouseEvent<HTMLElement>): void;
 }

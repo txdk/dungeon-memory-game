@@ -8,6 +8,7 @@ import MonsterInfoPanel from "./MonsterInfoPanel";
 import StageStartScreen from "./StageStartScreen";
 import StageClearScreen from "./StageClearScreen";
 import HeadsUpDisplay from "./HeadsUpDisplay";
+import StageSelectScreen from "./StageSelectScreen";
 
 export default function Screen() {
 
@@ -44,6 +45,14 @@ export default function Screen() {
                         <StageClearScreen stage={state.currentStage!} />
                     </>
                 );
+
+            case (GameStatus.STAGE_SELECT):
+                return (
+                    <>
+                        <HeadsUpDisplay score={state.score} />
+                        <StageSelectScreen />
+                    </>
+                );
                 
             case (GameStatus.GAME_OVER):
                 return <GameOverScreen monsterName={state.currentMonster!.name} score={state.score} startGame={startGame} />
@@ -55,7 +64,7 @@ export default function Screen() {
 
     return ( 
         <div className="mx-2 md:mx-10 w-[95%] md:w-2/3 border rounded-2xl h-[400px] md:h-[350px] relative bg-black">
-            {renderScreenElement()}  
+            {renderScreenElement()}
         </div>  
     );
 }

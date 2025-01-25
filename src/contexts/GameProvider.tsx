@@ -3,6 +3,7 @@ import gameReducer from "../reducers/GameReducer";
 import GameContext from "./GameContext";
 import { GameInput } from "../constants/GameConstants";
 import { GameActionType, GameStatus, initialState } from "../reducers/GameState";
+import { NewStageParams } from "../core/Stages";
 
 export default function GameProvider({ children }: Readonly<{ children: React.ReactNode }>) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);
@@ -23,6 +24,14 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         dispatch({
             type: GameActionType.START_GAME,
             payload: null
+        });
+    };
+
+    // Handle starting a new stage
+    const startNewStage = (newStageParams : NewStageParams) => {
+        dispatch({
+            type: GameActionType.START_NEW_STAGE,
+            payload: newStageParams
         });
     };
 
@@ -54,6 +63,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         state: gameState,
         registerInput: registerInput,
         startGame: startGame,
+        startNewStage: startNewStage,
         generateNextMonster: generateNextMonster,
         setGameStatus: setGameStatus,
         closeInfoPanel: closeInfoPanel

@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { Monster } from "../core/Monsters";
+import { Monster } from "../core/monsters/Monsters";
 import Button from "./generic/Button";
 import PlayerInputDisplay from "./PlayerInputDisplay";
 import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "./generic/AnimatedText";
-import { getMonsterArticle } from "../core/MonsterGenerator";
+import { getMonsterArticle } from "../core/monsters/MonsterGenerator";
 import SlotCounter from "react-slot-counter";
 
 interface CombatDisplayProps {

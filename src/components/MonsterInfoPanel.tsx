@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Monster } from "../core/Monsters";
+import { Monster } from "../core/monsters/Monsters";
 import Button from "./generic/Button";
 import InputIcon from "./generic/InputIcon";
 import GameContext from "../contexts/GameContext";

@@ -1,4 +1,4 @@
-import { getMonsterArticle } from "../core/MonsterGenerator";
+import { getMonsterArticle } from "../core/monsters/MonsterGenerator";
 import AnimatedText from "./generic/AnimatedText";
 import NewGameButton from "./NewGameButton";
 import SlotCounter from "react-slot-counter";

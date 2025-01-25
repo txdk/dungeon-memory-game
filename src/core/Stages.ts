@@ -1,7 +1,8 @@
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from './monsters/Monsters';
-import { FIRST_STAGE_FINAL_MONSTER_ID } from '../constants/GameConstants';
-import { getRandomArrayElement } from '../utils/RandomiserUtils';
+import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS } from '../constants/GameConstants';
+import { getRandomArrayElement, getRandomArraySample } from '../utils/RandomiserUtils';
+import { findMonsterByName } from './monsters/MonsterGenerator';
 
 // Constants specifying the requirements for a player to complete a stage
 export interface StageClearCondition {
@@ -24,9 +25,70 @@ export interface Stage {
     name: string;
     monsterList: Monster[];
     scoreReward: number;
+    levelRequirements: Map<number, number>;
     clearCondition: StageClearCondition;
-    generatePathOptions: () => {monsterList: Monster[], rewards: Rewards}[];
-}
+    generatePathOptions: () => NewStageParams[];
+    generateNextStage: (selectedMonsters: Monster[], allMonsters: Monster[]) => Stage;
+};
+
+export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
+
+    // Add monsters to list
+    const fleshGolem: Monster = {
+        ...(findMonsterByName("ogre", allMonsters)),
+        name: "flesh golem"
+    };
+    const necromancer: Monster = {...findMonsterByName("necromancer", allMonsters)};
+    const monsterList: Monster[] = [
+        ...selectedMonsters,
+        ...allMonsters.slice(CATACOMBS_FIRST_MONSTER_ID, CATACOMBS_FINAL_MONSTER_ID + 1),
+        fleshGolem,
+        necromancer
+    ];
+
+    const clearCondition: StageClearCondition = {
+        scoreRequirement: 2500,
+        finalMonsterCount: 3
+    };
+
+    const generatePathOptions = () => {
+        return [
+            {
+                monsterList: [...getRandomArraySample(monsterList.slice(0,5), 2)],
+                rewards: {
+                    score: 0,
+                    health: 0
+                }
+            },
+            {
+                monsterList: [getRandomArrayElement(monsterList.slice(2,5)), getRandomArrayElement(monsterList.slice(5,7))],
+                rewards: {
+                    score: 250,
+                    health: 1
+                }
+            },
+            {
+                monsterList: [{...fleshGolem}, {...necromancer}],
+                rewards: {
+                    score: 500,
+                    health: 2
+                }
+            }
+        ] as NewStageParams[];
+    };
+
+    return {
+        id: uuidv4(),
+        name: "The Catacombs",
+        monsterList: monsterList,
+        scoreReward: 1000,
+        levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
+        clearCondition: clearCondition,
+        generatePathOptions: generatePathOptions,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        generateNextStage: (_selectedMonsters: Monster[], _allMonsters: Monster[]) => {}
+    } as Stage;
+};
 
 export const generateFirstStage = (allMonsters: Monster[]) => {
 
@@ -68,26 +130,9 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
         name: "The Caves",
         monsterList: monsterList,
         scoreReward: 300,
+        levelRequirements: FIRST_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
-        generatePathOptions: generatePathOptions
+        generatePathOptions: generatePathOptions,
+        generateNextStage: generateSecondStage
     } as Stage;
 };
-
-export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
-
-    const monsterList = [...selectedMonsters, ...allMonsters.slice(FIRST_STAGE_FINAL_MONSTER_ID + 1)]
-
-    const clearCondition: StageClearCondition = {
-        scoreRequirement: 2000,
-        finalMonsterCount: 3
-    };
-
-    return {
-        id: uuidv4(),
-        name: "The Catacombs",
-        monsterList: monsterList,
-        scoreReward: 1000,
-        clearCondition: clearCondition,
-        // TODO: add generatePathOptions
-    } as Stage;
-}

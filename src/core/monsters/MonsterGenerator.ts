@@ -1,7 +1,12 @@
 import { getRandomArrayElement } from "../../utils/RandomiserUtils";
-import { generateMiniboss, generateMinotaur, generateNecromancer, generateOgre, generateTier1Monsters, generateTier2Monsters, Monster } from "./Monsters";
+import { generateBigMonster, generateMiniboss, generateMinotaur, generateNecromancer, generateStage2BasicMonsters, generateTier1Monsters, generateTier2Monsters, Monster } from "./Monsters";
 import { v4 as uuidv4} from 'uuid';
 import { Stage } from "../Stages";
+
+// Find monster by name
+export const findMonsterByName = (name: string, monsterList: Monster[]) => {
+    return monsterList.find((monster: Monster) => monster.name === name)!;
+};
 
 // Determine whether monster article is "a" or "an"
 export const getMonsterArticle = (name: string) => {
@@ -36,8 +41,9 @@ export const generateMonsterList = () => {
     return [
         ...tier1Monsters,
         ...generateTier2Monsters(),
+        ...generateStage2BasicMonsters(),
+        generateBigMonster(),
         generateNecromancer(tier1Monsters),
-        generateOgre(),
         generateMinotaur(),
         generateMiniboss()
     ];

@@ -16,11 +16,25 @@ export const MIN_ENCOUNTERS_BEFORE_NEW_MONSTER = 2;
 // ID of final monster in Stage 1
 export const FIRST_STAGE_FINAL_MONSTER_ID: number = 4;
 
-// Score requirement to level up TODO: set to change for different stages?
-const LEVEL_REQUIREMENTS: Map<number, number> = new Map();
-LEVEL_REQUIREMENTS.set(1, 10);
-LEVEL_REQUIREMENTS.set(2, 50);
-LEVEL_REQUIREMENTS.set(3, 100);
-LEVEL_REQUIREMENTS.set(4, 200);
+// ID of first monster in Stage 2 - Catacombs
+export const CATACOMBS_FIRST_MONSTER_ID: number = 6;
 
-export { LEVEL_REQUIREMENTS };
+// ID of final basic monster in Stage 2 - Catacombs
+export const CATACOMBS_FINAL_MONSTER_ID: number = 8;
+
+// Score requirement to level up
+const FIRST_STAGE_LEVEL_REQUIREMENTS: Map<number, number> = new Map();
+FIRST_STAGE_LEVEL_REQUIREMENTS.set(1, 10);
+FIRST_STAGE_LEVEL_REQUIREMENTS.set(2, 50);
+FIRST_STAGE_LEVEL_REQUIREMENTS.set(3, 100);
+FIRST_STAGE_LEVEL_REQUIREMENTS.set(4, 200);
+
+const SECOND_STAGE_LEVEL_REQUIREMENTS: Map<number, number> = new Map();
+SECOND_STAGE_LEVEL_REQUIREMENTS.set(1, 850);
+SECOND_STAGE_LEVEL_REQUIREMENTS.set(2, 900);
+SECOND_STAGE_LEVEL_REQUIREMENTS.set(3, 1075);
+SECOND_STAGE_LEVEL_REQUIREMENTS.set(4, 1200);
+SECOND_STAGE_LEVEL_REQUIREMENTS.set(5, 1500);
+SECOND_STAGE_LEVEL_REQUIREMENTS.set(6, 1750);
+
+export { FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS };

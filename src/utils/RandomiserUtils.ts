@@ -31,6 +31,12 @@ export const randomiseArrayOrder = (array: Array<unknown>) => {
     return randomisedArray;
 }
 
+// Get N random items from an array
+export const getRandomArraySample = (array: unknown[], sampleSize: number) => {
+    const randomisedArray: unknown[] = randomiseArrayOrder(array);
+    return randomisedArray.slice(0, sampleSize);
+}
+
 // Get a random directional input
 export const getRandomDirection = () => {
     return getRandomArrayElement(DIRECTIONAL_INPUTS);

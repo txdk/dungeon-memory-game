@@ -1,4 +1,4 @@
-import { GameInput, LEVEL_REQUIREMENTS, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../constants/GameConstants";
+import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
 import { generateMonsterList, getRandomMonsterFromStage } from "../core/monsters/MonsterGenerator";
 import { Encounter, Monster } from "../core/monsters/Monsters";
@@ -92,7 +92,7 @@ const generateNextMonster = (state: GameState) => {
 
     // Check level-up condition
     const canLevelUp: boolean = (
-        (newScore >= (LEVEL_REQUIREMENTS.get(state.currentLevel!) ?? Infinity)) &&
+        (newScore >= (state.currentStage!.levelRequirements.get(state.currentLevel!) ?? Infinity)) &&
         (state.newestEncounter!.quantity >= MIN_ENCOUNTERS_BEFORE_NEW_MONSTER)
     );
     const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
@@ -107,7 +107,7 @@ const generateNextMonster = (state: GameState) => {
         currentMonster: {...nextMonster},
         newestEncounter: {
             ...(state.newestEncounter!),
-            monster: state.monsterList[newLevel - 1], // NOTE: next monster is fetched incrementally from the total monster list
+            monster: state.currentStage!.monsterList[newLevel - 1], // NOTE: next monster is fetched incrementally from the total monster list
             quantity: canLevelUp? 0: state.newestEncounter!.quantity
         }
     } as GameState;

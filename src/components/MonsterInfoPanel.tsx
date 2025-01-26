@@ -7,6 +7,7 @@ import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameInput } from "../constants/GameConstants";
 import { v4 as uuidv4} from 'uuid';
 import AnimatedText from "./generic/AnimatedText";
+import { useKeyHandler } from "../hooks/useKeyHandler";
 
 interface MonsterInfoPanelProps {
     monster: Monster;
@@ -15,6 +16,7 @@ interface MonsterInfoPanelProps {
 export default function MonsterInfoPanel({ monster }: Readonly<MonsterInfoPanelProps>) {
 
     const { closeInfoPanel } = useContext(GameContext);
+    useKeyHandler(closeInfoPanel);
 
     return (
         <div className="font-customFont text-green-500 text-center text-sm md:text-base m-5 pt-5">

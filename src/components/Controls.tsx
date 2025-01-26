@@ -2,7 +2,7 @@ import { GiBroadsword, GiShield } from "react-icons/gi";
 import Button from "./generic/Button";
 import { FaLongArrowAltLeft, FaLongArrowAltRight, FaLongArrowAltUp } from "react-icons/fa";
 import { ICON_SIZE, MOBILE_ICON_SIZE } from "../constants/AppConstants";
-import { useContext } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import GameContext from "../contexts/GameContext";
 import { GameInput } from "../constants/GameConstants"; 
 import { useMediaQuery } from "react-responsive";
@@ -10,6 +10,39 @@ import { useMediaQuery } from "react-responsive";
 export default function Controls() {
 
     const { registerInput } = useContext(GameContext);
+
+    // Handle keyboard inputs
+    const handleKeyDown = useCallback(
+        (e: KeyboardEvent) => {
+            e.preventDefault();
+
+            switch (e.code) {
+                case "ArrowLeft":
+                    registerInput(GameInput.INPUT_LEFT);
+                    break;
+                case "ArrowUp":
+                    registerInput(GameInput.INPUT_UP);
+                    break;
+                case "ArrowRight":
+                    registerInput(GameInput.INPUT_RIGHT);
+                    break;
+                case "KeyA":
+                    registerInput(GameInput.INPUT_ATTACK);
+                    break;
+                case "KeyD":
+                    registerInput(GameInput.INPUT_SHIELD);
+                    break;
+            };
+        }, [registerInput]
+    );
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [handleKeyDown]);
 
     // Determine which icon size to use
     const isTabletOrMobile = useMediaQuery({ maxWidth: 768 });

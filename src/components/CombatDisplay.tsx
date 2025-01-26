@@ -7,6 +7,7 @@ import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "./generic/AnimatedText";
 import { getMonsterArticle } from "../core/monsters/MonsterGenerator";
 import SlotCounter from "react-slot-counter";
+import { useKeyHandler } from "../hooks/useKeyHandler";
 
 interface CombatDisplayProps {
     monster: Monster | null;
@@ -15,11 +16,12 @@ interface CombatDisplayProps {
 export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>) {
 
     const { generateNextMonster } = useContext(GameContext);
+    useKeyHandler(generateNextMonster, monster?.isDefeated ?? false);
 
     // Display nothing if there are no active monsters
     if (monster === null) {
         return <></>;
-    }
+    };
 
     return (
         <>

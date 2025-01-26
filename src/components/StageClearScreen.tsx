@@ -7,6 +7,7 @@ import { useContext } from "react";
 import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameStatus } from "../reducers/GameState";
+import { useKeyHandler } from "../hooks/useKeyHandler";
 
 interface StageClearScreenProps {
     stage: Stage;
@@ -16,6 +17,10 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
 
     const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
+    const handleClick = () => {
+        setGameStatus(GameStatus.STAGE_SELECT);
+    };
+    useKeyHandler(handleClick, buttonVisibility);
 
     return (
         <div className="font-customFont text-green-500 text-center mt-[100px]">
@@ -35,7 +40,7 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
                 buttonVisibility &&
                 <Button
                     className="flex mt-[50px] md:mt-[50px] relative p-1 md:p-1.5 left-[32%] md:left-[40%] items-center fade-in" 
-                    handleClick={() => setGameStatus(GameStatus.STAGE_SELECT)}
+                    handleClick={handleClick}
                 >
                     <>
                         <span className="text-xs md:text-sm">Proceed</span>

@@ -31,6 +31,53 @@ export interface Stage {
     generateNextStage: (selectedMonsters: Monster[], allMonsters: Monster[]) => Stage;
 };
 
+export const generateFirstStage = (allMonsters: Monster[]) => {
+
+    const monsterList: Monster[] = allMonsters.slice(0, FIRST_STAGE_FINAL_MONSTER_ID + 1);
+
+    const clearCondition: StageClearCondition = {
+        scoreRequirement: 400,
+        finalMonsterCount: 3
+    };
+
+    const generatePathOptions = () => {
+        return ([
+            {
+                monsterList: monsterList.slice(0, 2),
+                rewards: {
+                    health: 0,
+                    score: 0
+                }
+            },
+            {
+                monsterList: [getRandomArrayElement(monsterList.slice(1, 3)), getRandomArrayElement(monsterList.slice(3, 5))],
+                rewards: {
+                    health: 1,
+                    score: 50
+                }
+            },
+            {
+                monsterList: monsterList.slice(3, 5),
+                rewards: {
+                    health: 2,
+                    score: 200
+                }
+            }
+        ]);
+    };
+
+    return {
+        id: uuidv4(),
+        name: "The Caves",
+        monsterList: monsterList,
+        scoreReward: 250,
+        levelRequirements: FIRST_STAGE_LEVEL_REQUIREMENTS,
+        clearCondition: clearCondition,
+        generatePathOptions: generatePathOptions,
+        generateNextStage: generateSecondStage
+    } as Stage;
+};
+
 export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
 
     // Add monsters to list
@@ -85,54 +132,26 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
         levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: generatePathOptions,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        generateNextStage: (_selectedMonsters: Monster[], _allMonsters: Monster[]) => {}
+        generateNextStage: generateThirdStage
     } as Stage;
 };
 
-export const generateFirstStage = (allMonsters: Monster[]) => {
-
-    const monsterList: Monster[] = allMonsters.slice(0, FIRST_STAGE_FINAL_MONSTER_ID + 1);
+export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
 
     const clearCondition: StageClearCondition = {
-        scoreRequirement: 500,
+        scoreRequirement: Infinity,
         finalMonsterCount: 3
-    };
-
-    const generatePathOptions = () => {
-        return ([
-            {
-                monsterList: monsterList.slice(0, 2),
-                rewards: {
-                    health: 0,
-                    score: 0
-                }
-            },
-            {
-                monsterList: [getRandomArrayElement(monsterList.slice(1, 3)), getRandomArrayElement(monsterList.slice(3, 5))],
-                rewards: {
-                    health: 1,
-                    score: 50
-                }
-            },
-            {
-                monsterList: monsterList.slice(3, 5),
-                rewards: {
-                    health: 2,
-                    score: 200
-                }
-            }
-        ]);
     };
 
     return {
         id: uuidv4(),
-        name: "The Caves",
-        monsterList: monsterList,
-        scoreReward: 300,
-        levelRequirements: FIRST_STAGE_LEVEL_REQUIREMENTS,
+        name: "The Undercity",
+        monsterList: [...selectedMonsters, ...allMonsters.slice(11)],
+        scoreReward: 3000,
+        levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
-        generatePathOptions: generatePathOptions,
-        generateNextStage: generateSecondStage
-    } as Stage;
+        generatePathOptions: () => [] as NewStageParams[],
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        generateNextStage: (_selectedMonsters: Monster[], _allMonsters: Monster[]) => {}
+    } as Stage
 };

@@ -2,7 +2,7 @@ import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../con
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
 import { generateMonsterList, getRandomMonsterFromStage } from "../core/monsters/MonsterGenerator";
 import { Encounter, Monster } from "../core/monsters/Monsters";
-import { generateFirstStage, generateSecondStage, NewStageParams, Stage } from "../core/Stages";
+import { generateFirstStage, NewStageParams, Stage } from "../core/Stages";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "./GameState";
 
 // Start a new game
@@ -34,7 +34,7 @@ const handlePlayerInput = (state: GameState, input: GameInput) => {
         state.currentMonster.isDefeated
     ) {
         return state;
-    }
+    };
 
     // Check whether player input is correct and resolve consequences
     const isCorrect: boolean = checkPlayerInput(input, state.correctInputs, state.currentMonster);
@@ -107,7 +107,7 @@ const generateNextMonster = (state: GameState) => {
         currentMonster: {...nextMonster},
         newestEncounter: {
             ...(state.newestEncounter!),
-            monster: state.currentStage!.monsterList[newLevel - 1], // NOTE: next monster is fetched incrementally from the total monster list
+            monster: state.currentStage!.monsterList[newLevel - 1], 
             quantity: canLevelUp? 0: state.newestEncounter!.quantity
         }
     } as GameState;
@@ -118,7 +118,7 @@ const handleStageStart = (state: GameState, newStageParams: NewStageParams) => {
 
     const newHealth: number = state.currentHealth + (newStageParams.rewards.health ?? 0);
     const newScore: number = state.score + (newStageParams.rewards.score ?? 0);
-    const newStage: Stage = generateSecondStage(newStageParams.monsterList, state.monsterList);
+    const newStage: Stage = state.currentStage!.generateNextStage(newStageParams.monsterList, state.monsterList);
     const initialLevel: number = newStageParams.monsterList.length;
 
     const firstMonster: Monster = {...getRandomMonsterFromStage(initialLevel, newStage)};

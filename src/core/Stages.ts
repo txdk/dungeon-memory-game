@@ -1,7 +1,7 @@
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from './monsters/Monsters';
 import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS, THIRD_STAGE_LEVEL_REQUIREMENTS } from '../constants/GameConstants';
-import { getRandomArrayElement, getRandomArraySample } from '../utils/RandomiserUtils';
+import { getRandomArrayElement, getRandomArraySample } from '../utils/randomUtils';
 import { findMonsterByName } from './monsters/MonsterGenerator';
 
 // Constants specifying the requirements for a player to complete a stage

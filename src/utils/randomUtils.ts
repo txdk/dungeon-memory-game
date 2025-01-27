@@ -8,13 +8,13 @@ const ALL_INPUTS = [...DIRECTIONAL_INPUTS, ...COMBAT_INPUTS];
 // Return a random index from an array
 export const getRandomArrayIndex = (array: Array<unknown>) => {
     return Math.floor(Math.random() * array.length);
-}
+};
 
 // Return a random element from an array
 export const getRandomArrayElement = <T>(array: Array<T>) => {
     const randomIndex: number = getRandomArrayIndex(array);
     return array[randomIndex];
-}
+};
 
 // Randomise the order of elements in an array
 export const randomiseArrayOrder = (array: Array<unknown>) => {
@@ -26,16 +26,16 @@ export const randomiseArrayOrder = (array: Array<unknown>) => {
         const randomElement: unknown = array[randomIndex];
         randomisedArray.push(randomElement);
         array = array.filter((_, index) => index !== randomIndex);
-    }
+    };
 
     return randomisedArray;
-}
+};
 
 // Get N random items from an array
 export const getRandomArraySample = (array: unknown[], sampleSize: number) => {
     const randomisedArray: unknown[] = randomiseArrayOrder(array);
     return randomisedArray.slice(0, sampleSize);
-}
+};
 
 // Get a random directional input
 export const getRandomDirection = () => {
@@ -45,14 +45,14 @@ export const getRandomDirection = () => {
 // Get a random combat input
 export const getRandomCombatInput = () => {
     return getRandomArrayElement(COMBAT_INPUTS);
-}
+};
 
 // Get a random noncombat input
 export const getRandomNonCombatInput = () => {
     return getRandomArrayElement(NON_COMBAT_INPUTS);
-}
+};
 
 // Get a random input
 export const getRandomInput = () => {
     return getRandomArrayElement(ALL_INPUTS);
-}
+};

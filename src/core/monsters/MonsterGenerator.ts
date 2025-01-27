@@ -1,4 +1,4 @@
-import { getRandomArrayElement } from "../../utils/RandomiserUtils";
+import { getRandomArrayElement } from "../../utils/randomUtils";
 import { generateBigMonster, generateMiniboss, generateMinotaur, generateNecromancer, generateStage2BasicMonsters, generateTier1Monsters, generateTier2Monsters, Monster } from "./Monsters";
 import { v4 as uuidv4} from 'uuid';
 import { Stage } from "../Stages";

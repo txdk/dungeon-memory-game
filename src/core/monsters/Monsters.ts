@@ -1,5 +1,5 @@
 import { GameInput } from "../../constants/GameConstants"
-import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, getRandomNonCombatInput, randomiseArrayOrder } from "../../utils/RandomiserUtils";
+import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, getRandomNonCombatInput, randomiseArrayOrder } from "../../utils/randomUtils";
 import { v4 as uuidv4} from 'uuid';
 
 export interface Monster {

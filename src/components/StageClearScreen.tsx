@@ -8,6 +8,7 @@ import GameContext from "../contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameStatus } from "../reducers/GameState";
 import { useKeyHandler } from "../hooks/useKeyHandler";
+import { getTimeIntervalInMinutes } from "../utils/mathUtils";
 
 interface StageClearScreenProps {
     stage: Stage;
@@ -32,7 +33,8 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
                 />
             </div>
             <p className="text-sm md:text-base mt-3 md:mt-5">
-                You conquered {stage.name.toLowerCase()} and gained{" "}
+                You conquered {stage.name.toLowerCase()} in{" "}
+                {getTimeIntervalInMinutes(stage.startTimestamp, stage.endTimestamp)} and gained{" "}
                 <SlotCounter value={stage.scoreReward} />
                 {" "}score!
             </p>

@@ -24,6 +24,8 @@ export interface Stage {
     id: string;
     name: string;
     monsterList: Monster[];
+    startTimestamp: number;
+    endTimestamp: number;
     accumulatedScore: number;
     scoreReward: number;
     levelRequirements: Map<number, number>;
@@ -71,6 +73,8 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
         id: uuidv4(),
         name: "The Caves",
         monsterList: monsterList,
+        startTimestamp: new Date().getTime(),
+        endTimestamp: Infinity,
         accumulatedScore: 0,
         scoreReward: 250,
         levelRequirements: FIRST_STAGE_LEVEL_REQUIREMENTS,
@@ -130,6 +134,8 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
         id: uuidv4(),
         name: "The Catacombs",
         monsterList: monsterList,
+        startTimestamp: new Date().getTime(),
+        endTimestamp: Infinity,
         accumulatedScore: 0,
         scoreReward: 1000,
         levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
@@ -150,6 +156,8 @@ export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Mon
         id: uuidv4(),
         name: "The Undercity",
         monsterList: [...selectedMonsters, ...allMonsters.slice(11)],
+        startTimestamp: new Date().getTime(),
+        endTimestamp: Infinity,
         accumulatedScore: 0,
         scoreReward: 3000,
         levelRequirements: THIRD_STAGE_LEVEL_REQUIREMENTS,

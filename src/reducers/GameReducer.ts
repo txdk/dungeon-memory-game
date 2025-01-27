@@ -85,6 +85,10 @@ const generateNextMonster = (state: GameState) => {
         return {
             ...state,
             status: GameStatus.STAGE_CLEAR,
+            currentStage: {
+                ...state.currentStage,
+                endTimestamp: new Date().getTime(),
+            },
             playerInputs: [],
             correctInputs: 0,
             score: newScore + state.currentStage!.scoreReward

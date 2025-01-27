@@ -5,7 +5,7 @@ import GameProvider from "./contexts/GameProvider"
 function App() {
 
   return (
-    <div className="">
+    <div>
       <GameProvider>
           <div className="flex place-content-center pt-[30px] md:pt-[130px]">
             <Screen />

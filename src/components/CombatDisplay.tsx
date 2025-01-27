@@ -11,9 +11,10 @@ import { useKeyHandler } from "../hooks/useKeyHandler";
 
 interface CombatDisplayProps {
     monster: Monster | null;
+    textColour: string;
 }
 
-export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>) {
+export default function CombatDisplay({ monster, textColour }: Readonly<CombatDisplayProps>) {
 
     const { generateNextMonster } = useContext(GameContext);
     useKeyHandler(generateNextMonster, monster?.isDefeated ?? false);
@@ -29,12 +30,13 @@ export default function CombatDisplay({ monster }: Readonly<CombatDisplayProps>)
             <div className="text-center m-5 pt-5">
                 <AnimatedText 
                     id={monster.instanceId}
+                    className={textColour}
                     text={`You encountered ${getMonsterArticle(monster.name)} ${monster.name}!`}
                     delay={25}
                 />
             </div>
 
-            <PlayerInputDisplay />
+            <PlayerInputDisplay className={textColour} />
             {
                 monster.isDefeated && (
                     <div className="flex flex-col md:flex-row items-center">

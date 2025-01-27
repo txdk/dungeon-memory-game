@@ -67,7 +67,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         generateNextMonster: generateNextMonster,
         setGameStatus: setGameStatus,
         closeInfoPanel: closeInfoPanel
-    }), [gameState, registerInput])
+    }), [gameState, registerInput]);
 
     return (
         <GameContext.Provider value={providerValue}>

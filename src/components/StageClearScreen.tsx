@@ -39,7 +39,7 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
             {
                 buttonVisibility &&
                 <Button
-                    className="flex mt-[50px] md:mt-[50px] relative p-1 md:p-1.5 left-[32%] md:left-[40%] items-center fade-in" 
+                    className="flex mt-[50px] md:mt-[50px] relative p-1 md:p-1.5 left-[32%] md:left-[43%] items-center fade-in" 
                     handleClick={handleClick}
                 >
                     <>

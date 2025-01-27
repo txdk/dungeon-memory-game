@@ -7,13 +7,13 @@ function App() {
   return (
     <div className="">
       <GameProvider>
-        <div className="flex place-content-center pt-[30px] md:pt-[130px]">
-          <Screen />
-        </div>
-        <Controls />
+          <div className="flex place-content-center pt-[30px] md:pt-[130px]">
+            <Screen />
+          </div>
+          <Controls />
       </GameProvider>
     </div>
   )
-}
+};
 
-export default App
+export default App;

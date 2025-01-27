@@ -12,3 +12,12 @@ export const INPUT_ICON_SIZE: number = 27;
 
 // Stage transition time in ms
 export const STAGE_TRANSITION_DELAY = 2000;
+
+// Colours for app elements
+export enum APP_COLOURS {
+    PRIMARY = "text-green-500",
+    ALERT = "text-red-700"
+};
+
+// Duration of alert flash in ms
+export const ALERT_FLASH_DURATION = 500;

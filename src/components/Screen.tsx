@@ -9,10 +9,12 @@ import StageStartScreen from "./StageStartScreen";
 import StageClearScreen from "./StageClearScreen";
 import HeadsUpDisplay from "./HeadsUpDisplay";
 import StageSelectScreen from "./StageSelectScreen";
+import { useAlert } from "../hooks/useAlert";
 
 export default function Screen() {
 
     const { state, startGame } = useContext(GameContext);
+    const textColour = useAlert(state.currentHealth).colour;
     
     // Determine what element to render on screen based on game status
     const renderScreenElement = () => {
@@ -26,13 +28,13 @@ export default function Screen() {
             case (GameStatus.IN_PROGRESS):
                 return (
                     <>
-                        <HeadsUpDisplay score={state.score} />
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} score={state.score} />
                         {
                             state.currentMonster !== null && (
                                 !state.seenMonsters.includes(state.currentMonster.id)? (
                                     <MonsterInfoPanel monster={state.currentMonster} />
                                 ):
-                                <CombatDisplay monster={state.currentMonster} />
+                                <CombatDisplay textColour={textColour} monster={state.currentMonster} />
                             )
                         }       
                     </>
@@ -41,7 +43,7 @@ export default function Screen() {
             case (GameStatus.STAGE_CLEAR):
                 return (
                     <>
-                        <HeadsUpDisplay score={state.score} />
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} score={state.score} />
                         <StageClearScreen stage={state.currentStage!} />
                     </>
                 );
@@ -49,7 +51,7 @@ export default function Screen() {
             case (GameStatus.STAGE_SELECT):
                 return (
                     <>
-                        <HeadsUpDisplay score={state.score} />
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} score={state.score} />
                         <StageSelectScreen />
                     </>
                 );

@@ -1,6 +1,6 @@
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from './monsters/Monsters';
-import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS } from '../constants/GameConstants';
+import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS, THIRD_STAGE_LEVEL_REQUIREMENTS } from '../constants/GameConstants';
 import { getRandomArrayElement, getRandomArraySample } from '../utils/RandomiserUtils';
 import { findMonsterByName } from './monsters/MonsterGenerator';
 
@@ -148,7 +148,7 @@ export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Mon
         name: "The Undercity",
         monsterList: [...selectedMonsters, ...allMonsters.slice(11)],
         scoreReward: 3000,
-        levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
+        levelRequirements: THIRD_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: () => [] as NewStageParams[],
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

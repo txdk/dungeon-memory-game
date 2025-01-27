@@ -6,15 +6,20 @@ import { useCallback, useContext, useEffect } from "react";
 import GameContext from "../contexts/GameContext";
 import { GameInput } from "../constants/GameConstants"; 
 import { useMediaQuery } from "react-responsive";
+import { useAlert } from "../hooks/useAlert";
+import classNames from "classnames";
 
 export default function Controls() {
 
-    const { registerInput } = useContext(GameContext);
+    const { state, registerInput } = useContext(GameContext);
+    const { isFrozen, colour } = useAlert(state.currentHealth);
 
     // Handle keyboard inputs
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
             e.preventDefault();
+
+            if (isFrozen) return;
 
             switch (e.code) {
                 case "ArrowLeft":
@@ -33,7 +38,7 @@ export default function Controls() {
                     registerInput(GameInput.INPUT_SHIELD);
                     break;
             };
-        }, [registerInput]
+        }, [isFrozen, registerInput]
     );
 
     useEffect(() => {
@@ -44,6 +49,13 @@ export default function Controls() {
         };
     }, [handleKeyDown]);
 
+    // Handle button press
+    const handleButtonPress = (input: GameInput) => {
+        if (!isFrozen) {
+            registerInput(input);
+        };
+    };
+
     // Determine which icon size to use
     const isTabletOrMobile = useMediaQuery({ maxWidth: 768 });
     const iconSize = isTabletOrMobile? MOBILE_ICON_SIZE: ICON_SIZE;
@@ -52,32 +64,44 @@ export default function Controls() {
         <div className="flex place-content-center pt-20 md:pt-16 space-x-[40px] md:space-x-[200px] mb-3">
             <div className="space-x-1 md:space-x-2">
                 {/* Left arrow button */}
-                <Button handleClick={() => registerInput(GameInput.INPUT_LEFT)}>
+                <Button 
+                    className={colour}
+                    handleClick={() => {handleButtonPress(GameInput.INPUT_LEFT)}}
+                >
                     <FaLongArrowAltLeft size={iconSize} />
                 </Button>
 
                 {/* Up arrow button */}
                 <Button 
-                    className="translate-y-[-20px] active:translate-y-[-16px]" 
-                    handleClick={() => {registerInput(GameInput.INPUT_UP)}}
+                    className={classNames(colour, "translate-y-[-20px] active:translate-y-[-16px]")} 
+                    handleClick={() => {handleButtonPress(GameInput.INPUT_UP)}}
                 >
                     <FaLongArrowAltUp size={iconSize} />
                 </Button>
 
                 {/* Right arrow button */}
-                <Button handleClick={() => registerInput(GameInput.INPUT_RIGHT)}>
+                <Button 
+                    className={colour}
+                    handleClick={() => handleButtonPress(GameInput.INPUT_RIGHT)}
+                >
                     <FaLongArrowAltRight size={iconSize} />
                 </Button>
             </div>
 
             <div className="space-x-2 md:space-x-5">
                 {/* Attack button */}
-                <Button handleClick={() => {registerInput(GameInput.INPUT_ATTACK)}}>
+                <Button 
+                    className={colour}
+                    handleClick={() => {handleButtonPress(GameInput.INPUT_ATTACK)}}
+                >
                     <GiBroadsword size={iconSize}/>
                 </Button>
 
                 {/* Shield button */}
-                <Button handleClick={() => {registerInput(GameInput.INPUT_SHIELD)}}>
+                <Button 
+                    className={colour}
+                    handleClick={() => {handleButtonPress(GameInput.INPUT_SHIELD)}}
+                >
                     <GiShield size={iconSize}/>
                 </Button>
             </div>    

@@ -2,6 +2,7 @@ import { useContext, useMemo } from "react";
 import GameContext from "../contexts/GameContext";
 import InputIcon from "./generic/InputIcon";
 import { PlayerInput } from "../reducers/GameState";
+import classNames from "classnames";
 
 // Render the player control inputs
 const renderInputs = (playerInputs: Array<PlayerInput>) => {
@@ -17,19 +18,23 @@ const renderInputs = (playerInputs: Array<PlayerInput>) => {
                 key={`input-${i}`}
             />
         )
-    }
+    };
 
     return playerInputArray;
+};
+
+interface PlayerInputDisplayProps {
+    className?: string;
 }
 
-export default function PlayerInputDisplay() {
+export default function PlayerInputDisplay({ className }: Readonly<PlayerInputDisplayProps>) {
     const { state } = useContext(GameContext);
     const playerInputs: Array<PlayerInput> = state.playerInputs;
     const playerInputArray: Array<JSX.Element> = useMemo(() => renderInputs(playerInputs), [playerInputs]);
 
     return (
-        <div className="flex font-customFont text-green-500 mt-10 p-5 md:p-10">
+        <div className={classNames(className, "flex font-customFont text-green-500 mt-10 p-5 md:p-10")}>
             INPUTS: {playerInputArray}
         </div>
     );
-}
+};

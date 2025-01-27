@@ -1,6 +1,6 @@
 import { v4 as uuidv4} from 'uuid';
 import AnimatedText from './generic/AnimatedText';
-import OptionCard from './OptionCard';
+import StageOptionCard from './StageOptionCard';
 import { useContext } from 'react';
 import GameContext from '../contexts/GameContext';
 
@@ -21,7 +21,7 @@ export default function StageSelectScreen() {
             <div className='flex justify-center mt-3 space-x-3 md:space-x-5'>
                 {
                     pathOptions.map((option) => {
-                        return <OptionCard key={uuidv4()} monsterList={option.monsterList} rewards={option.rewards} />
+                        return <StageOptionCard key={uuidv4()} monsterList={option.monsterList} rewards={option.rewards} />
                     })
                 }
             </div>

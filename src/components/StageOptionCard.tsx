@@ -1,20 +1,20 @@
 import { useMediaQuery } from "react-responsive";
 import { GameInput } from "../constants/GameConstants";
 import { Monster } from "../core/monsters/Monsters";
-import Button from "./generic/Button";
 import InputIcon from "./generic/InputIcon";
 import { v4 as uuidv4} from 'uuid';
 import { GiHearts } from "react-icons/gi";
 import { Rewards } from "../core/Stages";
 import { useContext } from "react";
 import GameContext from "../contexts/GameContext";
+import OptionCard from "./generic/OptionCard";
 
-interface OptionCardProps {
+interface StageOptionCardProps {
     monsterList: Monster[];
     rewards: Rewards;
-}
+};
 
-export default function OptionCard({ monsterList, rewards }: Readonly<OptionCardProps>) {
+export default function StageOptionCard({ monsterList, rewards }: Readonly<StageOptionCardProps>) {
 
     const { startNewStage } = useContext(GameContext);
 
@@ -57,7 +57,7 @@ export default function OptionCard({ monsterList, rewards }: Readonly<OptionCard
     };
 
     return (
-        <div className="border rounded-2xl w-[30%] h-[300px] md:h-[250px] bg-slate-900">
+        <OptionCard handleSelect={() => startNewStage({monsterList: monsterList, rewards: rewards})}>
             <p className="text-xs md:text-base py-2">Monsters ahead:</p>
             <ul className="ml-1 md:ml-2">
                 {
@@ -79,12 +79,6 @@ export default function OptionCard({ monsterList, rewards }: Readonly<OptionCard
             <div className="flex text-[8px] md:text-xs ml-1">
                 {renderRewards()}
             </div>
-            <Button 
-                className="text-xs absolute py-1 top-[88%] md:top-[85%] ml-[-50px]"
-                handleClick={() => startNewStage({monsterList: monsterList, rewards: rewards})}
-            >
-                SELECT
-            </Button>
-        </div>
+        </OptionCard>
     );
-}
+};

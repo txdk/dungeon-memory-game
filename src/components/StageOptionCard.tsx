@@ -1,6 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 import { GameInput } from "../constants/GameConstants";
-import { Monster } from "../core/monsters/Monsters";
+import { Monster } from "../core/monsters/Monster";
 import InputIcon from "./generic/InputIcon";
 import { v4 as uuidv4} from 'uuid';
 import { GiHearts } from "react-icons/gi";

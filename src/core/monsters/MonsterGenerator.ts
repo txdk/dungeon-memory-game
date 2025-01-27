@@ -1,7 +1,10 @@
 import { getRandomArrayElement } from "../../utils/randomUtils";
-import { generateBigMonster, generateMiniboss, generateMinotaur, generateNecromancer, generateStage2BasicMonsters, generateTier1Monsters, generateTier2Monsters, Monster } from "./Monsters";
+import { Monster } from "./Monster";
 import { v4 as uuidv4} from 'uuid';
 import { Stage } from "../Stages";
+import { generateTier1Monsters, generateTier2Monsters } from "./CaveMonsters";
+import { generateBigMonster, generateNecromancer, generateStage2BasicMonsters } from "./CatacombsMonsters";
+import { generateMiniboss, generateMinotaur } from "./UndercityMonsters";
 
 // Find monster by name
 export const findMonsterByName = (name: string, monsterList: Monster[]) => {

@@ -1,5 +1,5 @@
 import { GameInput, MAX_HEALTH } from "../constants/GameConstants";
-import { Encounter, Monster } from "../core/monsters/Monsters";
+import { Encounter, Monster } from "../core/monsters/Monster";
 import { Stage } from "../core/Stages";
 
 export interface PlayerInput {

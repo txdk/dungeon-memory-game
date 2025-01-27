@@ -1,5 +1,5 @@
 import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "../constants/GameConstants";
-import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/CombatModule";
+import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "../core/combatUtils";
 import { generateMonsterList, getRandomMonsterFromStage } from "../core/monsters/MonsterGenerator";
 import { Encounter, Monster } from "../core/monsters/Monsters";
 import { generateFirstStage, NewStageParams, Stage } from "../core/Stages";
@@ -75,11 +75,12 @@ const setGameStatus = (state: GameState, status: GameStatus) => {
 const generateNextMonster = (state: GameState) => {
     const scoreIncrease: number = state.currentMonster?.isDefeated? state.currentMonster.score: 0;
     const newScore: number = state.score + scoreIncrease;
+    const newStageScore: number = state.currentStage!.accumulatedScore + scoreIncrease;
 
     // Check stage clear condition
     if (
         state.newestEncounter!.quantity >= state.currentStage!.clearCondition.finalMonsterCount &&
-        newScore >= state.currentStage!.clearCondition.scoreRequirement
+        newStageScore >= state.currentStage!.clearCondition.scoreRequirement
     ) {
         return {
             ...state,
@@ -92,7 +93,7 @@ const generateNextMonster = (state: GameState) => {
 
     // Check level-up condition
     const canLevelUp: boolean = (
-        (newScore >= (state.currentStage!.levelRequirements.get(state.currentLevel!) ?? Infinity)) &&
+        (newStageScore >= (state.currentStage!.levelRequirements.get(state.currentLevel!) ?? Infinity)) &&
         (state.newestEncounter!.quantity >= MIN_ENCOUNTERS_BEFORE_NEW_MONSTER)
     );
     const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
@@ -109,6 +110,10 @@ const generateNextMonster = (state: GameState) => {
             ...(state.newestEncounter!),
             monster: state.currentStage!.monsterList[newLevel - 1], 
             quantity: canLevelUp? 0: state.newestEncounter!.quantity
+        },
+        currentStage: {
+            ...state.currentStage,
+            accumulatedScore: newStageScore
         }
     } as GameState;
 };

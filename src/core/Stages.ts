@@ -24,6 +24,7 @@ export interface Stage {
     id: string;
     name: string;
     monsterList: Monster[];
+    accumulatedScore: number;
     scoreReward: number;
     levelRequirements: Map<number, number>;
     clearCondition: StageClearCondition;
@@ -70,6 +71,7 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
         id: uuidv4(),
         name: "The Caves",
         monsterList: monsterList,
+        accumulatedScore: 0,
         scoreReward: 250,
         levelRequirements: FIRST_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
@@ -94,7 +96,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
     ];
 
     const clearCondition: StageClearCondition = {
-        scoreRequirement: 2500,
+        scoreRequirement: 1200,
         finalMonsterCount: 3
     };
 
@@ -128,6 +130,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
         id: uuidv4(),
         name: "The Catacombs",
         monsterList: monsterList,
+        accumulatedScore: 0,
         scoreReward: 1000,
         levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
@@ -147,11 +150,12 @@ export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Mon
         id: uuidv4(),
         name: "The Undercity",
         monsterList: [...selectedMonsters, ...allMonsters.slice(11)],
+        accumulatedScore: 0,
         scoreReward: 3000,
         levelRequirements: THIRD_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: () => [] as NewStageParams[],
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         generateNextStage: (_selectedMonsters: Monster[], _allMonsters: Monster[]) => {}
-    } as Stage
+    } as Stage;
 };

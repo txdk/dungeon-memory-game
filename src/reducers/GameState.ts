@@ -18,17 +18,17 @@ export enum GameStatus {
 
 export interface GameState {
     status: GameStatus,
-    playerInputs: Array<PlayerInput>;
+    playerInputs: PlayerInput[];
     correctInputs: number;
     currentMonster: Monster | null;
     currentHealth: number;
     currentStage: Stage | null;
     currentLevel: number | undefined;
     score: number;
-    monsterList: Array<Monster>;
-    seenMonsters: Array<number>;
+    monsterList: Monster[];
+    seenMonsters: number[];
     newestEncounter: Encounter | null;
-};;
+};
 
 export const initialState: GameState = {
     status: GameStatus.NOT_STARTED,

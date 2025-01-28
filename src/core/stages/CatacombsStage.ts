@@ -1,10 +1,10 @@
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from "@/types/Monster";
-import { findMonsterByName } from "../monsters/MonsterGenerator";
+import { findMonsterByName } from "@/utils/monsterGenerationUtils";
 import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, SECOND_STAGE_LEVEL_REQUIREMENTS } from "@/constants/GameConstants";
 import { NewStageParams, Stage, StageClearCondition } from "@/types/Stage";
 import { getRandomArrayElement, getRandomArraySample } from "@/utils/randomUtils";
-import { generateThirdStage } from './UndercityStage';
+import { generateThirdStage } from '@/core/stages/UndercityStage';
 
 export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
 

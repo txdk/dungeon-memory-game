@@ -5,7 +5,7 @@ import PlayerInputDisplay from "@/components/PlayerInputDisplay";
 import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "@/components/generic/AnimatedText";
-import { getMonsterArticle } from "@/core/monsters/MonsterGenerator";
+import { getMonsterArticle } from "@/utils/monsterGenerationUtils";
 import SlotCounter from "react-slot-counter";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 

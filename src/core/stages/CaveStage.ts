@@ -3,7 +3,7 @@ import { Monster } from '@/types/Monster';
 import { FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS } from '@/constants/GameConstants';
 import { getRandomArrayElement } from '@/utils/randomUtils';
 import { NewStageParams, Stage, StageClearCondition } from '@/types/Stage';
-import { generateSecondStage } from './CatacombsStage';
+import { generateSecondStage } from '@/core/stages/CatacombsStage';
 
 export const generateFirstStage = (allMonsters: Monster[]) => {
 

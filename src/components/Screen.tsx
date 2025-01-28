@@ -7,7 +7,7 @@ import GameOverScreen from "@/components/GameOverScreen";
 import MonsterInfoPanel from "@/components/MonsterInfoPanel";
 import StageStartScreen from "@/components/stage/StageStartScreen";
 import StageClearScreen from "@/components/stage/StageClearScreen";
-import HeadsUpDisplay from "@/components/HeadsUpDisplay";
+import HeadsUpDisplay from "@/components/headsUpDisplay/HeadsUpDisplay";
 import StageSelectScreen from "@/components/stage/StageSelectScreen";
 import { useAlert } from "@/hooks/useAlert";
 

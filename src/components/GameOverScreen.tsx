@@ -1,6 +1,6 @@
-import { getMonsterArticle } from "../core/monsters/MonsterGenerator";
-import AnimatedText from "./generic/AnimatedText";
-import NewGameButton from "./NewGameButton";
+import { getMonsterArticle } from "@/core/monsters/MonsterGenerator";
+import AnimatedText from "@/components/generic/AnimatedText";
+import NewGameButton from "@/components/NewGameButton";
 import SlotCounter from "react-slot-counter";
 import { v4 as uuidv4} from 'uuid';
 

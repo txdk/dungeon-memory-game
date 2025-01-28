@@ -1,6 +1,6 @@
-import { GameInput, MAX_HEALTH } from "../constants/GameConstants";
-import { Encounter, Monster } from "../core/monsters/Monster";
-import { Stage } from "../core/Stages";
+import { GameInput, MAX_HEALTH } from "@/constants/GameConstants";
+import { Encounter, Monster } from "@/types/Monster";
+import { Stage } from "@/types/Stage";
 
 export interface PlayerInput {
     input: GameInput,
@@ -23,7 +23,7 @@ export interface GameState {
     currentMonster: Monster | null;
     currentHealth: number;
     currentStage: Stage | null;
-    currentLevel: number | undefined;
+    currentLevel: number | null;
     score: number;
     monsterList: Monster[];
     seenMonsters: number[];
@@ -37,7 +37,7 @@ export const initialState: GameState = {
     currentMonster: null,
     currentHealth: MAX_HEALTH,
     currentStage: null,
-    currentLevel: undefined,
+    currentLevel: null,
     score: 0,
     monsterList: [],
     seenMonsters: [],

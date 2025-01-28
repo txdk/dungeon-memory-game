@@ -1,12 +1,12 @@
 import { RxDoubleArrowRight } from "react-icons/rx";
-import AnimatedText from "./generic/AnimatedText";
-import Button from "./generic/Button";
+import AnimatedText from "@/components/generic/AnimatedText";
+import Button from "@/components/generic/Button";
 import { useContext } from "react";
-import { Stage } from "../core/Stages";
-import GameContext from "../contexts/GameContext";
-import { GameStatus } from "../reducers/GameState";
-import { useDelay } from "../hooks/useDelay";
-import { useKeyHandler } from "../hooks/useKeyHandler";
+import GameContext from "@/contexts/GameContext";
+import { GameStatus } from "@/reducers/GameState";
+import { useDelay } from "@/hooks/useDelay";
+import { useKeyHandler } from "@/hooks/useKeyHandler";
+import { Stage } from "@/types/Stage";
 
 interface StageStartScreenProps {
     stage: Stage;

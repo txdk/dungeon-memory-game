@@ -1,15 +1,15 @@
 import { useContext } from "react";
-import GameContext from "../contexts/GameContext";
-import NewGameButton from "./NewGameButton";
-import { GameStatus } from "../reducers/GameState"; 
-import CombatDisplay from "./CombatDisplay";
-import GameOverScreen from "./GameOverScreen";
-import MonsterInfoPanel from "./MonsterInfoPanel";
-import StageStartScreen from "./StageStartScreen";
-import StageClearScreen from "./StageClearScreen";
-import HeadsUpDisplay from "./HeadsUpDisplay";
-import StageSelectScreen from "./StageSelectScreen";
-import { useAlert } from "../hooks/useAlert";
+import GameContext from "@/contexts/GameContext";
+import NewGameButton from "@/components/NewGameButton";
+import { GameStatus } from "@/reducers/GameState"; 
+import CombatDisplay from "@/components/CombatDisplay";
+import GameOverScreen from "@/components/GameOverScreen";
+import MonsterInfoPanel from "@/components/MonsterInfoPanel";
+import StageStartScreen from "@/components/StageStartScreen";
+import StageClearScreen from "@/components/StageClearScreen";
+import HeadsUpDisplay from "@/components/HeadsUpDisplay";
+import StageSelectScreen from "@/components/StageSelectScreen";
+import { useAlert } from "@/hooks/useAlert";
 
 export default function Screen() {
 

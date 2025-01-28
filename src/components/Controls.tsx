@@ -1,13 +1,13 @@
-import { GiBroadsword, GiShield } from "react-icons/gi";
-import Button from "./generic/Button";
-import { FaLongArrowAltLeft, FaLongArrowAltRight, FaLongArrowAltUp } from "react-icons/fa";
-import { ICON_SIZE, MOBILE_ICON_SIZE } from "../constants/AppConstants";
-import { useCallback, useContext, useEffect } from "react";
-import GameContext from "../contexts/GameContext";
-import { GameInput } from "../constants/GameConstants"; 
-import { useMediaQuery } from "react-responsive";
-import { useAlert } from "../hooks/useAlert";
+import Button from "@/components/generic/Button";
+import { ICON_SIZE, MOBILE_ICON_SIZE } from "@/constants/AppConstants";
+import { GameInput } from "@/constants/GameConstants";
+import GameContext from "@/contexts/GameContext";
+import { useAlert } from "@/hooks/useAlert";
 import classNames from "classnames";
+import { useCallback, useContext, useEffect } from "react";
+import { FaLongArrowAltLeft, FaLongArrowAltRight, FaLongArrowAltUp } from "react-icons/fa";
+import { GiBroadsword, GiShield } from "react-icons/gi";
+import { useMediaQuery } from "react-responsive";
 
 export default function Controls() {
 

@@ -1,4 +1,4 @@
-import { GameInput } from "../../constants/GameConstants"
+import { GameInput } from "@/constants/GameConstants";
 
 export interface Monster {
     id: number;

@@ -1,5 +1,5 @@
 import { GiBrokenHeart, GiHearts } from "react-icons/gi";
-import { MAX_HEALTH } from "../constants/GameConstants";
+import { MAX_HEALTH } from "@/constants/GameConstants";
 import { useMemo } from "react";
 import classNames from "classnames";
 

@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { Monster } from "../core/monsters/Monster";
-import Button from "./generic/Button";
-import InputIcon from "./generic/InputIcon";
-import GameContext from "../contexts/GameContext";
+import { Monster } from "@/types/Monster";
+import Button from "@/components/generic/Button";
+import InputIcon from "@/components/generic/InputIcon";
+import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import { GameInput } from "../constants/GameConstants";
+import { GameInput } from "@/constants/GameConstants";
 import { v4 as uuidv4} from 'uuid';
-import AnimatedText from "./generic/AnimatedText";
-import { useKeyHandler } from "../hooks/useKeyHandler";
+import AnimatedText from "@/components/generic/AnimatedText";
+import { useKeyHandler } from "@/hooks/useKeyHandler";
 
 interface MonsterInfoPanelProps {
     monster: Monster;

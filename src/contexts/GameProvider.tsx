@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useReducer } from "react";
-import gameReducer from "../reducers/GameReducer";
-import GameContext from "./GameContext";
-import { GameInput } from "../constants/GameConstants";
-import { GameActionType, GameStatus, initialState } from "../reducers/GameState";
-import { NewStageParams } from "../core/Stages";
+import gameReducer from "@/reducers/GameReducer";
+import GameContext from "@/contexts/GameContext";
+import { GameInput } from "@/constants/GameConstants";
+import { GameActionType, GameStatus, initialState } from "@/reducers/GameState";
+import { NewStageParams } from "@/types/Stage";
 
 export default function GameProvider({ children }: Readonly<{ children: React.ReactNode }>) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);

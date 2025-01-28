@@ -1,8 +1,8 @@
 import { v4 as uuidv4} from 'uuid';
-import AnimatedText from './generic/AnimatedText';
-import StageOptionCard from './StageOptionCard';
+import AnimatedText from '@/components/generic/AnimatedText';
+import StageOptionCard from '@/components/StageOptionCard';
 import { useContext } from 'react';
-import GameContext from '../contexts/GameContext';
+import GameContext from '@/contexts/GameContext';
 
 export default function StageSelectScreen() {
 

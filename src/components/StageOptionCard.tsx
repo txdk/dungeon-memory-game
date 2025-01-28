@@ -1,13 +1,13 @@
 import { useMediaQuery } from "react-responsive";
-import { GameInput } from "../constants/GameConstants";
-import { Monster } from "../core/monsters/Monster";
-import InputIcon from "./generic/InputIcon";
+import { GameInput } from "@/constants/GameConstants";
+import { Monster } from "@/types/Monster";
+import InputIcon from "@/components/generic/InputIcon";
 import { v4 as uuidv4} from 'uuid';
 import { GiHearts } from "react-icons/gi";
-import { Rewards } from "../core/Stages";
+import { Rewards } from "@/types/Stage";
 import { useContext } from "react";
-import GameContext from "../contexts/GameContext";
-import OptionCard from "./generic/OptionCard";
+import GameContext from "@/contexts/GameContext";
+import OptionCard from "@/components/generic/OptionCard";
 
 interface StageOptionCardProps {
     monsterList: Monster[];

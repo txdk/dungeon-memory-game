@@ -1,38 +1,9 @@
 import { v4 as uuidv4} from 'uuid';
-import { Monster } from './monsters/Monster';
-import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS, THIRD_STAGE_LEVEL_REQUIREMENTS } from '../constants/GameConstants';
-import { getRandomArrayElement, getRandomArraySample } from '../utils/randomUtils';
-import { findMonsterByName } from './monsters/MonsterGenerator';
-
-// Constants specifying the requirements for a player to complete a stage
-export interface StageClearCondition {
-    scoreRequirement: number;
-    finalMonsterCount: number;
-}
-
-export interface Rewards {
-    health?: number;
-    score?: number;
-};
-
-export interface NewStageParams {
-    monsterList: Monster[];
-    rewards: Rewards;
-};
-
-export interface Stage {
-    id: string;
-    name: string;
-    monsterList: Monster[];
-    startTimestamp: number;
-    endTimestamp: number;
-    accumulatedScore: number;
-    scoreReward: number;
-    levelRequirements: Map<number, number>;
-    clearCondition: StageClearCondition;
-    generatePathOptions: () => NewStageParams[];
-    generateNextStage: (selectedMonsters: Monster[], allMonsters: Monster[]) => Stage;
-};
+import { Monster } from '@/types/Monster';
+import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS, SECOND_STAGE_LEVEL_REQUIREMENTS, THIRD_STAGE_LEVEL_REQUIREMENTS } from '@/constants/GameConstants';
+import { getRandomArrayElement, getRandomArraySample } from '@/utils/randomUtils';
+import { findMonsterByName } from '@/core/monsters/MonsterGenerator';
+import { NewStageParams, Stage, StageClearCondition } from '@/types/Stage';
 
 export const generateFirstStage = (allMonsters: Monster[]) => {
 

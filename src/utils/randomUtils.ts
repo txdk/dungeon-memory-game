@@ -1,4 +1,4 @@
-import { GameInput } from "../constants/GameConstants";
+import { GameInput } from "@/constants/GameConstants";
 
 const DIRECTIONAL_INPUTS = [GameInput.INPUT_LEFT, GameInput.INPUT_UP, GameInput.INPUT_RIGHT];
 const COMBAT_INPUTS = [GameInput.INPUT_ATTACK, GameInput.INPUT_SHIELD];

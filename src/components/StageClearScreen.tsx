@@ -1,14 +1,14 @@
-import { Stage } from "../core/Stages";
-import { useDelay } from "../hooks/useDelay";
-import AnimatedText from "./generic/AnimatedText";
+import { Stage } from "@/types/Stage";
+import { useDelay } from "@/hooks/useDelay";
+import AnimatedText from "@/components/generic/AnimatedText";
 import SlotCounter from "react-slot-counter";
-import Button from "./generic/Button";
+import Button from "@/components/generic/Button";
 import { useContext } from "react";
-import GameContext from "../contexts/GameContext";
+import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import { GameStatus } from "../reducers/GameState";
-import { useKeyHandler } from "../hooks/useKeyHandler";
-import { getTimeIntervalInMinutes } from "../utils/mathUtils";
+import { GameStatus } from "@/reducers/GameState";
+import { useKeyHandler } from "@/hooks/useKeyHandler";
+import { getTimeIntervalInMinutes } from "@/utils/mathUtils";
 
 interface StageClearScreenProps {
     stage: Stage;

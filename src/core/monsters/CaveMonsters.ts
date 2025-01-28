@@ -1,6 +1,6 @@
-import { GameInput } from "../../constants/GameConstants";
+import { GameInput } from "@/constants/GameConstants";
 import { getRandomCombatInput, getRandomDirection, getRandomNonCombatInput, randomiseArrayOrder } from "../../utils/randomUtils";
-import { Monster } from "./Monster";
+import { Monster } from "@/types/Monster";
 import { v4 as uuidv4} from 'uuid';
 
 // Tier 1 monsters

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { STAGE_TRANSITION_DELAY } from "../constants/AppConstants";
+import { STAGE_TRANSITION_DELAY } from "@/constants/AppConstants";
 
 /**
  * Custom hook to set a boolean to true after an initial delay.

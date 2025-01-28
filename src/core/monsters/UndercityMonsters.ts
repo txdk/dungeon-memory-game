@@ -1,7 +1,7 @@
-import { GameInput } from "../../constants/GameConstants";
-import { getRandomArrayElement, getRandomDirection, getRandomInput, randomiseArrayOrder } from "../../utils/randomUtils";
+import { GameInput } from "@/constants/GameConstants";
+import { getRandomArrayElement, getRandomDirection, getRandomInput, randomiseArrayOrder } from "@/utils/randomUtils";
 import { v4 as uuidv4} from 'uuid';
-import { Monster } from "./Monster";
+import { Monster } from "@/types/Monster";
 
 export const generateMinotaur = () => {
     const mazeInputs: Array<GameInput> = [

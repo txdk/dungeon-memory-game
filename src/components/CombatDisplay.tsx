@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { Monster } from "../core/monsters/Monster";
-import Button from "./generic/Button";
-import PlayerInputDisplay from "./PlayerInputDisplay";
-import GameContext from "../contexts/GameContext";
+import { Monster } from "@/types/Monster";
+import Button from "@/components/generic/Button";
+import PlayerInputDisplay from "@/components/PlayerInputDisplay";
+import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import AnimatedText from "./generic/AnimatedText";
-import { getMonsterArticle } from "../core/monsters/MonsterGenerator";
+import AnimatedText from "@/components/generic/AnimatedText";
+import { getMonsterArticle } from "@/core/monsters/MonsterGenerator";
 import SlotCounter from "react-slot-counter";
-import { useKeyHandler } from "../hooks/useKeyHandler";
+import { useKeyHandler } from "@/hooks/useKeyHandler";
 
 interface CombatDisplayProps {
     monster: Monster | null;

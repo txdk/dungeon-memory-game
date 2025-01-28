@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "@/components/generic/Button";
 import { ReactNode } from "react";
 import classNames from "classnames";
 

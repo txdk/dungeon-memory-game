@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import Button from "./generic/Button";
-import { useKeyHandler } from "../hooks/useKeyHandler";
+import Button from "@/components/generic/Button";
+import { useKeyHandler } from "@/hooks/useKeyHandler";
 
 interface NewGameButtonProps {
     className?: string;

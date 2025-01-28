@@ -1,5 +1,5 @@
-import HealthBar from "./HealthBar";
-import ScoreDisplay from "./ScoreDisplay";
+import HealthBar from "@/components/HealthBar";
+import ScoreDisplay from "@/components/ScoreDisplay";
 
 interface HeadsUpDisplayProps {
     textColour: string;

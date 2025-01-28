@@ -1,6 +1,6 @@
-import Controls from "./components/Controls"
-import Screen from "./components/Screen"
-import GameProvider from "./contexts/GameProvider"
+import Controls from "@/components/Controls"
+import Screen from "@/components/Screen"
+import GameProvider from "@/contexts/GameProvider"
 
 function App() {
 

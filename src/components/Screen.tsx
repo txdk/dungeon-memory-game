@@ -28,7 +28,7 @@ export default function Screen() {
             case (GameStatus.IN_PROGRESS):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} score={state.score} />
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
                         {
                             state.currentMonster !== null && (
                                 !state.seenMonsters.includes(state.currentMonster.id)? (
@@ -43,7 +43,7 @@ export default function Screen() {
             case (GameStatus.STAGE_CLEAR):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} score={state.score} />
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
                         <StageClearScreen stage={state.currentStage!} />
                     </>
                 );
@@ -51,13 +51,18 @@ export default function Screen() {
             case (GameStatus.STAGE_SELECT):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} score={state.score} />
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
                         <StageSelectScreen />
                     </>
                 );
                 
             case (GameStatus.GAME_OVER):
-                return <GameOverScreen monsterName={state.currentMonster!.name} score={state.score} startGame={startGame} />
+                return <GameOverScreen 
+                    monsterName={state.currentMonster!.name} 
+                    stageName={state.currentStage!.name} 
+                    score={state.score} 
+                    startGame={startGame} 
+                />
 
             default:
                 return <></>;

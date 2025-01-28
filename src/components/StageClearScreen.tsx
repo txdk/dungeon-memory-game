@@ -35,8 +35,8 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
             <p className="text-sm md:text-base mt-3 md:mt-5">
                 You conquered {stage.name.toLowerCase()} in{" "}
                 {getTimeIntervalInMinutes(stage.startTimestamp, stage.endTimestamp)} and gained{" "}
-                <SlotCounter value={stage.scoreReward} />
-                {" "}score!
+                <SlotCounter value={stage.goldReward} />
+                {" "}gold!
             </p>
             {
                 buttonVisibility &&

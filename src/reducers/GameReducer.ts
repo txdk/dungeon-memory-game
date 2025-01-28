@@ -77,6 +77,7 @@ const generateNextMonster = (state: GameState) => {
     const scoreIncrease: number = state.currentMonster?.isDefeated? state.currentMonster.score: 0;
     const newScore: number = state.score + scoreIncrease;
     const newStageScore: number = state.currentStage!.accumulatedScore + scoreIncrease;
+    const newGold: number = state.gold + scoreIncrease;
 
     // Check stage clear condition
     if (
@@ -92,7 +93,7 @@ const generateNextMonster = (state: GameState) => {
             },
             playerInputs: [],
             correctInputs: 0,
-            score: newScore + state.currentStage!.scoreReward
+            score: newScore + state.currentStage!.goldReward
         } as GameState;
     }
 
@@ -102,13 +103,14 @@ const generateNextMonster = (state: GameState) => {
         (state.newestEncounter!.quantity >= MIN_ENCOUNTERS_BEFORE_NEW_MONSTER)
     );
     const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
-    const nextMonster: Monster = getRandomMonsterFromStage(newLevel, state.currentStage);
+    const nextMonster: Monster = getRandomMonsterFromStage(newLevel, state.currentStage!);
 
     return {
         ...state,
         playerInputs: [],
         correctInputs: 0,
         score: newScore,
+        gold: newGold,
         currentLevel: newLevel,
         currentMonster: {...nextMonster},
         newestEncounter: {
@@ -127,7 +129,7 @@ const generateNextMonster = (state: GameState) => {
 const handleStageStart = (state: GameState, newStageParams: NewStageParams) => {
 
     const newHealth: number = state.currentHealth + (newStageParams.rewards.health ?? 0);
-    const newScore: number = state.score + (newStageParams.rewards.score ?? 0);
+    const newScore: number = state.score + (newStageParams.rewards.gold ?? 0);
     const newStage: Stage = state.currentStage!.generateNextStage(newStageParams.monsterList, state.monsterList);
     const initialLevel: number = newStageParams.monsterList.length;
 

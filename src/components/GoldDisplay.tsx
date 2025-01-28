@@ -1,16 +1,16 @@
 import classNames from "classnames";
 import SlotCounter from "react-slot-counter";
 
-interface ScoreDisplayProps {
+interface GoldDisplayProps {
     textColour: string;
-    score: number;
+    gold: number;
 }
 
-export default function ScoreDisplay({ textColour, score }: Readonly<ScoreDisplayProps>) {
+export default function GoldDisplay({ textColour, gold }: Readonly<GoldDisplayProps>) {
     return (
         <p className={classNames(textColour, "font-customFont text-left m-2")}>
-            SCORE:{" "}
-            <SlotCounter value={score} />
+            GOLD:{" "}
+            <SlotCounter value={gold} />
         </p>
     )
 }

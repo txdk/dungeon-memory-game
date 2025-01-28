@@ -32,11 +32,11 @@ export default function StageOptionCard({ monsterList, rewards }: Readonly<Stage
         );
     };
 
-    // Display score rewards
-    const renderScore = () => {
+    // Display gold rewards
+    const renderGold = () => {
         return (
-            rewards.score &&
-            <p className="flex">SCORE +{rewards.score}</p>
+            rewards.gold &&
+            <p className="flex">+{rewards.gold} GOLD</p>
         );
     };
 
@@ -45,11 +45,11 @@ export default function StageOptionCard({ monsterList, rewards }: Readonly<Stage
         return (
             <ul className="ml-1">
                 {
-                    (rewards.health === 0 && rewards.score === 0)?
+                    (rewards.health === 0 && rewards.gold === 0)?
                     <p>NONE</p>:
                     <>
                         <ul>{renderHealth()}</ul>
-                        <ul>{renderScore()}</ul>
+                        <ul>{renderGold()}</ul>
                     </>
                 }
             </ul>

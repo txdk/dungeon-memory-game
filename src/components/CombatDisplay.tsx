@@ -43,7 +43,7 @@ export default function CombatDisplay({ monster, textColour }: Readonly<CombatDi
                         <p className="p-0 md:p-5 ml-5 font-customFont text-green-500 text-sm">
                             You defeated the {monster.name} and gained {" "}
                             <SlotCounter value={monster.score} duration={0.5} />
-                            {" "}score!
+                            {" "}gold!
                         </p>
                         
                         <Button className="flex p-1 md:p-1.5 mt-3 md:mt-0 h-2/3 items-center" handleClick={generateNextMonster}>

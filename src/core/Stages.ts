@@ -20,21 +20,21 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
                 monsterList: monsterList.slice(0, 2),
                 rewards: {
                     health: 0,
-                    score: 0
+                    gold: 0
                 }
             },
             {
                 monsterList: [getRandomArrayElement(monsterList.slice(1, 3)), getRandomArrayElement(monsterList.slice(3, 5))],
                 rewards: {
                     health: 1,
-                    score: 50
+                    gold: 50
                 }
             },
             {
                 monsterList: monsterList.slice(3, 5),
                 rewards: {
                     health: 2,
-                    score: 200
+                    gold: 200
                 }
             }
         ]);
@@ -47,7 +47,7 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
         startTimestamp: new Date().getTime(),
         endTimestamp: Infinity,
         accumulatedScore: 0,
-        scoreReward: 250,
+        goldReward: 250,
         levelRequirements: FIRST_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: generatePathOptions,
@@ -80,21 +80,21 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
             {
                 monsterList: [...getRandomArraySample(monsterList.slice(0,5), 2)],
                 rewards: {
-                    score: 0,
+                    gold: 0,
                     health: 0
                 }
             },
             {
                 monsterList: [getRandomArrayElement(monsterList.slice(2,5)), getRandomArrayElement(monsterList.slice(5,7))],
                 rewards: {
-                    score: 250,
+                    gold: 250,
                     health: 1
                 }
             },
             {
                 monsterList: [{...fleshGolem}, {...necromancer}],
                 rewards: {
-                    score: 500,
+                    gold: 500,
                     health: 2
                 }
             }
@@ -108,7 +108,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
         startTimestamp: new Date().getTime(),
         endTimestamp: Infinity,
         accumulatedScore: 0,
-        scoreReward: 1000,
+        goldReward: 1000,
         levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: generatePathOptions,
@@ -130,7 +130,7 @@ export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Mon
         startTimestamp: new Date().getTime(),
         endTimestamp: Infinity,
         accumulatedScore: 0,
-        scoreReward: 3000,
+        goldReward: 3000,
         levelRequirements: THIRD_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: () => [] as NewStageParams[],

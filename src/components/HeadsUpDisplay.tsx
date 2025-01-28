@@ -1,17 +1,17 @@
 import HealthBar from "@/components/HealthBar";
-import ScoreDisplay from "@/components/ScoreDisplay";
+import GoldDisplay from "@/components/GoldDisplay";
 
 interface HeadsUpDisplayProps {
     textColour: string;
     currentHealth: number;
-    score: number;
+    gold: number;
 }
 
-export default function HUD({ textColour, currentHealth, score }: Readonly<HeadsUpDisplayProps>) {
+export default function HeadsUpDisplay({ textColour, currentHealth, gold }: Readonly<HeadsUpDisplayProps>) {
     return (
         <>
             <HealthBar colour={textColour} currentHealth={currentHealth} />
-            <ScoreDisplay textColour={textColour} score={score} />
+            <GoldDisplay textColour={textColour} gold={gold} />
         </>
     );
 }

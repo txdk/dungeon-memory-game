@@ -25,6 +25,7 @@ export interface GameState {
     currentStage: Stage | null;
     currentLevel: number | null;
     score: number;
+    gold: number;
     monsterList: Monster[];
     seenMonsters: number[];
     newestEncounter: Encounter | null;
@@ -39,6 +40,7 @@ export const initialState: GameState = {
     currentStage: null,
     currentLevel: null,
     score: 0,
+    gold: 0,
     monsterList: [],
     seenMonsters: [],
     newestEncounter: null

@@ -8,7 +8,7 @@ export interface StageClearCondition {
 
 export interface Rewards {
     health?: number;
-    score?: number;
+    gold?: number;
 };
 
 export interface NewStageParams {
@@ -23,7 +23,7 @@ export interface Stage {
     startTimestamp: number;
     endTimestamp: number;
     accumulatedScore: number;
-    scoreReward: number;
+    goldReward: number;
     levelRequirements: Map<number, number>;
     clearCondition: StageClearCondition;
     generatePathOptions: () => NewStageParams[];

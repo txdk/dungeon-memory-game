@@ -1,8 +1,8 @@
 import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "@/constants/GameConstants";
-import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "@/core/combatUtils";
+import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "@/utils/combatUtils";
 import { generateMonsterList, getRandomMonsterFromStage } from "@/core/monsters/MonsterGenerator";
 import { Encounter, Monster } from "@/types/Monster";
-import { generateFirstStage } from "@/core/Stages";
+import { generateFirstStage } from "@/core/stages/CaveStage";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "@/reducers/GameState";
 import { NewStageParams, Stage } from "@/types/Stage";
 

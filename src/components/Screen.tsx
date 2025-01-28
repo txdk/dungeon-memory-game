@@ -5,10 +5,10 @@ import { GameStatus } from "@/reducers/GameState";
 import CombatDisplay from "@/components/CombatDisplay";
 import GameOverScreen from "@/components/GameOverScreen";
 import MonsterInfoPanel from "@/components/MonsterInfoPanel";
-import StageStartScreen from "@/components/StageStartScreen";
-import StageClearScreen from "@/components/StageClearScreen";
+import StageStartScreen from "@/components/stage/StageStartScreen";
+import StageClearScreen from "@/components/stage/StageClearScreen";
 import HeadsUpDisplay from "@/components/HeadsUpDisplay";
-import StageSelectScreen from "@/components/StageSelectScreen";
+import StageSelectScreen from "@/components/stage/StageSelectScreen";
 import { useAlert } from "@/hooks/useAlert";
 
 export default function Screen() {

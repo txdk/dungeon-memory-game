@@ -1,6 +1,6 @@
 import { v4 as uuidv4} from 'uuid';
 import AnimatedText from '@/components/generic/AnimatedText';
-import StageOptionCard from '@/components/StageOptionCard';
+import StageOptionCard from '@/components/stage/StageOptionCard';
 import { useContext } from 'react';
 import GameContext from '@/contexts/GameContext';
 

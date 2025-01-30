@@ -13,6 +13,7 @@ export enum GameStatus {
     STAGE_CLEAR,
     STAGE_SELECT,
     IN_PROGRESS,
+    IN_SHOP,
     GAME_OVER
 };
 
@@ -51,6 +52,7 @@ export enum GameActionType {
     START_NEW_STAGE,
     GENERATE_NEXT_MONSTER,
     SET_GAME_STATUS,
+    BUY_ITEM,
     CLOSE_INFO_PANEL,
     START_GAME
 };

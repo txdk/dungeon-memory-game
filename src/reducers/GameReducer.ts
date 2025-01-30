@@ -5,6 +5,8 @@ import { Encounter, Monster } from "@/types/Monster";
 import { generateFirstStage } from "@/core/stages/CaveStage";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "@/reducers/GameState";
 import { NewStageParams, Stage } from "@/types/Stage";
+import { Item } from "@/types/Item";
+import { triggerItemEffects } from "@/utils/itemUtils";
 
 // Start a new game
 const handleGameStart = () => {
@@ -72,6 +74,17 @@ const setGameStatus = (state: GameState, status: GameStatus) => {
     };
 };
 
+// Handle buying an item
+const handleBuyItem = (state: GameState, item: Item) => {
+
+    const newState: GameState = triggerItemEffects(item, state);
+
+    return {
+        ...newState,
+        gold: newState.gold - item.baseCost
+    };
+};
+
 // Generate next monster
 const generateNextMonster = (state: GameState) => {
     const scoreIncrease: number = state.currentMonster?.isDefeated? state.currentMonster.score: 0;
@@ -93,6 +106,7 @@ const generateNextMonster = (state: GameState) => {
             },
             playerInputs: [],
             correctInputs: 0,
+            gold: newGold + state.currentStage!.goldReward,
             score: newScore + state.currentStage!.goldReward
         } as GameState;
     }
@@ -177,6 +191,9 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
         // Set game status
         case GameActionType.SET_GAME_STATUS: 
             return setGameStatus(state, action.payload as GameStatus);
+
+        case GameActionType.BUY_ITEM:
+            return handleBuyItem(state, action.payload as Item);
 
         // Start new stage
         case GameActionType.START_NEW_STAGE:

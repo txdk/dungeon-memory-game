@@ -19,7 +19,7 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
     const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
     const handleClick = () => {
-        setGameStatus(GameStatus.STAGE_SELECT);
+        setGameStatus(GameStatus.IN_SHOP);
     };
     useKeyHandler(handleClick, buttonVisibility);
 

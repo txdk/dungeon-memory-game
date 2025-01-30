@@ -16,7 +16,8 @@ export const STAGE_TRANSITION_DELAY = 2000;
 // Colours for app elements
 export enum APP_COLOURS {
     PRIMARY = "text-green-500",
-    ALERT = "text-red-700"
+    ALERT = "text-red-700",
+    DISABLED = "text-gray-500"
 };
 
 // Duration of alert flash in ms

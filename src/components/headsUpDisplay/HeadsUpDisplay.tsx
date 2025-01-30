@@ -1,5 +1,5 @@
-import HealthBar from "@/components/HealthBar";
-import GoldDisplay from "@/components/GoldDisplay";
+import HealthBar from "@/components/headsUpDisplay/HealthBar";
+import GoldDisplay from "@/components/headsUpDisplay/GoldDisplay";
 
 interface HeadsUpDisplayProps {
     textColour: string;

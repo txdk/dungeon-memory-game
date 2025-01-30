@@ -10,6 +10,7 @@ import StageClearScreen from "@/components/stage/StageClearScreen";
 import HeadsUpDisplay from "@/components/headsUpDisplay/HeadsUpDisplay";
 import StageSelectScreen from "@/components/stage/StageSelectScreen";
 import { useAlert } from "@/hooks/useAlert";
+import Shop from "@/components/shop/Shop";
 
 export default function Screen() {
 
@@ -18,6 +19,7 @@ export default function Screen() {
     
     // Determine what element to render on screen based on game status
     const renderScreenElement = () => {
+
         switch (state.status) {
             case (GameStatus.NOT_STARTED):
                 return <NewGameButton startGame={startGame} />; 
@@ -53,6 +55,14 @@ export default function Screen() {
                     <>
                         <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
                         <StageSelectScreen />
+                    </>
+                );
+
+            case (GameStatus.IN_SHOP):
+                return (
+                    <>
+                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
+                        <Shop /> 
                     </>
                 );
                 

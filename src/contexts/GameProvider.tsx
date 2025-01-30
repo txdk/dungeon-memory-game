@@ -4,6 +4,7 @@ import GameContext from "@/contexts/GameContext";
 import { GameInput } from "@/constants/GameConstants";
 import { GameActionType, GameStatus, initialState } from "@/reducers/GameState";
 import { NewStageParams } from "@/types/Stage";
+import { Item } from "@/types/Item";
 
 export default function GameProvider({ children }: Readonly<{ children: React.ReactNode }>) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);
@@ -16,7 +17,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
                 payload: input
             })
         }, 
-        [dispatch]
+        []
     );
 
     // Handle starting a new game
@@ -51,13 +52,23 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         })
     };
 
+    // Buy item
+    const buyItem = useCallback(
+        (item: Item) => {
+            dispatch({
+                type: GameActionType.BUY_ITEM,
+                payload: item
+            })
+        }, []
+    );
+
     // Close monster info panel
     const closeInfoPanel = () => {
         dispatch({
             type: GameActionType.CLOSE_INFO_PANEL,
             payload: null
         })
-    }
+    };
 
     const providerValue = useMemo(() => ({
         state: gameState,
@@ -66,8 +77,9 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         startNewStage: startNewStage,
         generateNextMonster: generateNextMonster,
         setGameStatus: setGameStatus,
+        buyItem: buyItem,
         closeInfoPanel: closeInfoPanel
-    }), [gameState, registerInput]);
+    }), [gameState, buyItem, registerInput]);
 
     return (
         <GameContext.Provider value={providerValue}>

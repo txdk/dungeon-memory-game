@@ -1,13 +1,12 @@
 import { GiBrokenHeart, GiHearts } from "react-icons/gi";
-import { MAX_HEALTH } from "@/constants/GameConstants";
 import { useMemo } from "react";
 import classNames from "classnames";
 
 // Render the player health bar based on current health
-const renderHearts = (health: number) => {
+const renderHearts = (health: number, maxHealth: number) => {
     const healthIndicator: Array<JSX.Element> = [];
 
-    for (let i = 0; i < MAX_HEALTH; i++) {
+    for (let i = 0; i < maxHealth; i++) {
         if (i < health) {
             healthIndicator.push(<GiHearts key={`heart-${i}`} />);
         }
@@ -22,10 +21,11 @@ const renderHearts = (health: number) => {
 interface HealthBarProps {
     colour: string;
     currentHealth: number;
+    maxHealth: number;
 }
 
-export default function HealthBar({ colour, currentHealth }: Readonly<HealthBarProps>) {
-    const healthIndicator: Array<JSX.Element> = useMemo(() => renderHearts(currentHealth), [currentHealth]);
+export default function HealthBar({ colour, currentHealth, maxHealth }: Readonly<HealthBarProps>) {
+    const healthIndicator: Array<JSX.Element> = useMemo(() => renderHearts(currentHealth, maxHealth), [currentHealth, maxHealth]);
 
     return (
         <span className={classNames(colour, "m-2 absolute right-0 flex")}>

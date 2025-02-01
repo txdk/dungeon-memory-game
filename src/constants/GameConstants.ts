@@ -1,5 +1,5 @@
-// Maximum health of player
-export const MAX_HEALTH: number = 5; 
+// Initial maximum health of player
+export const INITIAL_MAX_HEALTH: number = 5; 
 
 // Possible control inputs from player
 export enum GameInput {

@@ -1,4 +1,4 @@
-import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "@/constants/GameConstants";
+import { GameInput, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "@/constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "@/utils/combatUtils";
 import { generateMonsterList, generateUniqueMonsterInputs, getRandomMonsterFromStage, handleUpdateMonsterList } from "@/utils/monsterGenerationUtils";
 import { Encounter, Monster } from "@/types/Monster";
@@ -159,7 +159,7 @@ const handleStageStart = (state: GameState, newStageParams: NewStageParams) => {
     return {
         ...state,
         status: GameStatus.START_NEW_STAGE,
-        currentHealth: Math.min(MAX_HEALTH, newHealth),
+        currentHealth: Math.min(state.maxHealth, newHealth),
         score: newScore,
         currentStage: newStage,
         currentLevel: initialLevel,

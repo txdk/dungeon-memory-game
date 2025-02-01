@@ -1,4 +1,4 @@
-import { GameInput, MAX_HEALTH } from "@/constants/GameConstants";
+import { GameInput, INITIAL_MAX_HEALTH } from "@/constants/GameConstants";
 import { Encounter, Monster } from "@/types/Monster";
 import { Stage } from "@/types/Stage";
 
@@ -24,6 +24,7 @@ export interface GameState {
     correctInputs: number;
     currentMonster: Monster | null;
     currentHealth: number;
+    maxHealth: number;
     currentStage: Stage | null;
     currentLevel: number | null;
     score: number;
@@ -38,7 +39,8 @@ export const initialState: GameState = {
     playerInputs: [],
     correctInputs: 0,
     currentMonster: null,
-    currentHealth: MAX_HEALTH,
+    currentHealth: INITIAL_MAX_HEALTH,
+    maxHealth: INITIAL_MAX_HEALTH,
     currentStage: null,
     currentLevel: null,
     score: 0,

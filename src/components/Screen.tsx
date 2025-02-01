@@ -31,7 +31,12 @@ export default function Screen() {
             case (GameStatus.IN_PROGRESS):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
+                        <HeadsUpDisplay 
+                            textColour={textColour} 
+                            currentHealth={state.currentHealth} 
+                            maxHealth={state.maxHealth} 
+                            gold={state.gold} 
+                        />
                         {
                             state.currentMonster !== null && (
                                 !state.seenMonsters.includes(state.currentMonster.id)? (
@@ -46,7 +51,12 @@ export default function Screen() {
             case (GameStatus.STAGE_CLEAR):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
+                        <HeadsUpDisplay 
+                            textColour={textColour} 
+                            currentHealth={state.currentHealth} 
+                            maxHealth={state.maxHealth} 
+                            gold={state.gold} 
+                        />
                         <StageClearScreen stage={state.currentStage!} />
                     </>
                 );
@@ -54,7 +64,12 @@ export default function Screen() {
             case (GameStatus.STAGE_SELECT):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
+                        <HeadsUpDisplay 
+                            textColour={textColour} 
+                            currentHealth={state.currentHealth} 
+                            maxHealth={state.maxHealth} 
+                            gold={state.gold} 
+                        />
                         <StageSelectScreen />
                     </>
                 );
@@ -62,7 +77,12 @@ export default function Screen() {
             case (GameStatus.IN_SHOP):
                 return (
                     <>
-                        <HeadsUpDisplay textColour={textColour} currentHealth={state.currentHealth} gold={state.gold} />
+                        <HeadsUpDisplay 
+                            textColour={textColour} 
+                            currentHealth={state.currentHealth} 
+                            maxHealth={state.maxHealth} 
+                            gold={state.gold} 
+                        />
                         <Shop /> 
                     </>
                 );

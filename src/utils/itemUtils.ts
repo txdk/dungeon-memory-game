@@ -8,6 +8,12 @@ export const triggerItemEffects = (item: Item, state: GameState): GameState => {
                 ...state,
                 currentHealth: state.currentHealth + 1
             };
+        case ("Lilies of life"):
+            return {
+                ...state,
+                currentHealth: state.currentHealth + 1,
+                maxHealth: state.maxHealth + 1
+            };
         default:
             return state;
     };

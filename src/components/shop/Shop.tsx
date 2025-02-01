@@ -10,6 +10,7 @@ import { GameStatus } from "@/reducers/GameState";
 import Button from "../generic/Button";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { ITEM_COST_MULTIPLIERS } from "@/constants/GameConstants";
+import { LILIES_OF_LIFE } from "@/core/items/LiliesOfLife";
 
 export default function Shop() {
 
@@ -41,7 +42,7 @@ export default function Shop() {
             <p className="text-xs lg:text-sm lg:mb-7">It's dangerous to go alone... buy something!</p>
             <div className="flex flex-col lg:flex-row justify-center lg:space-x-[100px] xl:space-x-[150px]">
                 {
-                    [HEALING_POTION,PLACEHOLDER,PLACEHOLDER].map((item) => {
+                    [HEALING_POTION,LILIES_OF_LIFE,PLACEHOLDER].map((item) => {
                         return <ItemCard key={uuidv4()} item={adjustItemCost(item)} playerGold={state.gold} handleBuy={handleBuy} />
                     })
                 }

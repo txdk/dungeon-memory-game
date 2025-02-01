@@ -1,6 +1,6 @@
 import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "@/constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "@/utils/combatUtils";
-import { generateMonsterList, generateUniqueMonsterInputs, getRandomMonsterFromStage } from "@/utils/monsterGenerationUtils";
+import { generateMonsterList, generateUniqueMonsterInputs, getRandomMonsterFromStage, handleUpdateMonsterList } from "@/utils/monsterGenerationUtils";
 import { Encounter, Monster } from "@/types/Monster";
 import { generateFirstStage } from "@/core/stages/CaveStage";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "@/reducers/GameState";
@@ -109,7 +109,7 @@ const generateNextMonster = (state: GameState) => {
             gold: newGold + state.currentStage!.goldReward,
             score: newScore + state.currentStage!.goldReward
         } as GameState;
-    }
+    };
 
     // Check level-up condition
     const canLevelUp: boolean = (
@@ -119,6 +119,7 @@ const generateNextMonster = (state: GameState) => {
     const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
     const nextMonsterType: Monster = getRandomMonsterFromStage(newLevel, state.currentStage!);
     const nextMonster: Monster = generateUniqueMonsterInputs(nextMonsterType, state.currentMonster!);
+    const modifiedMonsterList: Monster[] = handleUpdateMonsterList(nextMonster, state.monsterList);
 
     return {
         ...state,
@@ -136,7 +137,8 @@ const generateNextMonster = (state: GameState) => {
         currentStage: {
             ...state.currentStage,
             accumulatedScore: newStageScore
-        }
+        },
+        monsterList: [...modifiedMonsterList]
     } as GameState;
 };
 

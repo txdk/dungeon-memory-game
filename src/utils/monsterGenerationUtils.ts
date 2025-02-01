@@ -5,6 +5,7 @@ import { Stage } from "@/types/Stage";
 import { generateTier1Monsters, generateTier2Monsters } from "@/core/monsters/CaveMonsters";
 import { generateBigMonster, generateNecromancer, generateStage2BasicMonsters } from "@/core/monsters/CatacombsMonsters";
 import { generateMiniboss, generateMinotaur, generateShapeshifter, generateStage3BasicMonsters } from "@/core/monsters/UndercityMonsters";
+import { generateBoss, generateCabalHighpriest, generateDemonicEnforcer, generateMechagolem, generateMegagolem } from "@/core/monsters/CitadelMonsters";
 
 // Find monster by name
 export const findMonsterByName = (name: string, monsterList: Monster[]) => {
@@ -39,21 +40,63 @@ export const getRandomMonsterFromStage = (level: number, stage: Stage) => {
 
 // Generate unique monster inputs
 export const generateUniqueMonsterInputs = (monster: Monster, previousMonster: Monster): Monster => {
+    
+    let newMonster: Monster;
     switch (monster.name) {
         case "shapeshifter":
-            return {
+            newMonster = {
                 ...monster,
                 defeatSequence: previousMonster.defeatSequence
             };
+            break;
+        
+        case "mechagolem":
+            newMonster = {
+                ...monster,
+                defeatSequence: [
+                    ...monster.defeatSequence.slice(1),
+                    monster.defeatSequence[0]
+                ]
+            };
+            break;
 
         default:
-            return monster;
+            newMonster = {...monster};
     };
+
+    // Check if inputs should be reversed
+    const shouldReverseInputs: boolean = previousMonster.name === "cabal highpriest";
+    if (shouldReverseInputs) {
+        newMonster = {
+            ...newMonster,
+            defeatSequence: [...newMonster.defeatSequence].reverse()
+        };
+    };
+
+    return newMonster;
+};
+
+// Permanently modify a monster in the monster list
+export const modifyMonsterList = (monster: Monster, monsterList: Monster[]) => {
+    const monsterIndex: number = monsterList.find((listMonster) => listMonster.id === monster.id)!.id;
+    const modifiedMonsterList: Monster[] = [...monsterList];
+    modifiedMonsterList[monsterIndex] = {...monster};
+    return modifiedMonsterList;
+};
+
+// Handle updating of the monster list for dynamic enemies
+export const handleUpdateMonsterList = (monster: Monster, monsterList: Monster[]) => {
+    if (monster.name === "mechagolem") {
+        return modifyMonsterList(monster, monsterList);
+    };
+
+    return monsterList;
 };
 
 // Generate monster list
-export const generateMonsterList = () => {
+export const generateMonsterList = (): Monster[] => {
     const tier1Monsters: Monster[] = generateTier1Monsters();
+    const miniboss: Monster = generateMiniboss();
 
     return [
         ...tier1Monsters,
@@ -64,6 +107,11 @@ export const generateMonsterList = () => {
         ...generateStage3BasicMonsters(),
         generateShapeshifter(),
         generateMinotaur(),
-        generateMiniboss()
+        miniboss,
+        generateDemonicEnforcer(),
+        generateCabalHighpriest(),
+        generateMechagolem(),
+        generateMegagolem(),
+        generateBoss(miniboss)
     ];
 };

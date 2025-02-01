@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 interface ItemCardProps {
     item: Item;
-    playerGold: number; 
+    playerGold: number;
     handleBuy: (item: Item) => void;
 };
 

@@ -1,4 +1,4 @@
-import { GameInput } from "@/constants/GameConstants";
+import { BOSS_NAMES, GameInput } from "@/constants/GameConstants";
 import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, randomiseArrayOrder } from "@/utils/randomUtils";
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from "@/types/Monster";
@@ -79,7 +79,7 @@ export const generateMinotaur = () => {
 };
 
 export const generateMiniboss = () => {
-    const minibossNames: Array<string> = ["vampire", "mind flayer", "death knight"];
+    const minibossNames: string[] = [...BOSS_NAMES.keys()];
     const minibossName: string = getRandomArrayElement(minibossNames);
 
     return {

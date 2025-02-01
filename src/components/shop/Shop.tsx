@@ -24,10 +24,8 @@ export default function Shop() {
     };
 
     const handleBuy = (item: Item) => {
-        const boughtItem: Item = adjustItemCost(item);
-
-        if (state.gold >= boughtItem.baseCost) {
-            buyItem(boughtItem);
+        if (state.gold >= item.baseCost) {
+            buyItem(item);
         };
     };
 

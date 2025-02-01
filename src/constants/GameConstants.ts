@@ -28,8 +28,14 @@ export const UNDERCITY_FIRST_MONSTER_ID: number = 11;
 // ID of final monster in Stage 3 - Undercity
 export const UNDERCITY_FINAL_MONSTER_ID: number = 15;
 
+// ID of the first monster in Stage 4 - Citadel
+export const CITADEL_FIRST_MONSTER_ID: number = 16;
+
+// ID of the final mosnter in Stage 4 - Citadel
+export const CITADEL_FINAL_MONSTER_ID: number = 20;
+
 // Final stage number
-export const FINAL_STAGE_NUMBER: number = 3;
+export const FINAL_STAGE_NUMBER: number = 4;
 
 // Score requirement to level up
 const FIRST_STAGE_LEVEL_REQUIREMENTS: Map<number, number> = new Map();
@@ -54,14 +60,30 @@ THIRD_STAGE_LEVEL_REQUIREMENTS.set(4, 1100);
 THIRD_STAGE_LEVEL_REQUIREMENTS.set(5, 1600);
 THIRD_STAGE_LEVEL_REQUIREMENTS.set(6, 2500);
 
+const FOURTH_STAGE_LEVEL_REQUIREMENTS: Map<number, number> = new Map();
+FOURTH_STAGE_LEVEL_REQUIREMENTS.set(1, 0);
+FOURTH_STAGE_LEVEL_REQUIREMENTS.set(2, 750);
+FOURTH_STAGE_LEVEL_REQUIREMENTS.set(3, 1800);
+FOURTH_STAGE_LEVEL_REQUIREMENTS.set(4, 3000);
+FOURTH_STAGE_LEVEL_REQUIREMENTS.set(5, 4200);
+FOURTH_STAGE_LEVEL_REQUIREMENTS.set(6, 6000);
+
 const ITEM_COST_MULTIPLIERS: Map<number, number> = new Map();
 ITEM_COST_MULTIPLIERS.set(1, 1);
 ITEM_COST_MULTIPLIERS.set(2, 3);
-ITEM_COST_MULTIPLIERS.set(3, 5);
+ITEM_COST_MULTIPLIERS.set(3, 10);
+
+// Miniboss/boss names
+const BOSS_NAMES: Map<string, string> = new Map();
+BOSS_NAMES.set("vampire", "vampire lord");
+BOSS_NAMES.set("death knight", "lich");
+BOSS_NAMES.set("archdemon", "demon prince")
 
 export { 
     FIRST_STAGE_LEVEL_REQUIREMENTS, 
     SECOND_STAGE_LEVEL_REQUIREMENTS, 
     THIRD_STAGE_LEVEL_REQUIREMENTS,
-    ITEM_COST_MULTIPLIERS
+    FOURTH_STAGE_LEVEL_REQUIREMENTS,
+    ITEM_COST_MULTIPLIERS,
+    BOSS_NAMES
 };

@@ -14,6 +14,7 @@ export enum GameStatus {
     STAGE_SELECT,
     IN_PROGRESS,
     IN_SHOP,
+    GAME_WIN,
     GAME_OVER
 };
 

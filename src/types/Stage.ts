@@ -19,6 +19,7 @@ export interface NewStageParams {
 export interface Stage {
     id: string;
     name: string;
+    number: number;
     monsterList: Monster[];
     startTimestamp: number;
     endTimestamp: number;

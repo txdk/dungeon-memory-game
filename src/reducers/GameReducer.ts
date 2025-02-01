@@ -1,6 +1,6 @@
 import { GameInput, MAX_HEALTH, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "@/constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "@/utils/combatUtils";
-import { generateMonsterList, getRandomMonsterFromStage } from "@/utils/monsterGenerationUtils";
+import { generateMonsterList, generateUniqueMonsterInputs, getRandomMonsterFromStage } from "@/utils/monsterGenerationUtils";
 import { Encounter, Monster } from "@/types/Monster";
 import { generateFirstStage } from "@/core/stages/CaveStage";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "@/reducers/GameState";
@@ -117,7 +117,8 @@ const generateNextMonster = (state: GameState) => {
         (state.newestEncounter!.quantity >= MIN_ENCOUNTERS_BEFORE_NEW_MONSTER)
     );
     const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
-    const nextMonster: Monster = getRandomMonsterFromStage(newLevel, state.currentStage!);
+    const nextMonsterType: Monster = getRandomMonsterFromStage(newLevel, state.currentStage!);
+    const nextMonster: Monster = generateUniqueMonsterInputs(nextMonsterType, state.currentMonster!);
 
     return {
         ...state,

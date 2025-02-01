@@ -9,14 +9,25 @@ import GameContext from "@/contexts/GameContext";
 import { GameStatus } from "@/reducers/GameState";
 import Button from "../generic/Button";
 import { RxDoubleArrowRight } from "react-icons/rx";
+import { ITEM_COST_MULTIPLIERS } from "@/constants/GameConstants";
 
 export default function Shop() {
 
     const { state, buyItem, setGameStatus } = useContext(GameContext);
 
+    const costMultiplier = ITEM_COST_MULTIPLIERS.get(state.currentStage!.number)!;
+    const adjustItemCost = (item: Item): Item => {
+        return {
+            ...item,
+            baseCost: item.baseCost * costMultiplier
+        };
+    };
+
     const handleBuy = (item: Item) => {
-        if (state.gold >= item.baseCost) {
-            buyItem(item);
+        const boughtItem: Item = adjustItemCost(item);
+
+        if (state.gold >= boughtItem.baseCost) {
+            buyItem(boughtItem);
         };
     };
 
@@ -33,7 +44,7 @@ export default function Shop() {
             <div className="flex flex-col lg:flex-row justify-center lg:space-x-[100px] xl:space-x-[150px]">
                 {
                     [HEALING_POTION,PLACEHOLDER,PLACEHOLDER].map((item) => {
-                        return <ItemCard key={uuidv4()} item={item} playerGold={state.gold} handleBuy={handleBuy} />
+                        return <ItemCard key={uuidv4()} item={adjustItemCost(item)} playerGold={state.gold} handleBuy={handleBuy} />
                     })
                 }
             </div>

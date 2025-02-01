@@ -4,7 +4,7 @@ import { v4 as uuidv4} from 'uuid';
 import { Stage } from "@/types/Stage"; 
 import { generateTier1Monsters, generateTier2Monsters } from "@/core/monsters/CaveMonsters";
 import { generateBigMonster, generateNecromancer, generateStage2BasicMonsters } from "@/core/monsters/CatacombsMonsters";
-import { generateMiniboss, generateMinotaur } from "@/core/monsters/UndercityMonsters";
+import { generateMiniboss, generateMinotaur, generateShapeshifter, generateStage3BasicMonsters } from "@/core/monsters/UndercityMonsters";
 
 // Find monster by name
 export const findMonsterByName = (name: string, monsterList: Monster[]) => {
@@ -37,9 +37,23 @@ export const getRandomMonsterFromStage = (level: number, stage: Stage) => {
     };
 };
 
+// Generate unique monster inputs
+export const generateUniqueMonsterInputs = (monster: Monster, previousMonster: Monster): Monster => {
+    switch (monster.name) {
+        case "shapeshifter":
+            return {
+                ...monster,
+                defeatSequence: previousMonster.defeatSequence
+            };
+
+        default:
+            return monster;
+    };
+};
+
 // Generate monster list
 export const generateMonsterList = () => {
-    const tier1Monsters: Array<Monster> = generateTier1Monsters();
+    const tier1Monsters: Monster[] = generateTier1Monsters();
 
     return [
         ...tier1Monsters,
@@ -47,6 +61,8 @@ export const generateMonsterList = () => {
         ...generateStage2BasicMonsters(),
         generateBigMonster(),
         generateNecromancer(tier1Monsters),
+        ...generateStage3BasicMonsters(),
+        generateShapeshifter(),
         generateMinotaur(),
         generateMiniboss()
     ];

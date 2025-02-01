@@ -43,6 +43,7 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
     return {
         id: uuidv4(),
         name: "The Caves",
+        number: 1,
         monsterList: monsterList,
         startTimestamp: new Date().getTime(),
         endTimestamp: Infinity,

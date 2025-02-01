@@ -22,7 +22,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
     ];
 
     const clearCondition: StageClearCondition = {
-        scoreRequirement: 1200,
+        scoreRequirement: 1100,
         finalMonsterCount: 3
     };
 
@@ -55,11 +55,12 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
     return {
         id: uuidv4(),
         name: "The Catacombs",
+        number: 2,
         monsterList: monsterList,
         startTimestamp: new Date().getTime(),
         endTimestamp: Infinity,
         accumulatedScore: 0,
-        goldReward: 1000,
+        goldReward: 500,
         levelRequirements: SECOND_STAGE_LEVEL_REQUIREMENTS,
         clearCondition: clearCondition,
         generatePathOptions: generatePathOptions,

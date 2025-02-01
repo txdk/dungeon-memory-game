@@ -11,6 +11,7 @@ import HeadsUpDisplay from "@/components/headsUpDisplay/HeadsUpDisplay";
 import StageSelectScreen from "@/components/stage/StageSelectScreen";
 import { useAlert } from "@/hooks/useAlert";
 import Shop from "@/components/shop/Shop";
+import WinScreen from "./WinScreen";
 
 export default function Screen() {
 
@@ -65,7 +66,12 @@ export default function Screen() {
                         <Shop /> 
                     </>
                 );
-                
+            
+            case (GameStatus.GAME_WIN):
+                return (
+                    <WinScreen score={state.score} startGame={startGame} />
+                ); 
+            
             case (GameStatus.GAME_OVER):
                 return <GameOverScreen 
                     monsterName={state.currentMonster!.name} 

@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { Monster } from "@/types/Monster";
 import Button from "@/components/generic/Button";
-import InputIcon from "@/components/generic/InputIcon";
 import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import { GameInput } from "@/constants/GameConstants";
-import { v4 as uuidv4} from 'uuid';
 import AnimatedText from "@/components/generic/AnimatedText";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
+import { renderDefeatSequence } from "@/utils/monsterInfoUtils";
 
 interface MonsterInfoPanelProps {
     monster: Monster;
@@ -29,9 +27,7 @@ export default function MonsterInfoPanel({ monster }: Readonly<MonsterInfoPanelP
                 {monster.description}
             </p>
             <span className="flex justify-left mt-5 text-xs md:text-base">
-                To defeat: {monster.defeatSequence.map((input: GameInput) => {
-                    return <InputIcon key={`icon-${uuidv4()}`} input={input} />
-                })}
+                To defeat: {renderDefeatSequence(monster)}
             </span>
             <Button className="flex mt-7 md:mt-3 relative p-1 md:p-1.5 left-[32%] md:left-[40%] items-center" handleClick={closeInfoPanel}>
                 <>

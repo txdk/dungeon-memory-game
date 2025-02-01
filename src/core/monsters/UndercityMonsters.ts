@@ -1,7 +1,55 @@
 import { GameInput } from "@/constants/GameConstants";
-import { getRandomArrayElement, getRandomDirection, getRandomInput, randomiseArrayOrder } from "@/utils/randomUtils";
+import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, randomiseArrayOrder } from "@/utils/randomUtils";
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from "@/types/Monster";
+
+export const generateStage3BasicMonsters = (): Monster[] => {
+
+    const firstMonsterInputs: GameInput[] = [...Array(6)].map(() => getRandomCombatInput());
+
+    const firstMonster: Monster = {
+        id: 11,
+        instanceId: uuidv4(),
+        name: "stone sentinel",
+        description: "A stalwart guardian of the undercity. Brings death to all but the most combat-trained interlopers.",
+        defeatSequence: firstMonsterInputs,
+        score: 200,
+        isDefeated: false
+    };
+
+    const secondMonsterPartialInputs: GameInput[] = randomiseArrayOrder(
+        [GameInput.INPUT_ATTACK, getRandomInput(), getRandomInput(), getRandomInput()]
+    ) as GameInput[];
+    const secondMonsterInputs: GameInput[] = (
+        Math.random() < 0.5? 
+        [...secondMonsterPartialInputs, ...secondMonsterPartialInputs]:
+        secondMonsterPartialInputs.flatMap(input => [input, input])
+    );
+
+    const secondMonster: Monster = {
+        id: 12,
+        instanceId: uuidv4(),
+        name: "manticore",
+        description: "A fearsome beast that enjoys toying with its prey. Observe its hunting habits to keep the upper hand!",
+        defeatSequence: secondMonsterInputs,
+        score: 200,
+        isDefeated: false
+    };
+
+    return [firstMonster, secondMonster];
+};
+
+export const generateShapeshifter = () => {
+    return {
+        id: 13,
+        instanceId: uuidv4(),
+        name: "shapeshifter",
+        description: "A master of cunning and trickery. Transforms into the previous monster you encountered.",
+        defeatSequence: [GameInput.INPUT_ATTACK],
+        score: 200,
+        isDefeated: false
+    } as Monster
+};
 
 export const generateMinotaur = () => {
     const mazeInputs: Array<GameInput> = [
@@ -14,7 +62,7 @@ export const generateMinotaur = () => {
     const reversedMazeInputs: Array<GameInput> = mazeInputs.slice().reverse();
     
     return {
-        id: 11,
+        id: 14,
         instanceId: uuidv4(),
         name: "minotaur",
         description: "A mighty foe awaits you at the centre of a dark maze. Don't lose your bearings!",
@@ -25,7 +73,7 @@ export const generateMinotaur = () => {
             GameInput.INPUT_ATTACK,
             ...reversedMazeInputs
         ],
-        score: 200,
+        score: 400,
         isDefeated: false
     } as Monster;
 };
@@ -35,7 +83,7 @@ export const generateMiniboss = () => {
     const minibossName: string = getRandomArrayElement(minibossNames);
 
     return {
-        id: 12,
+        id: 15,
         instanceId: uuidv4(),
         name: minibossName,
         description: "An ancient deadly foe with no easily exploitable weaknesses. Use all of your cunning to best it in combat!",
@@ -47,7 +95,7 @@ export const generateMiniboss = () => {
             GameInput.INPUT_SHIELD, 
             GameInput.INPUT_ATTACK
         ]) as Array<GameInput>,
-        score: 400,
+        score: 500,
         isDefeated: false
     } as Monster;
 };

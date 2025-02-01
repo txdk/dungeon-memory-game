@@ -8,18 +8,25 @@ import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameStatus } from "@/reducers/GameState";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
-import { getTimeIntervalInMinutes } from "@/utils/mathUtils";
+import { getTimeInterval } from "@/utils/mathUtils";
+import { FINAL_STAGE_NUMBER } from "@/constants/GameConstants";
 
 interface StageClearScreenProps {
     stage: Stage;
-}
+};
 
 export default function StageClearScreen({ stage }: Readonly<StageClearScreenProps>) {
 
     const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
     const handleClick = () => {
-        setGameStatus(GameStatus.IN_SHOP);
+
+        if (stage.number === FINAL_STAGE_NUMBER) {
+            setGameStatus(GameStatus.GAME_WIN);
+        }
+        else {
+            setGameStatus(GameStatus.IN_SHOP); 
+        };
     };
     useKeyHandler(handleClick, buttonVisibility);
 
@@ -34,7 +41,7 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
             </div>
             <p className="text-sm md:text-base mt-3 md:mt-5">
                 You conquered {stage.name.toLowerCase()} in{" "}
-                {getTimeIntervalInMinutes(stage.startTimestamp, stage.endTimestamp)} and gained{" "}
+                {getTimeInterval(stage.startTimestamp, stage.endTimestamp)} and gained{" "}
                 <SlotCounter value={stage.goldReward} />
                 {" "}gold!
             </p>

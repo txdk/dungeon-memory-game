@@ -47,6 +47,14 @@ export default function StageOptionCard({ monsterList, rewards }: Readonly<Stage
         );
     };
 
+    // Display hint rewards
+    const renderHints = () => {
+        return (
+          rewards.hints &&
+          <p className="flex">+{rewards.hints} hint{rewards.hints > 1 && "s"}</p>  
+        );
+    };
+
     // Display all rewards
     const renderRewards = () => {
         return (
@@ -57,6 +65,7 @@ export default function StageOptionCard({ monsterList, rewards }: Readonly<Stage
                     <>
                         <ul>{renderHealth()}</ul>
                         <ul>{renderGold()}</ul>
+                        <ul>{renderHints()}</ul>
                     </>
                 }
             </ul>

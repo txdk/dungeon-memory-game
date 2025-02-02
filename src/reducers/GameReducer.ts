@@ -174,7 +174,9 @@ const generateNextMonster = (state: GameState) => {
 const handleStageStart = (state: GameState, newStageParams: NewStageParams) => {
 
     const newHealth: number = state.currentHealth + (newStageParams.rewards.health ?? 0);
+    const newGold: number = state.gold + (newStageParams.rewards.gold ?? 0);
     const newScore: number = state.score + (newStageParams.rewards.gold ?? 0);
+    const newHints: number = state.hints + (newStageParams.rewards.hints ?? 0);
     const newStage: Stage = state.currentStage!.generateNextStage(newStageParams.monsterList, state.monsterList);
     const initialLevel: number = newStageParams.monsterList.length;
 
@@ -188,7 +190,9 @@ const handleStageStart = (state: GameState, newStageParams: NewStageParams) => {
         ...state,
         status: GameStatus.START_NEW_STAGE,
         currentHealth: Math.min(state.maxHealth, newHealth),
+        gold: newGold,
         score: newScore,
+        hints: newHints,
         currentStage: newStage,
         currentLevel: initialLevel,
         currentMonster: {...firstMonster},

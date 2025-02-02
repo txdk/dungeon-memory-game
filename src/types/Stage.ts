@@ -9,6 +9,7 @@ export interface StageClearCondition {
 export interface Rewards {
     health?: number;
     gold?: number;
+    hints?: number;
 };
 
 export interface NewStageParams {

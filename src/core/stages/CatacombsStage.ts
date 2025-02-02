@@ -46,7 +46,8 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
                 monsterList: [{...fleshGolem}, {...necromancer}],
                 rewards: {
                     gold: 500,
-                    health: 2
+                    health: 2,
+                    hints: 1
                 }
             }
         ] as NewStageParams[];

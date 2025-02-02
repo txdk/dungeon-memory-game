@@ -23,21 +23,24 @@ export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Mon
                 monsterList: [...getRandomArraySample(monsterList.slice(0,5), 2)],
                 rewards: {
                     gold: 0,
-                    health: 0
+                    health: 1,
+                    hints: 1
                 }
             },
             {
                 monsterList: [getRandomArrayElement(monsterList.slice(2,5)), getRandomArrayElement(monsterList.slice(5,7))],
                 rewards: {
                     gold: 500,
-                    health: 1
+                    health: 1,
+                    hints: 2
                 }
             },
             {
                 monsterList: [...monsterList.slice(5)],
                 rewards: {
                     gold: 750,
-                    health: 2
+                    health: 2,
+                    hints: 3
                 }
             }
         ] as NewStageParams[];

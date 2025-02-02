@@ -64,24 +64,28 @@ export const generateUniqueMonsterInputs = (monster: Monster, previousMonster: M
             newMonster = {...monster};
     };
 
+    return newMonster;
+};
+
+// Apply temporary monster input modifiers
+export const handleModifyInputs = (monster: Monster, previousMonster: Monster): Monster => {
     // Check if inputs should be reversed
     const shouldReverseInputs: boolean = previousMonster.name === "cabal highpriest";
     if (shouldReverseInputs) {
-        newMonster = {
-            ...newMonster,
-            defeatSequence: [...newMonster.defeatSequence].reverse()
+        return {
+            ...monster,
+            defeatSequence: [...monster.defeatSequence].reverse()
         };
     };
 
-    return newMonster;
+    return monster;
 };
 
 // Permanently modify a monster in the monster list
 export const modifyMonsterList = (monster: Monster, monsterList: Monster[]) => {
-    const monsterIndex: number = monsterList.find((listMonster) => listMonster.id === monster.id)!.id;
-    const modifiedMonsterList: Monster[] = [...monsterList];
-    modifiedMonsterList[monsterIndex] = {...monster};
-    return modifiedMonsterList;
+    return (
+        monsterList.map(listMonster => listMonster.name === monster.name? monster: listMonster)
+    );
 };
 
 // Handle updating of the monster list for dynamic enemies

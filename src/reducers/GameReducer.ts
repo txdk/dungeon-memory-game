@@ -1,6 +1,6 @@
 import { GameInput, MIN_ENCOUNTERS_BEFORE_NEW_MONSTER } from "@/constants/GameConstants";
 import { checkMonsterDefeated, checkPlayerInput, getGameStatus } from "@/utils/combatUtils";
-import { generateMonsterList, generateUniqueMonsterInputs, getRandomMonsterFromStage, handleUpdateMonsterList } from "@/utils/monsterGenerationUtils";
+import { generateMonsterList, generateUniqueMonsterInputs, getRandomMonsterFromStage, handleModifyInputs, handleUpdateMonsterList } from "@/utils/monsterGenerationUtils";
 import { Encounter, Monster } from "@/types/Monster";
 import { generateFirstStage } from "@/core/stages/CaveStage";
 import { GameAction, GameActionType, GameState, GameStatus, initialState } from "@/reducers/GameState";
@@ -119,7 +119,8 @@ const generateNextMonster = (state: GameState) => {
     const newLevel: number = state.currentLevel! + (canLevelUp? 1: 0);
     const nextMonsterType: Monster = getRandomMonsterFromStage(newLevel, state.currentStage!);
     const nextMonster: Monster = generateUniqueMonsterInputs(nextMonsterType, state.currentMonster!);
-    const modifiedMonsterList: Monster[] = handleUpdateMonsterList(nextMonster, state.monsterList);
+    const modifiedMonsterList: Monster[] = handleUpdateMonsterList(nextMonster, state.currentStage!.monsterList);
+    const nextMonsterModified: Monster = handleModifyInputs(nextMonster, state.currentMonster!);
 
     return {
         ...state,
@@ -128,7 +129,7 @@ const generateNextMonster = (state: GameState) => {
         score: newScore,
         gold: newGold,
         currentLevel: newLevel,
-        currentMonster: {...nextMonster},
+        currentMonster: {...nextMonsterModified},
         newestEncounter: {
             ...(state.newestEncounter!),
             monster: state.currentStage!.monsterList[newLevel - 1], 
@@ -136,9 +137,9 @@ const generateNextMonster = (state: GameState) => {
         },
         currentStage: {
             ...state.currentStage,
+            monsterList: [...modifiedMonsterList],
             accumulatedScore: newStageScore
-        },
-        monsterList: [...modifiedMonsterList]
+        }
     } as GameState;
 };
 
@@ -208,5 +209,5 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
 
         default:
             return state;
-    }
+    };
 }

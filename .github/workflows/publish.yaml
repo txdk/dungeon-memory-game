@@ -33,11 +33,6 @@ jobs:
           source-path: "/sfx"
           dest-path: "./public/sfx"
 
-      - name: Debug
-        run: |
-          ls ./public
-          ls ./public/sfx
-      
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v4
 

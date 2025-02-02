@@ -60,19 +60,19 @@ export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
 };
 
 export const generateBigMonster = (tier2Monsters: Monster[]) => {
-    // Create ogre
-    const ogreInputs: Array<GameInput> = randomiseArrayOrder(
+    // Create flesh golem
+    const fleshGolemInputs: Array<GameInput> = randomiseArrayOrder(
         [GameInput.INPUT_ATTACK, getRandomInput(), getRandomInput()]
     ) as Array<GameInput>;
     const ogre: Monster = {
         id: 9,
         instanceId: uuidv4(),
-        name: "ogre",
+        name: "flesh golem",
         description: "A towering brute that will take repeated and concentrated effort to defeat.",
         defeatSequence: [
-            ...(new Array(3).fill(ogreInputs[0])),
-            ...(new Array(4).fill(ogreInputs[1])),
-            ...(new Array(4).fill(ogreInputs[2])),
+            ...(new Array(3).fill(fleshGolemInputs[0])),
+            ...(new Array(4).fill(fleshGolemInputs[1])),
+            ...(new Array(4).fill(fleshGolemInputs[2])),
         ],
         score: 50,
         isDefeated: false

@@ -1,6 +1,5 @@
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from "@/types/Monster";
-import { findMonsterByName } from "@/utils/monsterGenerationUtils";
 import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, SECOND_STAGE_LEVEL_REQUIREMENTS } from "@/constants/GameConstants";
 import { NewStageParams, Stage, StageClearCondition } from "@/types/Stage";
 import { getRandomArrayElement, getRandomArraySample } from "@/utils/randomUtils";
@@ -8,17 +7,9 @@ import { generateThirdStage } from '@/core/stages/UndercityStage';
 
 export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
 
-    // Add monsters to list
-    const fleshGolem: Monster = {
-        ...(findMonsterByName("ogre", allMonsters)),
-        name: "flesh golem"
-    };
-    const necromancer: Monster = {...findMonsterByName("necromancer", allMonsters)};
     const monsterList: Monster[] = [
         ...selectedMonsters,
-        ...allMonsters.slice(CATACOMBS_FIRST_MONSTER_ID, CATACOMBS_FINAL_MONSTER_ID + 1),
-        fleshGolem,
-        necromancer
+        ...allMonsters.slice(CATACOMBS_FIRST_MONSTER_ID, CATACOMBS_FINAL_MONSTER_ID + 1)
     ];
 
     const clearCondition: StageClearCondition = {
@@ -43,7 +34,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
                 }
             },
             {
-                monsterList: [{...fleshGolem}, {...necromancer}],
+                monsterList: [...monsterList.slice(5)],
                 rewards: {
                     gold: 500,
                     health: 2,

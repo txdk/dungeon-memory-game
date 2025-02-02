@@ -26,7 +26,7 @@ export const FIRST_STAGE_FINAL_ADVANCED_MONSTER_ID: number = 5;
 export const CATACOMBS_FIRST_MONSTER_ID: number = 6;
 
 // ID of final basic monster in Stage 2 - Catacombs
-export const CATACOMBS_FINAL_MONSTER_ID: number = 8;
+export const CATACOMBS_FINAL_MONSTER_ID: number = 10;
 
 // ID of first monster in Stage 3 - Undercity
 export const UNDERCITY_FIRST_MONSTER_ID: number = 11;

@@ -12,10 +12,12 @@ import { ITEM_COST_MULTIPLIERS } from "@/constants/GameConstants";
 import { LILLIES_OF_LIFE } from "@/core/items/LilliesOfLife";
 import { MAGIC_SCROLL } from "@/core/items/MagicScroll";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
+import useSound from "use-sound";
 
 export default function Shop() {
 
     const { state, buyItem, setGameStatus } = useContext(GameContext);
+    const [play] = useSound('dungeon-memory-game/sfx/pickupCoin.wav', {volume: 0.5});
     const itemList: Item[] = [MAGIC_SCROLL, HEALING_POTION, LILLIES_OF_LIFE];
 
     const costMultiplier = ITEM_COST_MULTIPLIERS.get(state.currentStage!.number)!;
@@ -29,6 +31,7 @@ export default function Shop() {
     const handleBuy = (item: Item) => {
         if (state.gold >= item.baseCost) {
             buyItem(item);
+            play();
         };
     };
 

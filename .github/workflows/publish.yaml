@@ -23,6 +23,15 @@ jobs:
 
       - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧
         uses: ./.github/workflows/setup-node
+
+      - name: Download assets from Dropbox
+        uses: tlambert03/dropbox-download-action@v1
+        with:
+          dropbox-refresh-token: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          dropbox-app-key: ${{ secrets.DROPBOX_APP_KEY }}
+          dropbox-app-secret: ${{ secrets.DROPBOX_APP_SECRET }}
+          source-path: "sfx"
+          dest-path: "./public/sfx"
       
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v4

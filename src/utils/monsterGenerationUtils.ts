@@ -100,13 +100,14 @@ export const handleUpdateMonsterList = (monster: Monster, monsterList: Monster[]
 // Generate monster list
 export const generateMonsterList = (): Monster[] => {
     const tier1Monsters: Monster[] = generateTier1Monsters();
+    const tier2Monsters: Monster[] = generateTier2Monsters();
     const miniboss: Monster = generateMiniboss();
 
     return [
         ...tier1Monsters,
-        ...generateTier2Monsters(),
-        ...generateStage2BasicMonsters(),
-        generateBigMonster(),
+        ...tier2Monsters,
+        ...generateStage2BasicMonsters(tier1Monsters),
+        generateBigMonster(tier2Monsters),
         generateNecromancer(tier1Monsters),
         ...generateStage3BasicMonsters(),
         generateShapeshifter(),

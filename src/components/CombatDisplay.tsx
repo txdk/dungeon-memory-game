@@ -18,7 +18,9 @@ interface CombatDisplayProps {
 export default function CombatDisplay({ monster, hints, textColour }: Readonly<CombatDisplayProps>) {
 
     const { generateNextMonster, useHint } = useContext(GameContext);
-    useKeyHandler(generateNextMonster, monster?.isDefeated ?? false);
+    const isMonsterDefeated: boolean = monster?.isDefeated ?? false
+    useKeyHandler(generateNextMonster, ["Space", "Enter"], isMonsterDefeated);
+    useKeyHandler(useHint, ["KeyH"], isMonsterDefeated && hints > 0);
 
     // Display nothing if there are no active monsters
     if (monster === null) {

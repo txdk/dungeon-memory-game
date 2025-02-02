@@ -19,7 +19,7 @@ export default function StageStartScreen({ stage }: Readonly<StageStartScreenPro
     const handleClick = () => {
         setGameStatus(GameStatus.IN_PROGRESS);
     };
-    useKeyHandler(handleClick, buttonVisibility);
+    useKeyHandler(handleClick, ["Space", "Enter"], buttonVisibility);
 
     return (
         <div className="font-customFont text-green-500 text-center text-xl md:text-2xl mt-[100px]">

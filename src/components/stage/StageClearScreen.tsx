@@ -28,7 +28,7 @@ export default function StageClearScreen({ stage }: Readonly<StageClearScreenPro
             setGameStatus(GameStatus.IN_SHOP); 
         };
     };
-    useKeyHandler(handleClick, buttonVisibility);
+    useKeyHandler(handleClick, ["Space", "Enter"], buttonVisibility);
 
     return (
         <div className="font-customFont text-green-500 text-center mt-[100px]">

@@ -14,7 +14,7 @@ interface MonsterInfoPanelProps {
 export default function MonsterInfoPanel({ monster }: Readonly<MonsterInfoPanelProps>) {
 
     const { closeInfoPanel } = useContext(GameContext);
-    useKeyHandler(closeInfoPanel);
+    useKeyHandler(closeInfoPanel, ["Space", "Enter"]);
 
     return (
         <div className="font-customFont text-green-500 text-center text-sm md:text-base m-5 pt-5">

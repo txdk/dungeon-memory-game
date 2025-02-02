@@ -11,6 +11,7 @@ import { RxDoubleArrowRight } from "react-icons/rx";
 import { ITEM_COST_MULTIPLIERS } from "@/constants/GameConstants";
 import { LILLIES_OF_LIFE } from "@/core/items/LilliesOfLife";
 import { MAGIC_SCROLL } from "@/core/items/MagicScroll";
+import { useKeyHandler } from "@/hooks/useKeyHandler";
 
 export default function Shop() {
 
@@ -31,6 +32,12 @@ export default function Shop() {
         };
     };
 
+    const handleProceed = () => {
+        setGameStatus(GameStatus.STAGE_SELECT);
+    };
+
+    useKeyHandler(handleProceed, ["Space", "Enter"]);
+
     return (
         <div className="font-customFont text-green-500 text-center">
             <div className="text-lg lg:text-2xl mb-1.5">
@@ -50,7 +57,7 @@ export default function Shop() {
             </div>
             <Button
                 className="flex relative md:mt-[-16px] lg:mt-1.5 p-0.5 lg:p-1 xl:p-1.5 left-[40%] md:left-[43%] items-center fade-in" 
-                handleClick={() => setGameStatus(GameStatus.STAGE_SELECT)}
+                handleClick={handleProceed}
             >
                 <>
                     <span className="text-xs">Proceed</span>

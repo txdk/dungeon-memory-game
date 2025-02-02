@@ -9,7 +9,7 @@ interface NewGameButtonProps {
 
 export default function NewGameButton( { className, startGame }: Readonly<NewGameButtonProps>) {
 
-    useKeyHandler(startGame);
+    useKeyHandler(startGame, ["Space", "Enter"]);
 
     return (
         <div className={classNames(className, "flex justify-center mt-[130px]")}>

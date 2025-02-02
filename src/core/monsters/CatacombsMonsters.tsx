@@ -2,10 +2,13 @@ import { GameInput } from "@/constants/GameConstants";
 import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, getRandomNonCombatInput, randomiseArrayOrder } from "@/utils/randomUtils";
 import { Monster } from "@/types/Monster";
 import { v4 as uuidv4} from 'uuid';
+import { GiBroadsword, GiShield } from "react-icons/gi";
+
+export const debuffMonsterNames: string[] = randomiseArrayOrder(["cultist", "warlock", "cursed keeper"]) as string[];
 
 export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
 
-    const monsterNames: string[] = randomiseArrayOrder(["wraith", "spectre", "plaguebearer", "darkhound"]) as string[];
+    const easyMonsterNames: string[] = randomiseArrayOrder(["wraith", "spectre", "plaguebearer", "darkhound"]) as string[];
 
     const semicircleInputs: GameInput[] = [GameInput.INPUT_LEFT, GameInput.INPUT_UP, GameInput.INPUT_RIGHT];
     const swarmMovementInputs: GameInput[] = Math.random() < 0.5? semicircleInputs: [...semicircleInputs].reverse();
@@ -21,15 +24,22 @@ export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
     const easyMonster: Monster = {
         id: 6,
         instanceId: uuidv4(),
-        name: monsterNames[0],
-        description: "Sometimes it is better to evade than to engage...",
+        name: easyMonsterNames[0],
+        description: "The insidious aura of undeath surrounds this creature. Deadly and unpredictable.",
         defeatSequence: randomiseArrayOrder(
-            [getRandomDirection(), getRandomNonCombatInput(), getRandomNonCombatInput()]
+            [getRandomInput(), getRandomNonCombatInput(), getRandomCombatInput()]
         ) as Array<GameInput>,
         score: 25,
         isDefeated: false
     };
     const firstMonster: Monster = getRandomArrayElement([carrionSwarm, easyMonster]);
+
+    const debuffMonsterDescription: JSX.Element = (
+        <p className="flex">
+            Inflicts a debilitating curse upon you. Required <GiBroadsword /> inputs are swapped with <GiShield /> inputs and{" "}
+            vice versa for the next monster.
+        </p>
+    );
 
     return [
         {...firstMonster},
@@ -48,8 +58,8 @@ export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
         {
             id: 8,
             instanceId: uuidv4(),
-            name: monsterNames[1],
-            description: "The insidious aura of undeath surrounds this creature. Deadly and unpredictable.",
+            name: debuffMonsterNames[0],
+            description: debuffMonsterDescription,
             defeatSequence: randomiseArrayOrder(
                 [getRandomInput(), getRandomNonCombatInput(), getRandomNonCombatInput(), getRandomCombatInput()]
             ) as Array<GameInput>,

@@ -86,5 +86,8 @@ export const generateTier2Monsters = () => {
         isDefeated: false
     };
 
-    return [fourthMonster, fifthMonster, sixthMonster];
+    return [
+        fourthMonster, 
+        ...(randomiseArrayOrder([fifthMonster, sixthMonster]) as Monster[])
+    ];
 };

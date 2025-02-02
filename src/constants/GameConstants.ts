@@ -14,13 +14,7 @@ export enum GameInput {
 export const MIN_ENCOUNTERS_BEFORE_NEW_MONSTER = 2;
 
 // ID of final basic monster in Stage 1
-export const FIRST_STAGE_FINAL_MONSTER_ID: number = 3;
-
-// ID of first advanced monster in Stage 1
-export const FIRST_STAGE_FIRST_ADVANCED_MONSTER_ID: number = 4;
-
-// ID of final advanced monster in Stage 1
-export const FIRST_STAGE_FINAL_ADVANCED_MONSTER_ID: number = 5;
+export const FIRST_STAGE_FINAL_MONSTER_ID: number = 4;
 
 // ID of first monster in Stage 2 - Catacombs
 export const CATACOMBS_FIRST_MONSTER_ID: number = 6;

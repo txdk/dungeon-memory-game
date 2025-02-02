@@ -1,6 +1,6 @@
 import { v4 as uuidv4} from 'uuid';
 import { Monster } from '@/types/Monster';
-import { FIRST_STAGE_FINAL_ADVANCED_MONSTER_ID, FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_FIRST_ADVANCED_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS } from '@/constants/GameConstants';
+import { FIRST_STAGE_FINAL_MONSTER_ID, FIRST_STAGE_LEVEL_REQUIREMENTS } from '@/constants/GameConstants';
 import { getRandomArrayElement } from '@/utils/randomUtils';
 import { NewStageParams, Stage, StageClearCondition } from '@/types/Stage';
 import { generateSecondStage } from '@/core/stages/CatacombsStage';
@@ -8,8 +8,6 @@ import { generateSecondStage } from '@/core/stages/CatacombsStage';
 export const generateFirstStage = (allMonsters: Monster[]) => {
 
     const monsterList: Monster[] = allMonsters.slice(0, FIRST_STAGE_FINAL_MONSTER_ID + 1);
-    const finalMonster: Monster = Math.random() < 0.5? allMonsters[FIRST_STAGE_FIRST_ADVANCED_MONSTER_ID]: allMonsters[FIRST_STAGE_FINAL_ADVANCED_MONSTER_ID];
-    monsterList.push(finalMonster);
 
     const clearCondition: StageClearCondition = {
         scoreRequirement: 400,

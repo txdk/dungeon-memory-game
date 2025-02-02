@@ -3,9 +3,10 @@ import { Monster } from "@/types/Monster";
 import { v4 as uuidv4} from 'uuid';
 import { Stage } from "@/types/Stage"; 
 import { generateTier1Monsters, generateTier2Monsters } from "@/core/monsters/CaveMonsters";
-import { generateBigMonster, generateNecromancer, generateStage2BasicMonsters } from "@/core/monsters/CatacombsMonsters";
+import { debuffMonsterNames, generateBigMonster, generateNecromancer, generateStage2BasicMonsters } from "@/core/monsters/CatacombsMonsters";
 import { generateMiniboss, generateMinotaur, generateShapeshifter, generateStage3BasicMonsters } from "@/core/monsters/UndercityMonsters";
 import { generateBoss, generateCabalHighpriest, generateDemonicEnforcer, generateMechagolem, generateMegagolem } from "@/core/monsters/CitadelMonsters";
+import { swapCombatInputs } from "./inputUtils";
 
 // Find monster by name
 export const findMonsterByName = (name: string, monsterList: Monster[]) => {
@@ -69,16 +70,27 @@ export const generateUniqueMonsterInputs = (monster: Monster, previousMonster: M
 
 // Apply temporary monster input modifiers
 export const handleModifyInputs = (monster: Monster, previousMonster: Monster): Monster => {
+    let newMonster: Monster = monster;
+
+    // Check if attacks and defends should be swapped
+    const shouldSwapCombatInputs: boolean = debuffMonsterNames.includes(previousMonster.name);
+    if (shouldSwapCombatInputs) {
+        newMonster = {
+            ...newMonster,
+            defeatSequence: newMonster.defeatSequence.map((input) => swapCombatInputs(input))
+        };
+    };
+
     // Check if inputs should be reversed
     const shouldReverseInputs: boolean = previousMonster.name === "cabal highpriest";
     if (shouldReverseInputs) {
-        return {
-            ...monster,
+        newMonster = {
+            ...newMonster,
             defeatSequence: [...monster.defeatSequence].reverse()
         };
     };
 
-    return monster;
+    return newMonster;
 };
 
 // Permanently modify a monster in the monster list

@@ -8,6 +8,9 @@ import AnimatedText from "@/components/generic/AnimatedText";
 import { getMonsterArticle } from "@/utils/monsterGenerationUtils";
 import SlotCounter from "react-slot-counter";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
+import classNames from "classnames";
+import { POWERUP_SOUND, SELECT_SOUND } from "@/constants/AudioConstants";
+import useSound from "use-sound";
 
 interface CombatDisplayProps {
     monster: Monster | null;
@@ -17,10 +20,21 @@ interface CombatDisplayProps {
 
 export default function CombatDisplay({ monster, hints, textColour }: Readonly<CombatDisplayProps>) {
 
-    const { generateNextMonster, useHint } = useContext(GameContext);
-    const isMonsterDefeated: boolean = monster?.isDefeated ?? false
-    useKeyHandler(generateNextMonster, ["Space", "Enter"], isMonsterDefeated);
-    useKeyHandler(useHint, ["KeyH"], isMonsterDefeated && hints > 0);
+    const { generateNextMonster, activateHint } = useContext(GameContext);
+    const isMonsterDefeated: boolean = monster?.isDefeated ?? false;
+    const [playProceed] = useSound(SELECT_SOUND, {volume: 0.5});
+    const handleProceed = () => {
+        playProceed();
+        generateNextMonster();
+    };
+    useKeyHandler(handleProceed, ["Space", "Enter"], isMonsterDefeated);
+
+    const [playHint] = useSound(POWERUP_SOUND, {volume: 0.5});
+    const handleActivateHint = () => {
+        playHint();
+        activateHint();
+    };
+    useKeyHandler(handleActivateHint, ["KeyH"], !isMonsterDefeated && hints > 0);
 
     // Display nothing if there are no active monsters
     if (monster === null) {
@@ -49,7 +63,7 @@ export default function CombatDisplay({ monster, hints, textColour }: Readonly<C
                             {" "}gold!
                         </p>
                         
-                        <Button className="flex p-1 md:p-1.5 mt-3 md:mt-0 h-2/3 items-center" handleClick={generateNextMonster}>
+                        <Button className="flex p-1 md:p-1.5 mt-3 md:mt-0 h-2/3 items-center" handleClick={handleProceed}>
                             <>
                                 <span className="text-xs md:text-sm">Proceed</span>
                                 <RxDoubleArrowRight className="ml-2" />
@@ -59,8 +73,8 @@ export default function CombatDisplay({ monster, hints, textColour }: Readonly<C
                 ):
                 hints > 0 && (
                     <div className="flex justify-center">
-                        <Button className="flex p-0.5 md:p-1.5 mt-12 h-2/3 items-center" handleClick={useHint}>
-                            <span className="text-xs">Hint? ({hints})</span>
+                        <Button className="flex p-0.5 md:p-1.5 mt-12 h-2/3 items-center" handleClick={handleActivateHint}>
+                            <span className={classNames(textColour, "text-xs")}>Hint? ({hints})</span>
                         </Button>
                     </div>
                 )

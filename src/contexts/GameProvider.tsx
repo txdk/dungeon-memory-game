@@ -63,7 +63,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
     );
 
     // Use hint
-    const useHint = () => {
+    const activateHint = () => {
         dispatch({
             type: GameActionType.USE_HINT,
             payload: null
@@ -86,7 +86,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         generateNextMonster: generateNextMonster,
         setGameStatus: setGameStatus,
         buyItem: buyItem,
-        useHint: useHint,
+        activateHint: activateHint,
         closeInfoPanel: closeInfoPanel
     }), [gameState, buyItem, registerInput]);
 

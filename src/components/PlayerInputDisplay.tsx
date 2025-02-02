@@ -1,8 +1,10 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import GameContext from "@/contexts/GameContext";
 import InputIcon from "@/components/generic/InputIcon";
 import { PlayerInput } from "@/reducers/GameState";
 import classNames from "classnames";
+import useSound from "use-sound";
+import { CLICK_SOUND } from "@/constants/AudioConstants";
 
 // Render the player control inputs
 const renderInputs = (playerInputs: Array<PlayerInput>) => {
@@ -29,8 +31,16 @@ interface PlayerInputDisplayProps {
 
 export default function PlayerInputDisplay({ className }: Readonly<PlayerInputDisplayProps>) {
     const { state } = useContext(GameContext);
-    const playerInputs: Array<PlayerInput> = state.playerInputs;
-    const playerInputArray: Array<JSX.Element> = useMemo(() => renderInputs(playerInputs), [playerInputs]);
+    const [play] = useSound(CLICK_SOUND, {volume: 0.5});
+    const playerInputs: PlayerInput[] = state.playerInputs;
+    const playerInputArray: JSX.Element[] = useMemo(() => renderInputs(playerInputs), [playerInputs]);
+
+    // Play sound when player makes a correct input
+    useEffect(() => {
+        if (playerInputs?.length > 0 && playerInputs.at(-1)?.isCorrect) {
+            play();
+        };
+    }, [play, playerInputs]);
 
     return (
         <div className={classNames(className, "flex font-customFont text-green-500 mt-10 p-5 md:p-10")}>

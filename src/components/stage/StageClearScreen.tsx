@@ -3,13 +3,15 @@ import { useDelay } from "@/hooks/useDelay";
 import AnimatedText from "@/components/generic/AnimatedText";
 import SlotCounter from "react-slot-counter";
 import Button from "@/components/generic/Button";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { GameStatus } from "@/reducers/GameState";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import { getTimeInterval } from "@/utils/mathUtils";
 import { FINAL_STAGE_NUMBER } from "@/constants/GameConstants";
+import useSound from "use-sound";
+import { LEVEL_CLEAR_SOUND, SELECT_SOUND } from "@/constants/AudioConstants";
 
 interface StageClearScreenProps {
     stage: Stage;
@@ -17,9 +19,18 @@ interface StageClearScreenProps {
 
 export default function StageClearScreen({ stage }: Readonly<StageClearScreenProps>) {
 
+    // Play sound on stage clear
+    const [playStageClear] = useSound(LEVEL_CLEAR_SOUND, {volume: 0.5});
+    useEffect(() => {
+        playStageClear();
+    }, [stage.id, playStageClear]);
+
     const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
+    const [playProceed] = useSound(SELECT_SOUND, {volume: 0.5});
     const handleClick = () => {
+
+        playProceed();
 
         if (stage.number === FINAL_STAGE_NUMBER) {
             setGameStatus(GameStatus.GAME_WIN);

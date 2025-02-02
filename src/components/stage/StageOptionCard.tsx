@@ -8,6 +8,8 @@ import { Rewards } from "@/types/Stage";
 import { useContext } from "react";
 import GameContext from "@/contexts/GameContext";
 import OptionCard from "@/components/generic/OptionCard";
+import useSound from "use-sound";
+import { COIN_SOUND } from "@/constants/AudioConstants";
 
 interface StageOptionCardProps {
     monsterList: Monster[];
@@ -17,6 +19,11 @@ interface StageOptionCardProps {
 export default function StageOptionCard({ monsterList, rewards }: Readonly<StageOptionCardProps>) {
 
     const { startNewStage } = useContext(GameContext);
+    const [play] = useSound(COIN_SOUND, {volume: 0.5});
+    const handleStartStage = () => {
+        play();
+        startNewStage({monsterList: monsterList, rewards: rewards});
+    };
 
     const isTabletOrMobile = useMediaQuery({ maxWidth: 768 });
     const iconSize = isTabletOrMobile? 12: 17;
@@ -57,7 +64,7 @@ export default function StageOptionCard({ monsterList, rewards }: Readonly<Stage
     };
 
     return (
-        <OptionCard handleSelect={() => startNewStage({monsterList: monsterList, rewards: rewards})}>
+        <OptionCard handleSelect={handleStartStage}>
             <p className="text-xs md:text-base py-2">Monsters ahead:</p>
             <ul className="ml-1 md:ml-2">
                 {

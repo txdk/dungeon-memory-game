@@ -13,7 +13,7 @@ const GameContext = createContext({
     generateNextMonster: () => {},
     setGameStatus: (_: GameStatus) => {},
     buyItem: (_: Item) => {},
-    useHint: () => {},
+    activateHint: () => {},
     closeInfoPanel: () => {}
 });
 

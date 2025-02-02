@@ -11,12 +11,13 @@ import { useKeyHandler } from "@/hooks/useKeyHandler";
 
 interface CombatDisplayProps {
     monster: Monster | null;
+    hints: number;
     textColour: string;
 }
 
-export default function CombatDisplay({ monster, textColour }: Readonly<CombatDisplayProps>) {
+export default function CombatDisplay({ monster, hints, textColour }: Readonly<CombatDisplayProps>) {
 
-    const { generateNextMonster } = useContext(GameContext);
+    const { generateNextMonster, useHint } = useContext(GameContext);
     useKeyHandler(generateNextMonster, monster?.isDefeated ?? false);
 
     // Display nothing if there are no active monsters
@@ -38,7 +39,7 @@ export default function CombatDisplay({ monster, textColour }: Readonly<CombatDi
 
             <PlayerInputDisplay className={textColour} />
             {
-                monster.isDefeated && (
+                monster.isDefeated ? (
                     <div className="flex flex-col md:flex-row items-center">
                         <p className="p-0 md:p-5 ml-5 font-customFont text-green-500 text-sm">
                             You defeated the {monster.name} and gained {" "}
@@ -53,6 +54,13 @@ export default function CombatDisplay({ monster, textColour }: Readonly<CombatDi
                             </>
                         </Button>
                     </div>  
+                ):
+                hints > 0 && (
+                    <div className="flex justify-center">
+                        <Button className="flex p-0.5 md:p-1.5 mt-12 h-2/3 items-center" handleClick={useHint}>
+                            <span className="text-xs">Hint? ({hints})</span>
+                        </Button>
+                    </div>
                 )
             }
         </>

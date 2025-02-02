@@ -29,6 +29,7 @@ export interface GameState {
     currentLevel: number | null;
     score: number;
     gold: number;
+    hints: number;
     monsterList: Monster[];
     seenMonsters: number[];
     newestEncounter: Encounter | null;
@@ -45,6 +46,7 @@ export const initialState: GameState = {
     currentLevel: null,
     score: 0,
     gold: 0,
+    hints: 0,
     monsterList: [],
     seenMonsters: [],
     newestEncounter: null
@@ -56,6 +58,7 @@ export enum GameActionType {
     GENERATE_NEXT_MONSTER,
     SET_GAME_STATUS,
     BUY_ITEM,
+    USE_HINT,
     CLOSE_INFO_PANEL,
     START_GAME
 };

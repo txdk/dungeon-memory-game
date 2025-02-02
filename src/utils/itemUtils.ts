@@ -3,6 +3,11 @@ import { Item } from "@/types/Item";
 
 export const triggerItemEffects = (item: Item, state: GameState): GameState => {
     switch (item.name) {
+        case ("Magic scroll"):
+            return {
+                ...state,
+                hints: state.hints + 1
+            };
         case ("Healing potion"):
             return {
                 ...state,

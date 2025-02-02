@@ -62,6 +62,14 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         }, []
     );
 
+    // Use hint
+    const useHint = () => {
+        dispatch({
+            type: GameActionType.USE_HINT,
+            payload: null
+        })
+    };
+
     // Close monster info panel
     const closeInfoPanel = () => {
         dispatch({
@@ -78,6 +86,7 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         generateNextMonster: generateNextMonster,
         setGameStatus: setGameStatus,
         buyItem: buyItem,
+        useHint: useHint,
         closeInfoPanel: closeInfoPanel
     }), [gameState, buyItem, registerInput]);
 
@@ -85,5 +94,5 @@ export default function GameProvider({ children }: Readonly<{ children: React.Re
         <GameContext.Provider value={providerValue}>
             {children}
         </GameContext.Provider>
-    )
+    );
 }

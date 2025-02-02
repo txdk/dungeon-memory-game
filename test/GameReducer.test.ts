@@ -18,5 +18,6 @@ test('start new game', () => {
     expect(gameState.currentStage.name).toBe("The Caves");
     expect(gameState.currentStage.number).toBe(1);
     expect(gameState.currentLevel).toBe(1);
-    expect(gameState.currentMonster.defeatSequence).toEqual([GameInput.INPUT_ATTACK])
+    expect(gameState.currentMonster.defeatSequence).toEqual([GameInput.INPUT_ATTACK]);
+    expect(gameState.currentStage.monsterList.length).toBe(5);
 });

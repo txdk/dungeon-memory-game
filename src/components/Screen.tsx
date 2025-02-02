@@ -42,7 +42,7 @@ export default function Screen() {
                                 !state.seenMonsters.includes(state.currentMonster.id)? (
                                     <MonsterInfoPanel monster={state.currentMonster} />
                                 ):
-                                <CombatDisplay textColour={textColour} monster={state.currentMonster} />
+                                <CombatDisplay textColour={textColour} hints={state.hints} monster={state.currentMonster} />
                             )
                         }       
                     </>

@@ -85,6 +85,33 @@ const handleBuyItem = (state: GameState, item: Item) => {
     };
 };
 
+// Handle player use of hint
+const handleUseHint = (state: GameState): GameState => {
+
+    const revealedInput: GameInput = state.currentMonster!.defeatSequence[state.correctInputs];
+    const correctInputs: number = state.correctInputs + 1;
+    const isMonsterDefeated: boolean = checkMonsterDefeated(correctInputs, state.currentMonster!);
+    const isNewestMonster: boolean = state.currentMonster!.id === state.newestEncounter!.monster.id;
+
+    return {
+        ...state,
+        hints: state.hints - 1,
+        playerInputs: [
+            ...state.playerInputs, 
+            {input: revealedInput, isCorrect: true}
+        ],
+        correctInputs: correctInputs,
+        currentMonster: {
+            ...state.currentMonster!,
+            isDefeated: isMonsterDefeated
+        },
+        newestEncounter: {
+            ...state.newestEncounter!,
+            quantity: state.newestEncounter!.quantity + ((isNewestMonster && isMonsterDefeated)? 1: 0)
+        }
+    };
+};
+
 // Generate next monster
 const generateNextMonster = (state: GameState) => {
     const scoreIncrease: number = state.currentMonster?.isDefeated? state.currentMonster.score: 0;
@@ -198,6 +225,9 @@ export default function gameReducer(state: GameState, action: GameAction): GameS
 
         case GameActionType.BUY_ITEM:
             return handleBuyItem(state, action.payload as Item);
+
+        case GameActionType.USE_HINT:
+            return handleUseHint(state);
 
         // Start new stage
         case GameActionType.START_NEW_STAGE:

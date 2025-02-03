@@ -4,6 +4,7 @@ import { CATACOMBS_FINAL_MONSTER_ID, CATACOMBS_FIRST_MONSTER_ID, SECOND_STAGE_LE
 import { NewStageParams, Stage, StageClearCondition } from "@/types/Stage";
 import { getRandomArrayElement, getRandomArraySample } from "@/utils/randomUtils";
 import { generateThirdStage } from '@/core/stages/UndercityStage';
+import { debuffMonsterNames } from '../monsters/CatacombsMonsters';
 
 export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Monster[]) => {
 
@@ -18,6 +19,9 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
     };
 
     const generatePathOptions = () => {
+        const debuffMonster: Monster = monsterList.find((monster) => debuffMonsterNames.includes(monster.name))!;
+        const necromancer: Monster = monsterList.find((monster) => monster.name === "necromancer")!;
+
         return [
             {
                 monsterList: [...getRandomArraySample(monsterList.slice(0,5), 2)],
@@ -27,15 +31,14 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
                 }
             },
             {
-                monsterList: [getRandomArrayElement(monsterList.slice(2,5)), getRandomArrayElement(monsterList.slice(5,7))],
+                monsterList: [getRandomArrayElement(monsterList.slice(2,4)), getRandomArrayElement(monsterList.slice(4,7))],
                 rewards: {
                     gold: 250,
                     health: 1
                 }
             },
             {
-                // TODO: add warlock to hard option
-                monsterList: [...monsterList.slice(5)],
+                monsterList: [debuffMonster, necromancer],
                 rewards: {
                     gold: 500,
                     health: 2,

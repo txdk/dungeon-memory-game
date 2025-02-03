@@ -5,7 +5,7 @@ import GameContext from "@/contexts/GameContext";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import AnimatedText from "@/components/generic/AnimatedText";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
-import { renderDefeatSequence } from "@/utils/monsterInfoUtils";
+import { renderDefeatSequence, renderFlavourText } from "@/utils/monsterInfoUtils";
 import useSound from "use-sound";
 import { PROCEED_SOUND } from "@/constants/AudioConstants";
 
@@ -33,7 +33,7 @@ export default function MonsterInfoPanel({ monster, monsterType }: Readonly<Mons
                 delay={25}
             />
             <p className="text-xs md:text-base pt-5">
-                {monster.description}
+                {renderFlavourText(monster.description)}
             </p>
             <span className="flex justify-left mt-5 text-xs md:text-base">
                 To defeat: {renderDefeatSequence(monsterType)}

@@ -44,7 +44,7 @@ export const generateShapeshifter = () => {
         id: 13,
         instanceId: uuidv4(),
         name: "shapeshifter",
-        description: "A master of cunning and trickery. Transforms into the previous monster you encountered.",
+        description: "A master of cunning and trickery. Note: Transforms into the previous monster you encountered.",
         defeatSequence: [GameInput.INPUT_ATTACK],
         score: 200,
         isDefeated: false

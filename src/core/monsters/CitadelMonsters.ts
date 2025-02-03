@@ -25,7 +25,7 @@ export const generateCabalHighpriest = (): Monster => {
         instanceId: uuidv4(),
         name: "cabal highpriest",
         description: `Grand mage, and loyal to the powers that control the citadel. Empowers its allies with a dark magic.
-        Causes the inputs of the next monster to be reversed.`,
+        Note: Causes the inputs of the next monster to be reversed.`,
         defeatSequence: randomiseArrayOrder([
             GameInput.INPUT_ATTACK, 
             getRandomNonCombatInput(),
@@ -44,7 +44,7 @@ export const generateMechagolem = (): Monster => {
         instanceId: uuidv4(),
         name: "mechagolem",
         description: `A brute of a combat automaton, constantly adapting to its enemies.
-        When defeated, the mechagolem's defeat sequence is modified by cycling the first input to the end of the sequence.`,
+        Note: When defeated, the mechagolem's defeat sequence is modified by cycling the first input to the end of the sequence.`,
         defeatSequence: randomiseArrayOrder([
             GameInput.INPUT_ATTACK, 
             GameInput.INPUT_SHIELD, 

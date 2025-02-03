@@ -60,7 +60,7 @@ export default function StageOptionCard({ monsterList, rewards }: Readonly<Stage
         return (
             <ul className="ml-1">
                 {
-                    (rewards.health === 0 && rewards.gold === 0 && rewards.hints === 0)?
+                    (rewards.gold === undefined && rewards.health === undefined && rewards.hints === undefined)?
                     <p>NONE</p>:
                     <>
                         <ul>{renderHealth()}</ul>

@@ -18,10 +18,7 @@ export const generateFirstStage = (allMonsters: Monster[]) => {
         return ([
             {
                 monsterList: monsterList.slice(0, 2),
-                rewards: {
-                    health: 0,
-                    gold: 0
-                }
+                rewards: {}
             },
             {
                 monsterList: [getRandomArrayElement(monsterList.slice(1, 3)), getRandomArrayElement(monsterList.slice(3, 5))],

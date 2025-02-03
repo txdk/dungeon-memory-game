@@ -25,10 +25,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
         return [
             {
                 monsterList: [...getRandomArraySample(monsterList.slice(0,5), 2)],
-                rewards: {
-                    gold: 0,
-                    health: 0
-                }
+                rewards: {}
             },
             {
                 monsterList: [getRandomArrayElement(monsterList.slice(2,4)), getRandomArrayElement(monsterList.slice(4,7))],

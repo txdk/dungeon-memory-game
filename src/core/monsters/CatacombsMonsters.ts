@@ -51,7 +51,7 @@ export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
             id: 8,
             instanceId: uuidv4(),
             name: debuffMonsterNames[0],
-            description: `Inflicts a debilitating curse upon you. Required 🗡️ inputs are swapped with 🛡️ inputs and 
+            description: `Inflicts a debilitating curse upon you. Required attack inputs are swapped with shield inputs and 
             vice versa for the next monster.`,
             defeatSequence: randomiseArrayOrder(
                 [getRandomInput(), getRandomNonCombatInput(), getRandomNonCombatInput(), getRandomCombatInput()]

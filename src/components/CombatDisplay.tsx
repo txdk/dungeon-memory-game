@@ -9,7 +9,7 @@ import { getMonsterArticle } from "@/utils/monsterGenerationUtils";
 import SlotCounter from "react-slot-counter";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import classNames from "classnames";
-import { POWERUP_SOUND, PROCEED_SOUND } from "@/constants/AudioConstants";
+import { POWERUP_SOUND, PROCEED_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 import useSound from "use-sound";
 
 interface CombatDisplayProps {
@@ -22,14 +22,14 @@ export default function CombatDisplay({ monster, hints, textColour }: Readonly<C
 
     const { generateNextMonster, activateHint } = useContext(GameContext);
     const isMonsterDefeated: boolean = monster?.isDefeated ?? false;
-    const [playProceed] = useSound(PROCEED_SOUND, {volume: 0.5});
+    const [playProceed] = useSound(PROCEED_SOUND, {volume: SFX_VOLUME});
     const handleProceed = () => {
         playProceed();
         generateNextMonster();
     };
     useKeyHandler(handleProceed, ["Space", "Enter"], isMonsterDefeated);
 
-    const [playHint] = useSound(POWERUP_SOUND, {volume: 0.5});
+    const [playHint] = useSound(POWERUP_SOUND, {volume: SFX_VOLUME});
     const handleActivateHint = () => {
         playHint();
         activateHint();

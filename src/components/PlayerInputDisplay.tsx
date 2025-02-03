@@ -4,7 +4,7 @@ import InputIcon from "@/components/generic/InputIcon";
 import { PlayerInput } from "@/reducers/GameState";
 import classNames from "classnames";
 import useSound from "use-sound";
-import { CLICK_SOUND } from "@/constants/AudioConstants";
+import { CLICK_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 // Render the player control inputs
 const renderInputs = (playerInputs: Array<PlayerInput>) => {
@@ -31,7 +31,7 @@ interface PlayerInputDisplayProps {
 
 export default function PlayerInputDisplay({ className }: Readonly<PlayerInputDisplayProps>) {
     const { state } = useContext(GameContext);
-    const [play] = useSound(CLICK_SOUND, {volume: 0.5});
+    const [play] = useSound(CLICK_SOUND, {volume: SFX_VOLUME});
     const playerInputs: PlayerInput[] = state.playerInputs;
     const playerInputArray: JSX.Element[] = useMemo(() => renderInputs(playerInputs), [playerInputs]);
 

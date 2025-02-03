@@ -11,7 +11,7 @@ import { useKeyHandler } from "@/hooks/useKeyHandler";
 import { getTimeInterval } from "@/utils/mathUtils";
 import { FINAL_STAGE_NUMBER } from "@/constants/GameConstants";
 import useSound from "use-sound";
-import { LEVEL_CLEAR_SOUND, SELECT_SOUND } from "@/constants/AudioConstants";
+import { LEVEL_CLEAR_SOUND, SELECT_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 interface StageClearScreenProps {
     stage: Stage;
@@ -20,14 +20,14 @@ interface StageClearScreenProps {
 export default function StageClearScreen({ stage }: Readonly<StageClearScreenProps>) {
 
     // Play sound on stage clear
-    const [playStageClear] = useSound(LEVEL_CLEAR_SOUND, {volume: 0.5});
+    const [playStageClear] = useSound(LEVEL_CLEAR_SOUND, {volume: SFX_VOLUME});
     useEffect(() => {
         playStageClear();
     }, [stage.id, playStageClear]);
 
     const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
-    const [playProceed] = useSound(SELECT_SOUND, {volume: 0.5});
+    const [playProceed] = useSound(SELECT_SOUND, {volume: SFX_VOLUME});
     const handleClick = () => {
 
         playProceed();

@@ -9,7 +9,7 @@ import { useContext } from "react";
 import GameContext from "@/contexts/GameContext";
 import OptionCard from "@/components/generic/OptionCard";
 import useSound from "use-sound";
-import { COIN_SOUND } from "@/constants/AudioConstants";
+import { COIN_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 interface StageOptionCardProps {
     monsterList: Monster[];
@@ -19,7 +19,7 @@ interface StageOptionCardProps {
 export default function StageOptionCard({ monsterList, rewards }: Readonly<StageOptionCardProps>) {
 
     const { startNewStage } = useContext(GameContext);
-    const [play] = useSound(COIN_SOUND, {volume: 0.5});
+    const [play] = useSound(COIN_SOUND, {volume: SFX_VOLUME});
     const handleStartStage = () => {
         play();
         startNewStage({monsterList: monsterList, rewards: rewards});

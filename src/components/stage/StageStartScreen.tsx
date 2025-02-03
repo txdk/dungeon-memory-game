@@ -8,7 +8,7 @@ import { useDelay } from "@/hooks/useDelay";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import { Stage } from "@/types/Stage";
 import useSound from "use-sound";
-import { PROCEED_SOUND } from "@/constants/AudioConstants";
+import { PROCEED_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 interface StageStartScreenProps {
     stage: Stage;
@@ -18,7 +18,7 @@ export default function StageStartScreen({ stage }: Readonly<StageStartScreenPro
 
     const buttonVisibility: boolean = useDelay(stage.id);
     const { setGameStatus } = useContext(GameContext);
-    const [play] = useSound(PROCEED_SOUND, {volume: 0.5});
+    const [play] = useSound(PROCEED_SOUND, {volume: SFX_VOLUME});
     const handleClick = () => {
         play();
         setGameStatus(GameStatus.IN_PROGRESS);

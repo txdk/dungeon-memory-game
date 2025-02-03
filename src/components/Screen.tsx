@@ -13,10 +13,12 @@ import { useAlert } from "@/hooks/useAlert";
 import Shop from "@/components/shop/Shop";
 import WinScreen from "./WinScreen";
 import { Monster } from "@/types/Monster";
+import TutorialScreen from "@/components/help/TutorialScreen";
+import HelpButton from "./help/HelpButton";
 
 export default function Screen() {
 
-    const { state, startGame } = useContext(GameContext);
+    const { state, startGame, setGameStatus } = useContext(GameContext);
     const textColour = useAlert(state.currentHealth).colour;
     
     // Determine what element to render on screen based on game status
@@ -24,7 +26,15 @@ export default function Screen() {
 
         switch (state.status) {
             case (GameStatus.NOT_STARTED):
-                return <NewGameButton startGame={startGame} />; 
+                return (
+                    <>
+                        <NewGameButton startGame={startGame} />
+                        <HelpButton setGameStatus={setGameStatus} />
+                    </>
+                );
+
+            case (GameStatus.TUTORIAL):
+                return <TutorialScreen setGameStatus={setGameStatus} />;
             
             case (GameStatus.START_NEW_STAGE):
                 return <StageStartScreen stage={state.currentStage!} />;

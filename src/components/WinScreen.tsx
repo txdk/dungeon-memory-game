@@ -3,7 +3,7 @@ import SlotCounter from "react-slot-counter";
 import { v4 as uuidv4} from 'uuid';
 import NewGameButton from "@/components/NewGameButton";
 import useSound from "use-sound";
-import { LEVEL_CLEAR_SOUND } from "@/constants/AudioConstants";
+import { LEVEL_CLEAR_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 import { useEffect } from "react";
 
 interface WinScreenProps {
@@ -13,7 +13,7 @@ interface WinScreenProps {
 
 export default function WinScreen({ score, startGame }: Readonly<WinScreenProps>) {
 
-    const [play] = useSound(LEVEL_CLEAR_SOUND, {volume: 0.5});
+    const [play] = useSound(LEVEL_CLEAR_SOUND, {volume: SFX_VOLUME});
 
     useEffect(() => {
         play();

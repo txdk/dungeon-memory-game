@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Button from "@/components/generic/Button";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import useSound from "use-sound";
-import { SELECT_SOUND } from "@/constants/AudioConstants";
+import { SELECT_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 interface NewGameButtonProps {
     className?: string;
@@ -11,7 +11,7 @@ interface NewGameButtonProps {
 
 export default function NewGameButton( { className, startGame }: Readonly<NewGameButtonProps>) {
 
-    const [play] = useSound(SELECT_SOUND, {volume: 0.5});
+    const [play] = useSound(SELECT_SOUND, {volume: SFX_VOLUME});
     const handleGameStart = () => {
         play();
         startGame();

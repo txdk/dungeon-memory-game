@@ -7,7 +7,7 @@ import AnimatedText from "@/components/generic/AnimatedText";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import { renderDefeatSequence, renderFlavourText } from "@/utils/monsterInfoUtils";
 import useSound from "use-sound";
-import { PROCEED_SOUND } from "@/constants/AudioConstants";
+import { PROCEED_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 interface MonsterInfoPanelProps {
     monster: Monster;
@@ -17,7 +17,7 @@ interface MonsterInfoPanelProps {
 export default function MonsterInfoPanel({ monster, monsterType }: Readonly<MonsterInfoPanelProps>) {
 
     const { closeInfoPanel } = useContext(GameContext);
-    const [play] = useSound(PROCEED_SOUND, {volume: 0.5});
+    const [play] = useSound(PROCEED_SOUND, {volume: SFX_VOLUME});
     const handleProceed = () => {
         play();
         closeInfoPanel();

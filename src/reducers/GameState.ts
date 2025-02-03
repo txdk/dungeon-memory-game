@@ -10,6 +10,7 @@ export interface PlayerInput {
 export enum GameStatus {
     NOT_STARTED,
     START_NEW_STAGE,
+    TUTORIAL,
     STAGE_CLEAR,
     STAGE_SELECT,
     IN_PROGRESS,

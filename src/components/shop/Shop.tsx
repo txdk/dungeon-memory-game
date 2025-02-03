@@ -13,12 +13,12 @@ import { LILLIES_OF_LIFE } from "@/core/items/LilliesOfLife";
 import { MAGIC_SCROLL } from "@/core/items/MagicScroll";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import useSound from "use-sound";
-import { COIN_SOUND, SELECT_SOUND } from "@/constants/AudioConstants";
+import { COIN_SOUND, SELECT_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 
 export default function Shop() {
 
     const { state, buyItem, setGameStatus } = useContext(GameContext);
-    const [playCoin] = useSound(COIN_SOUND, {volume: 0.5});
+    const [playCoin] = useSound(COIN_SOUND, {volume: SFX_VOLUME});
     const itemList: Item[] = [MAGIC_SCROLL, HEALING_POTION, LILLIES_OF_LIFE];
 
     const costMultiplier = ITEM_COST_MULTIPLIERS.get(state.currentStage!.number)!;
@@ -36,7 +36,7 @@ export default function Shop() {
         };
     };
 
-    const [playProceed] = useSound(SELECT_SOUND, {volume: 0.5});
+    const [playProceed] = useSound(SELECT_SOUND, {volume: SFX_VOLUME});
     const handleProceed = () => {
         playProceed();
         setGameStatus(GameStatus.STAGE_SELECT);

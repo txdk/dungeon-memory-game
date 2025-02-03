@@ -4,7 +4,7 @@ import NewGameButton from "@/components/NewGameButton";
 import SlotCounter from "react-slot-counter";
 import { v4 as uuidv4} from 'uuid';
 import useSound from "use-sound";
-import { GAME_OVER_SOUND } from "@/constants/AudioConstants";
+import { GAME_OVER_SOUND, SFX_VOLUME } from "@/constants/AudioConstants";
 import { useEffect } from "react";
 
 interface GameOverScreenProps {
@@ -16,7 +16,7 @@ interface GameOverScreenProps {
 
 export default function GameOverScreen({ monsterName, stageName, score, startGame }: Readonly<GameOverScreenProps>) {
 
-    const [play] = useSound(GAME_OVER_SOUND, {volume: 0.5});
+    const [play] = useSound(GAME_OVER_SOUND, {volume: SFX_VOLUME});
 
     useEffect(() => {
         play();

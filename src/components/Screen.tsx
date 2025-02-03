@@ -12,6 +12,7 @@ import StageSelectScreen from "@/components/stage/StageSelectScreen";
 import { useAlert } from "@/hooks/useAlert";
 import Shop from "@/components/shop/Shop";
 import WinScreen from "./WinScreen";
+import { Monster } from "@/types/Monster";
 
 export default function Screen() {
 
@@ -28,7 +29,8 @@ export default function Screen() {
             case (GameStatus.START_NEW_STAGE):
                 return <StageStartScreen stage={state.currentStage!} />;
 
-            case (GameStatus.IN_PROGRESS):
+            case (GameStatus.IN_PROGRESS): {
+                const monsterType: Monster = state.currentStage!.monsterList.find((monster) => monster.name === state.currentMonster!.name)!;
                 return (
                     <>
                         <HeadsUpDisplay 
@@ -40,13 +42,14 @@ export default function Screen() {
                         {
                             state.currentMonster !== null && (
                                 !state.seenMonsters.includes(state.currentMonster.id)? (
-                                    <MonsterInfoPanel monster={state.currentMonster} />
+                                    <MonsterInfoPanel monster={state.currentMonster} monsterType={monsterType} />
                                 ):
                                 <CombatDisplay textColour={textColour} hints={state.hints} monster={state.currentMonster} />
                             )
                         }       
                     </>
                 );
+            };
 
             case (GameStatus.STAGE_CLEAR):
                 return (

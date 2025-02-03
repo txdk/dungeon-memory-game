@@ -4,7 +4,7 @@ export interface Monster {
     id: number;
     instanceId: string;
     name: string;
-    description: string | JSX.Element;
+    description: string;
     defeatSequence: Array<GameInput>;
     score: number;
     isDefeated: boolean;

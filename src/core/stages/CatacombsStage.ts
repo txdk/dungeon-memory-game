@@ -34,6 +34,7 @@ export const generateSecondStage = (selectedMonsters: Monster[], allMonsters: Mo
                 }
             },
             {
+                // TODO: add warlock to hard option
                 monsterList: [...monsterList.slice(5)],
                 rewards: {
                     gold: 500,

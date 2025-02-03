@@ -22,7 +22,6 @@ export const generateThirdStage = (selectedMonsters: Monster[], allMonsters: Mon
             {
                 monsterList: [...getRandomArraySample(monsterList.slice(0,5), 2)],
                 rewards: {
-                    gold: 0,
                     health: 1,
                     hints: 1
                 }

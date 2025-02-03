@@ -2,7 +2,6 @@ import { GameInput } from "@/constants/GameConstants";
 import { getRandomArrayElement, getRandomCombatInput, getRandomDirection, getRandomInput, getRandomNonCombatInput, randomiseArrayOrder } from "@/utils/randomUtils";
 import { Monster } from "@/types/Monster";
 import { v4 as uuidv4} from 'uuid';
-import { GiBroadsword, GiShield } from "react-icons/gi";
 
 export const debuffMonsterNames: string[] = randomiseArrayOrder(["cultist", "warlock", "cursed keeper"]) as string[];
 
@@ -34,13 +33,6 @@ export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
     };
     const firstMonster: Monster = getRandomArrayElement([carrionSwarm, easyMonster]);
 
-    const debuffMonsterDescription: JSX.Element = (
-        <p className="flex">
-            Inflicts a debilitating curse upon you. Required <GiBroadsword /> inputs are swapped with <GiShield /> inputs and{" "}
-            vice versa for the next monster.
-        </p>
-    );
-
     return [
         {...firstMonster},
         {
@@ -59,7 +51,8 @@ export const generateStage2BasicMonsters = (tier1Monsters: Monster[]) => {
             id: 8,
             instanceId: uuidv4(),
             name: debuffMonsterNames[0],
-            description: debuffMonsterDescription,
+            description: `Inflicts a debilitating curse upon you. Required 🗡️ inputs are swapped with 🛡️ inputs and 
+            vice versa for the next monster.`,
             defeatSequence: randomiseArrayOrder(
                 [getRandomInput(), getRandomNonCombatInput(), getRandomNonCombatInput(), getRandomCombatInput()]
             ) as Array<GameInput>,

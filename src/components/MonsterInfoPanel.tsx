@@ -7,16 +7,17 @@ import AnimatedText from "@/components/generic/AnimatedText";
 import { useKeyHandler } from "@/hooks/useKeyHandler";
 import { renderDefeatSequence } from "@/utils/monsterInfoUtils";
 import useSound from "use-sound";
-import { SELECT_SOUND } from "@/constants/AudioConstants";
+import { PROCEED_SOUND } from "@/constants/AudioConstants";
 
 interface MonsterInfoPanelProps {
     monster: Monster;
+    monsterType: Monster;
 }
 
-export default function MonsterInfoPanel({ monster }: Readonly<MonsterInfoPanelProps>) {
+export default function MonsterInfoPanel({ monster, monsterType }: Readonly<MonsterInfoPanelProps>) {
 
     const { closeInfoPanel } = useContext(GameContext);
-    const [play] = useSound(SELECT_SOUND, {volume: 0.5});
+    const [play] = useSound(PROCEED_SOUND, {volume: 0.5});
     const handleProceed = () => {
         play();
         closeInfoPanel();
@@ -35,7 +36,7 @@ export default function MonsterInfoPanel({ monster }: Readonly<MonsterInfoPanelP
                 {monster.description}
             </p>
             <span className="flex justify-left mt-5 text-xs md:text-base">
-                To defeat: {renderDefeatSequence(monster)}
+                To defeat: {renderDefeatSequence(monsterType)}
             </span>
             <Button className="flex mt-7 md:mt-3 relative p-1 md:p-1.5 left-[32%] md:left-[40%] items-center" handleClick={handleProceed}>
                 <>
